@@ -1,24 +1,38 @@
 import type { Picture } from 'vite-imagetools'
 import {
   Activity,
+  Barcode,
   BarChart3,
+  Bell,
   Blocks,
   Bot,
-  Briefcase,
+  Building2,
+  Clock,
+  Code,
+  ConciergeBell,
+  Database,
+  Ellipsis,
   Facebook,
   Factory,
+  FileText,
   HeartPulse,
-  Hotel,
   Instagram,
   Linkedin,
+  Mail,
   Network,
+  Package,
   ScanSearch,
+  Settings,
   ShieldCheck,
-  ShoppingBag,
+  ShoppingCart,
   Sparkles,
+  Stethoscope,
+  Store,
+  Tag,
   Truck,
   UsersRound,
   Workflow,
+  Wrench,
   Youtube,
   type LucideIcon,
 } from 'lucide-react'
@@ -50,6 +64,7 @@ import softwareCodigoImage from '../assets/services/detail/software-codigo.jpg'
 import softwareEquipoImage from '../assets/services/detail/software-equipo.jpg'
 import trazabilidadPlantaImage from '../assets/services/detail/trazabilidad-planta.jpg'
 import trazabilidadAlmacenImage from '../assets/services/detail/trazabilidad-almacen.jpg'
+import administracionImage from '../assets/blog/coste-real-de-un-proyecto-de-automatizacion.jpg'
 
 export interface FeatureItem {
   slug: string
@@ -69,9 +84,14 @@ export interface BenefitItem {
   icon: LucideIcon
 }
 
-// TODO: sustituir por las URLs reales de los perfiles de Trek.IA
+// TODO: sustituir por las URLs reales de Instagram, Facebook y YouTube
 export const socialLinks = [
-  { label: 'LinkedIn', href: '#', Icon: Linkedin, color: '#0A66C2' },
+  {
+    label: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/trek-ia-79968b43b/',
+    Icon: Linkedin,
+    color: '#0A66C2',
+  },
   { label: 'Instagram', href: '#', Icon: Instagram, color: '#E4405F' },
   { label: 'Facebook', href: '#', Icon: Facebook, color: '#1877F2' },
   { label: 'YouTube', href: '#', Icon: Youtube, color: '#FF0000' },
@@ -80,8 +100,8 @@ export const socialLinks = [
 export const navItems = [
   { label: 'Home', href: '/' },
   { label: 'Quiénes somos', href: '/quienes-somos' },
-  { label: 'Sectores', href: '/sectores' },
   { label: 'Qué hacemos?', href: '/que-hacemos' },
+  { label: 'Sectores', href: '/sectores' },
   { label: 'Método', href: '/metodo' },
   { label: 'Blog', href: '/blog' },
   { label: 'Contáctanos', href: '/contacto' },
@@ -276,6 +296,107 @@ export const solutions: FeatureItem[] = [
   },
 ]
 
+export interface BusinessArea {
+  title: string
+  description: string
+  features: { label: string; icon: LucideIcon }[]
+  image: Picture
+  imageAlt: string
+}
+
+// Áreas de negocio de la sección "Qué hacemos" (home y /que-hacemos)
+export const businessAreas: BusinessArea[] = [
+  {
+    title: 'Compras y pedidos',
+    description: 'Automatizamos solicitudes, aprobaciones, pedidos y seguimientos.',
+    features: [
+      { label: 'Solicitudes y aprobaciones', icon: FileText },
+      { label: 'Pedidos a proveedores', icon: Truck },
+      { label: 'Seguimiento y avisos', icon: Bell },
+    ],
+    image: trazabilidadImage,
+    imageAlt: 'Persona revisando un catálogo de productos en una tablet',
+  },
+  {
+    title: 'Almacén y logística',
+    description: 'Digitalizamos entradas, salidas, stock, incidencias y trazabilidad.',
+    features: [
+      { label: 'Entradas y salidas', icon: Package },
+      { label: 'Stock en tiempo real', icon: Barcode },
+      { label: 'Trazabilidad e incidencias', icon: Tag },
+    ],
+    image: trazabilidadAlmacenImage,
+    imageAlt: 'Trabajador revisando existencias con una tablet en un almacén',
+  },
+  {
+    title: 'Administración',
+    description:
+      'Reducimos tareas manuales, documentos repetitivos y actualización de datos.',
+    features: [
+      { label: 'Generación de documentos', icon: FileText },
+      { label: 'Actualización de datos', icon: Database },
+      { label: 'Menos tareas repetitivas', icon: Clock },
+    ],
+    image: administracionImage,
+    imageAlt: 'Escritorio con libreta, calculadora e informes impresos',
+  },
+  {
+    title: 'Comercial y atención al cliente',
+    description: 'Automatizamos seguimientos, respuestas, avisos y gestión de oportunidades.',
+    features: [
+      { label: 'Seguimiento comercial', icon: UsersRound },
+      { label: 'Respuestas automáticas', icon: Mail },
+      { label: 'Gestión de oportunidades', icon: BarChart3 },
+    ],
+    image: iaAtencionImage,
+    imageAlt: 'Equipo de atención al cliente trabajando con auriculares frente al ordenador',
+  },
+  {
+    title: 'Datos y control',
+    description: 'Centralizamos la información para saber qué está pasando sin perseguir Excels.',
+    features: [
+      { label: 'Indicadores en tiempo real', icon: BarChart3 },
+      { label: 'Información unificada', icon: Database },
+      { label: 'Mejores decisiones', icon: UsersRound },
+    ],
+    image: dashboardsKpisImage,
+    imageAlt: 'Panel con indicadores clave de rendimiento en pantalla',
+  },
+  {
+    title: 'Procesos a medida',
+    description:
+      'Si hoy depende de correos, llamadas, Excel o copiar y pegar, probablemente podemos mejorarlo.',
+    features: [
+      { label: 'Aplicaciones internas', icon: Settings },
+      { label: 'Automatizaciones específicas', icon: Workflow },
+      { label: 'Integraciones con tus sistemas', icon: Code },
+    ],
+    image: automatizacionMapeoImage,
+    imageAlt: 'Persona dibujando el mapa de un proceso de gestión en una pizarra',
+  },
+]
+
+export const businessTypes: { label: string; icon: LucideIcon }[] = [
+  { label: 'Taller', icon: Wrench },
+  { label: 'Asesoría', icon: FileText },
+  { label: 'Consultoría', icon: UsersRound },
+  { label: 'Centro clínico', icon: Stethoscope },
+  { label: 'Tienda', icon: Store },
+  { label: 'Pyme', icon: Building2 },
+  { label: 'y más', icon: Ellipsis },
+]
+
+// Franja final de /sectores
+export const departments = [
+  'Compras',
+  'Administración',
+  'Comercial',
+  'Almacén',
+  'Operaciones',
+  'Atención al cliente',
+  'Dirección',
+]
+
 export const processSteps = [
   {
     number: '0',
@@ -331,6 +452,7 @@ export const sectors = [
     slug: 'logistica-y-transporte',
     label: 'Logística y transporte',
     summary: 'Rutas, entregas y almacenes coordinados en tiempo real.',
+    tags: 'Trazabilidad · incidencias',
     icon: Truck,
     image: logisticaImage,
   },
@@ -338,6 +460,7 @@ export const sectors = [
     slug: 'industria',
     label: 'Industria',
     summary: 'Producción conectada y trazable, del pedido a la planta.',
+    tags: 'Producción · control operativo',
     icon: Factory,
     image: industriaImage,
   },
@@ -345,6 +468,7 @@ export const sectors = [
     slug: 'sanitario',
     label: 'Sanitario',
     summary: 'Menos carga administrativa y más tiempo para la atención.',
+    tags: 'Citas · documentación',
     icon: HeartPulse,
     image: sanitarioImage,
   },
@@ -352,21 +476,24 @@ export const sectors = [
     slug: 'retail-y-distribucion',
     label: 'Retail y distribución',
     summary: 'Stock, pedidos y canales de venta siempre sincronizados.',
-    icon: ShoppingBag,
+    tags: 'Stock · reposición',
+    icon: ShoppingCart,
     image: retailImage,
   },
   {
     slug: 'hosteleria-y-turismo',
     label: 'Hostelería y turismo',
     summary: 'Reservas, turnos y proveedores bajo control en temporada alta.',
-    icon: Hotel,
+    tags: 'Reservas · operativa diaria',
+    icon: ConciergeBell,
     image: hosteleriaImage,
   },
   {
     slug: 'servicios',
     label: 'Servicios',
     summary: 'Presupuestos, horas y facturación sin tareas repetitivas.',
-    icon: Briefcase,
+    tags: 'Clientes · seguimiento',
+    icon: UsersRound,
     image: serviciosImage,
   },
 ]

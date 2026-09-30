@@ -1,6 +1,7 @@
 import { motion, useReducedMotion, type Variants } from 'framer-motion'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Reveal } from '../components/Reveal'
 import { processSteps } from '../data/siteData'
 
@@ -35,12 +36,8 @@ const stepLineVariants: Variants = {
   }),
 }
 
-interface ProcessSectionProps {
-  /** Muestra la frase junto al título (en el home se oculta) */
-  showDescription?: boolean
-}
-
-export function ProcessSection({ showDescription = true }: ProcessSectionProps) {
+// Resumen del método para el home: los cuatro pasos en una línea y enlace a /metodo
+export function ProcessSection() {
   const reduceMotion = useReducedMotion()
   const [active, setActive] = useState(0)
   const current = processSteps[active]
@@ -62,11 +59,10 @@ export function ProcessSection({ showDescription = true }: ProcessSectionProps) 
               Cuatro etapas. <span className="text-gradient">Una dirección clara.</span>
             </h2>
           </div>
-          {showDescription && (
-            <p className="process-header-description">
-              Avanzamos contigo, haciendo visible cada decisión y cada resultado.
-            </p>
-          )}
+          <Link to="/metodo" className="process-header-link">
+            Ver el método completo
+            <ArrowRight size={16} />
+          </Link>
         </Reveal>
         <motion.div
           className="process-steps"

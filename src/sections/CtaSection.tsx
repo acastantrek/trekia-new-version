@@ -1,4 +1,5 @@
-import ctaPhoto from '../assets/cta/equipo-analizando-datos.jpg'
+// Foto cálida de una conversación alrededor de una mesa: más cercana que una de oficina
+import ctaPhoto from '../assets/method/entender.jpg'
 import { ButtonLink } from '../components/ButtonLink'
 import { Reveal } from '../components/Reveal'
 import { ResponsiveImage } from '../components/ResponsiveImage'
@@ -19,12 +20,12 @@ export function CtaSection() {
           <div>
             <span className="eyebrow">
               <i />
-              Primer paso, impacto real
+              Diagnóstico gratuito
             </span>
-            <h2>Encuentra el proceso que más te está costando.</h2>
+            <h2>Nosotros encontramos dónde la tecnología puede ayudarte.</h2>
             <p>
-              En el diagnóstico gratuito identificamos oportunidades, prioridades y el siguiente
-              paso más sensato.
+              Analizamos cómo trabajáis, detectamos oportunidades de automatización y os proponemos
+              soluciones concretas para ahorrar tiempo, simplificar procesos y mejorar el día a día.
             </p>
           </div>
           <ButtonLink to="/contacto">Solicitar diagnóstico</ButtonLink>

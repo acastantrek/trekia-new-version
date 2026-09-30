@@ -1,16 +1,31 @@
-import { CalendarCheck, Check, Mail, Phone } from 'lucide-react'
+import { BarChart3, CalendarCheck, Check, Lightbulb, Mail, Phone, Search } from 'lucide-react'
 import { ContactForm } from '../components/ContactForm'
 import { PageHero } from '../components/PageHero'
 import { Reveal } from '../components/Reveal'
+
+const heroPoints = [
+  { label: 'Análisis a medida', icon: Search },
+  { label: 'Soluciones concretas', icon: Lightbulb },
+  { label: 'Acompañamiento real', icon: BarChart3 },
+]
 
 export function ContactPage() {
   return (
     <>
       <PageHero
         eyebrow="Diagnóstico gratuito"
-        title="Hablemos del proceso que está frenando tu crecimiento."
-        description="Una conversación directa para entender tu operación, detectar el cuello de botella y valorar si la tecnología puede resolverlo."
-      />
+        title="Nosotros encontramos dónde la tecnología puede ayudarte."
+        description="Analizamos cómo trabajáis, detectamos oportunidades de automatización y os proponemos soluciones concretas para ahorrar tiempo, simplificar procesos y mejorar el día a día."
+      >
+        <ul className="contact-hero-points">
+          {heroPoints.map(({ label, icon: Icon }) => (
+            <li key={label}>
+              <Icon size={26} aria-hidden="true" />
+              {label}
+            </li>
+          ))}
+        </ul>
+      </PageHero>
       <section className="section contact-section">
         <div className="container contact-layout">
           <Reveal className="contact-aside">

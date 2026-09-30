@@ -11,7 +11,11 @@ export function Footer() {
         <div className="footer-brand">
           <Logo />
           <p>
-            Software, automatización e IA operativa para empresas que quieren avanzar con control.
+            Automatizamos procesos.
+            <br />
+            Impulsamos negocios.
+            <br />
+            Somos tu departamento de IA.
           </p>
           <div className="footer-social">
             <span>Síguenos</span>

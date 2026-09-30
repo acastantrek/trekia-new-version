@@ -1,4 +1,5 @@
 .process {
+  padding: 56px 0;
   background: var(--bg-alt-2);
   border-block: 1px solid rgba(var(--line-rgb), 0.08);
 }
@@ -12,7 +13,7 @@
 .process-heading h2 {
   margin-top: 18px;
   max-width: 620px;
-  font-size: clamp(32px, 4vw, 46px);
+  font-size: clamp(28px, 3.2vw, 38px);
   line-height: 1.15;
   letter-spacing: -1.5px;
 }
@@ -22,15 +23,23 @@
   background-clip: text;
   -webkit-background-clip: text;
 }
-.process-header-description {
-  max-width: 360px;
+.process-header-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   padding-bottom: 6px;
-  color: var(--muted);
-  font-size: 17px;
-  line-height: 1.7;
+  color: var(--blue);
+  font-size: 15px;
+  font-weight: 700;
+}
+.process-header-link svg {
+  transition: transform 0.25s;
+}
+.process-header-link:hover svg {
+  transform: translateX(4px);
 }
 .process-steps {
-  margin-top: 60px;
+  margin-top: 40px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 32px;
@@ -40,8 +49,8 @@
 }
 .process-step-line {
   position: absolute;
-  top: 31px;
-  left: 64px;
+  top: 25px;
+  left: 52px;
   right: -32px;
   height: 1px;
   background: linear-gradient(90deg, rgba(79, 140, 255, 0.5), rgba(79, 140, 255, 0));
@@ -50,9 +59,9 @@
 .step-number {
   position: relative;
   z-index: 1;
-  width: 64px;
-  height: 64px;
-  margin-bottom: 24px;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 18px;
   display: grid;
   place-items: center;
   border: 1px solid rgba(93, 149, 255, 0.35);
@@ -72,13 +81,14 @@
   text-transform: uppercase;
 }
 .process-step h3 {
-  margin-bottom: 10px;
-  font-size: 20px;
+  margin-bottom: 6px;
+  font-size: 18px;
 }
 .process-step p {
+  margin: 0;
   color: var(--muted);
-  line-height: 1.65;
-  font-size: 16px;
+  line-height: 1.55;
+  font-size: 15px;
 }
 .process-carousel {
   display: none;
@@ -88,7 +98,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 60px;
+  margin-top: 32px;
 }
 .process-stepper::before {
   content: '';

@@ -1,7 +1,7 @@
 .hero {
   position: relative;
   min-height: 100vh;
-  padding: 40px 0 30px;
+  padding: 8px 0 30px;
   background:
     radial-gradient(circle at 67% 43%, rgba(46, 87, 204, 0.13), transparent 34%),
     linear-gradient(180deg, var(--bg-alt), var(--bg));
@@ -71,9 +71,9 @@
 }
 .hero h1 span {
   display: block;
-  /* Hueco para que el degradado pinte los trazos descendentes (la "g") */
-  padding-bottom: 0.1em;
-  margin-bottom: -0.1em;
+  /* Hueco para que el degradado pinte los trazos descendentes (la "p" y la "g") */
+  padding-bottom: 0.24em;
+  margin-bottom: -0.24em;
   color: transparent;
   background: linear-gradient(100deg, var(--text) 10%, var(--blue) 55%, var(--violet));
   background-clip: text;
@@ -84,16 +84,22 @@
   max-width: 640px;
   margin: 0 0 18px;
   padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 0;
+  display: grid;
+  /* Dos columnas: las frases de la derecha (y sus puntos) quedan alineadas en vertical */
+  grid-template-columns: repeat(2, auto);
+  justify-content: start;
+  column-gap: 10px;
   list-style: none;
   color: var(--text-soft);
-  font: 600 16px / 1.5 'Manrope';
+  font: 600 16px / 1.7 'Manrope';
 }
-.hero-highlights li:not(:last-child)::after {
+/* Anula el justify global de li: en pantallas estrechas una frase puede partirse en dos líneas */
+.hero-highlights li {
+  text-align: left;
+}
+.hero-highlights li:nth-child(even)::before {
   content: '·';
-  margin: 0 10px;
+  margin-right: 10px;
   color: var(--blue);
   font-weight: 800;
 }

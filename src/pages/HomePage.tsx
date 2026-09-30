@@ -1,16 +1,18 @@
 import { AboutTeaserSection } from '../sections/AboutTeaserSection'
 import { CtaSection } from '../sections/CtaSection'
 import { HeroSection } from '../sections/HeroSection'
+import { ProcessSection } from '../sections/ProcessSection'
 import { SectorsSection } from '../sections/SectorsSection'
-import { SolutionsSection } from '../sections/SolutionsSection'
+import { WhatWeDoTeaserSection } from '../sections/WhatWeDoTeaserSection'
 
 export function HomePage() {
   return (
     <>
       <HeroSection />
       <AboutTeaserSection />
-      <SolutionsSection carousel />
+      <WhatWeDoTeaserSection />
       <SectorsSection carousel />
+      <ProcessSection />
       <CtaSection />
     </>
   )

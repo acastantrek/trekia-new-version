@@ -42,7 +42,9 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 75% 30%;
+  object-position: 50% 18%;
+  /* Volteada: las personas quedan a la derecha, fuera del degradado que hay tras el texto */
+  transform: scaleX(-1);
 }
 .cta-panel .cta-photo::after {
   content: '';

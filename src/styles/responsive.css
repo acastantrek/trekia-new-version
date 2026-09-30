@@ -165,7 +165,7 @@
     font-size: 14px;
   }
   .hero {
-    padding-top: 40px;
+    padding-top: 20px;
   }
   .hero-grid {
     min-height: 0;
@@ -236,8 +236,10 @@
     align-items: flex-start;
     gap: 20px;
   }
-  .process-header-description {
-    max-width: none;
+  .process {
+    padding: 48px 0;
+  }
+  .process-header-link {
     padding-bottom: 0;
   }
   .about-teaser-photo {
@@ -287,7 +289,7 @@
   }
   .hero {
     min-height: auto;
-    padding: 24px 0 30px;
+    padding: 12px 0 30px;
   }
   .hero h1 {
     font-size: 38px;

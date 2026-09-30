@@ -1,4 +1,7 @@
-:root {
+/* Paleta oscura. En el modo mixto también la usan las secciones pares y el footer */
+:root,
+:where(:root[data-theme='mixed'] main > :nth-child(even)),
+:where(:root[data-theme='mixed'] .site-footer) {
   font-family: 'DM Sans', system-ui, sans-serif;
   color: var(--text);
   background: var(--bg);
@@ -35,10 +38,11 @@
   --container: 1360px;
 }
 
-/* Modo mixto: las secciones pares de cada página usan la paleta clara. :where() deja la
-   especificidad a 0 para que el fondo propio de cada sección siga mandando */
+/* Modo mixto: cada página empieza por una sección clara. La paleta clara se aplica a todo el
+   shell (header incluido) y las secciones pares y el footer vuelven a la oscura. :where() deja
+   la especificidad a 0 para que el fondo propio de cada sección siga mandando */
 :root[data-theme='light'],
-:where(:root[data-theme='mixed'] main > :nth-child(even)) {
+:where(:root[data-theme='mixed'] .site-shell) {
   color-scheme: light;
 
   --bg: #f5f7fc;
@@ -67,13 +71,15 @@
   --green: #0f9d72;
   --negative: #c23c58;
 }
-:where(:root[data-theme='mixed'] main > :nth-child(even)) {
+:where(:root[data-theme='mixed'] .site-shell) {
   background: var(--bg);
   color: var(--text);
 }
 
 /* Modo mixto: secciones en azul marino profundo alternadas con un blanco azulado limpio */
-:root[data-theme='mixed'] {
+:root[data-theme='mixed'],
+:where(:root[data-theme='mixed'] main > :nth-child(even)),
+:where(:root[data-theme='mixed'] .site-footer) {
   --bg: #0b1024;
   --bg-alt: #0d1329;
   --bg-alt-2: #0f152d;
@@ -82,7 +88,7 @@
   --surface-rgb: 19, 26, 52;
   --panel: rgba(var(--surface-rgb), 0.72);
 }
-:where(:root[data-theme='mixed'] main > :nth-child(even)) {
+:where(:root[data-theme='mixed'] .site-shell) {
   --bg: #f1f4fa;
   --bg-alt: #ecf0f8;
   --bg-alt-2: #e7ecf6;

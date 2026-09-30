@@ -1,9 +1,8 @@
 import { CheckCircle2 } from 'lucide-react'
-import { PageHero } from '../components/PageHero'
 import { Reveal } from '../components/Reveal'
 import { CtaSection } from '../sections/CtaSection'
 import { EconomicModelSection } from '../sections/EconomicModelSection'
-import { SolutionsSection } from '../sections/SolutionsSection'
+import { WhatWeDoSection } from '../sections/WhatWeDoSection'
 
 const principles = [
   [
@@ -23,12 +22,7 @@ const principles = [
 export function WhatWeDoPage() {
   return (
     <>
-      <PageHero
-        eyebrow="Qué hacemos?"
-        title="Una arquitectura operativa diseñada alrededor de tu empresa."
-        description="Software, automatización, integraciones e IA combinados con un objetivo: que la operación sea más rápida, visible y escalable."
-      />
-      <SolutionsSection compact />
+      <WhatWeDoSection isPageHeader />
       <section className="section principles">
         <div className="container principles-grid">
           <Reveal>
