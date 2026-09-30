@@ -1,0 +1,38 @@
+/* Base */
+@import './base.css';
+
+/* Layout */
+@import './header.css';
+@import './footer.css';
+@import './cookie-banner.css';
+@import './cookie-preferences.css';
+
+/* Shared UI */
+@import './ui.css';
+@import './glow-card.css';
+@import './detail-row.css';
+@import './lightbox.css';
+
+/* Home sections */
+@import './hero.css';
+@import './showcase.css';
+@import './challenges.css';
+@import './solutions.css';
+@import './process.css';
+@import './benefits.css';
+@import './testimonials.css';
+@import './about-teaser.css';
+@import './sectors.css';
+@import './economic.css';
+@import './cta.css';
+
+/* Other pages */
+@import './page-hero.css';
+@import './about-story.css';
+@import './method-detail.css';
+@import './blog.css';
+@import './legal.css';
+@import './contact.css';
+
+/* Responsive overrides (must stay last to preserve cascade order) */
+@import './responsive.css';

@@ -1,0 +1,55 @@
+.detail-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 70px;
+  align-items: center;
+}
+.detail-row:not(:last-child) {
+  margin-bottom: 90px;
+}
+.detail-row.is-reverse .detail-media {
+  order: 2;
+}
+.detail-media {
+  aspect-ratio: 4 / 3;
+  border-radius: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+.detail-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.detail-number {
+  width: 46px;
+  height: 46px;
+  margin-bottom: 22px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(93, 149, 255, 0.35);
+  border-radius: 50%;
+  color: var(--text);
+  background: radial-gradient(circle, rgba(79, 140, 255, 0.16), rgba(var(--surface-rgb), 0.9));
+  box-shadow: 0 0 16px rgba(79, 140, 255, 0.18);
+  font: 700 17px 'Manrope';
+}
+.detail-content .process-step-label {
+  display: block;
+  margin-bottom: 12px;
+}
+.detail-content h3 {
+  margin: 0 0 18px;
+  font-size: clamp(24px, 2.8vw, 32px);
+  line-height: 1.2;
+  letter-spacing: -0.8px;
+}
+.detail-content p {
+  margin: 0 0 14px;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.75;
+}
+.detail-content p:last-child {
+  margin-bottom: 0;
+}

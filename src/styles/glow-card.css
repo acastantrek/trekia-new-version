@@ -1,0 +1,93 @@
+/* Card clicable con animación de hover: se eleva, borde de degradado que gira
+   y foco de luz que sigue al cursor (--mx / --my desde trackSpotlight) */
+@property --card-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes card-border-spin {
+  to {
+    --card-angle: 360deg;
+  }
+}
+.glow-card {
+  position: relative;
+  overflow: hidden;
+  color: inherit;
+  cursor: pointer;
+  transition:
+    transform 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.2),
+    box-shadow 0.45s ease,
+    background 0.45s ease;
+}
+.glow-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  background: radial-gradient(
+    420px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(79, 140, 255, 0.2),
+    rgba(124, 92, 255, 0.08) 40%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+.glow-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  padding: 1.5px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--card-angle),
+    transparent 0deg,
+    var(--blue) 60deg,
+    var(--cyan) 120deg,
+    var(--violet) 180deg,
+    transparent 240deg
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  animation: card-border-spin 3s linear infinite;
+  animation-play-state: paused;
+  pointer-events: none;
+}
+.glow-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  background: rgba(var(--surface-rgb), 0.95);
+  box-shadow:
+    0 24px 60px -18px rgba(79, 140, 255, 0.55),
+    0 0 0 1px rgba(79, 140, 255, 0.15);
+}
+.glow-card:hover::before {
+  opacity: 1;
+}
+.glow-card:hover::after {
+  opacity: 1;
+  animation-play-state: running;
+}
+.glow-card:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: -2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .glow-card,
+  .glow-card *,
+  .glow-card::after {
+    transition: none;
+    animation: none;
+  }
+  .glow-card:hover {
+    transform: none;
+  }
+}

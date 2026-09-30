@@ -1,0 +1,105 @@
+.challenges {
+  background: var(--bg-alt);
+}
+.comparison-grid {
+  margin-top: 65px;
+  display: grid;
+  grid-template-columns: 1fr 50px 1fr;
+  align-items: center;
+}
+.comparison-card {
+  min-height: 390px;
+  padding: 34px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(var(--surface-rgb), 0.65);
+}
+.after-card {
+  border-color: rgba(69, 139, 255, 0.32);
+  background:
+    radial-gradient(circle at 100% 0, rgba(64, 104, 238, 0.15), transparent 42%),
+    rgba(var(--surface-rgb), 0.8);
+  box-shadow: 0 25px 80px rgba(14, 43, 125, 0.1);
+}
+.comparison-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+}
+.comparison-title span {
+  font: 700 20px 'Manrope';
+}
+.comparison-title small {
+  color: var(--faint);
+}
+.comparison-card ul {
+  list-style: none;
+  padding: 8px 0 22px;
+  margin: 0;
+}
+.comparison-card li {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 0;
+  color: var(--muted);
+  font-size: 16px;
+}
+.comparison-card li svg {
+  flex: none;
+}
+.before-card li svg {
+  color: var(--negative);
+}
+.after-card li svg {
+  color: var(--green);
+}
+.comparison-arrow {
+  width: 50px;
+  height: 50px;
+  display: grid;
+  place-items: center;
+  z-index: 1;
+  border: 1px solid rgba(90, 141, 255, 0.3);
+  border-radius: 50%;
+  background: var(--bg-alt-2);
+  color: var(--blue);
+  font-size: 22px;
+}
+.mini-flow {
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(var(--surface-rgb), 0.55);
+}
+.mini-flow i {
+  font-style: normal;
+  color: var(--faint);
+  font-size: 10px;
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+}
+.mini-flow b {
+  width: 28px;
+  height: 1px;
+  background: var(--line-solid);
+}
+.broken-flow b {
+  background: repeating-linear-gradient(90deg, var(--negative) 0 4px, transparent 4px 7px);
+}
+.connected-flow b {
+  background: var(--cyan);
+  box-shadow: 0 0 7px var(--blue);
+}
+.connected-flow i:nth-child(3) {
+  color: var(--text-soft);
+  border-color: rgba(83, 143, 255, 0.5);
+  background: rgba(43, 92, 195, 0.16);
+}

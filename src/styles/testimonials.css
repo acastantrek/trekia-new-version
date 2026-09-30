@@ -1,0 +1,181 @@
+.testimonials {
+  background: var(--bg-alt-2);
+}
+.testimonials-carousel {
+  margin-top: 58px;
+  display: flex;
+  align-items: stretch;
+  gap: 16px;
+}
+.testimonials-track {
+  flex: 1;
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  /* Hueco para que la card elevada, su sombra y las comillas ampliadas no se recorten */
+  margin: -56px 0 -44px;
+  padding: 56px 0 44px;
+}
+.testimonials-track::-webkit-scrollbar {
+  display: none;
+}
+.testimonial-card {
+  flex: 0 0 calc((100% - 40px) / 3);
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  padding: 32px 28px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(var(--surface-rgb), 0.56);
+}
+/* No enlaza a ningún sitio: animación de hover sin cursor de enlace */
+.testimonial-card.glow-card {
+  cursor: default;
+  /* Las comillas crecen fuera de la card en el hover y no deben recortarse */
+  overflow: visible;
+}
+.testimonial-card.glow-card:hover {
+  transform: translateY(-10px);
+}
+.testimonial-card > * {
+  position: relative;
+  z-index: 2;
+}
+.testimonial-quote-icon {
+  transform-origin: left bottom;
+  transition:
+    transform 0.55s cubic-bezier(0.3, 1.6, 0.4, 1),
+    opacity 0.35s ease;
+}
+.testimonial-card:hover .testimonial-quote-icon {
+  opacity: 1;
+  transform: rotate(-12deg) scale(2.8);
+}
+.testimonial-avatar {
+  transition:
+    transform 0.4s ease,
+    border-color 0.4s ease;
+}
+.testimonial-card:hover .testimonial-avatar {
+  transform: scale(1.12);
+  border-color: var(--blue);
+}
+/* Desktop: el carrusel se sale del container y ocupa casi todo el ancho */
+@media (min-width: 821px) {
+  .testimonials-carousel {
+    width: calc(100vw - 48px);
+    margin-left: calc(50% - 50vw + 24px);
+  }
+  .testimonial-card {
+    padding: 40px 36px;
+  }
+  .testimonials-track .testimonial-card p {
+    font-size: 17px;
+  }
+}
+.testimonial-quote-icon {
+  color: var(--blue);
+  opacity: 0.7;
+  margin-bottom: 18px;
+}
+.testimonial-card p {
+  flex: 1;
+  margin: 0 0 24px;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.7;
+}
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+.testimonial-avatar {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--line);
+}
+.testimonial-author div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.testimonial-author strong {
+  font-size: 14px;
+}
+.testimonial-author span {
+  color: var(--faint);
+  font-size: 14px;
+}
+.carousel-arrow {
+  flex: 0 0 auto;
+  width: 46px;
+  height: 46px;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: rgba(var(--surface-rgb), 0.7);
+  color: var(--text-soft);
+  cursor: pointer;
+  transition: 0.2s;
+}
+.carousel-arrow:hover:not(:disabled) {
+  border-color: rgba(83, 143, 255, 0.5);
+  background: rgba(43, 86, 180, 0.16);
+}
+.carousel-arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.carousel-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  margin-top: 30px;
+}
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--line);
+  cursor: pointer;
+  transition: 0.2s;
+}
+.carousel-dot.is-active {
+  width: 22px;
+  border-radius: 5px;
+  background: var(--blue);
+}
+/* Desktop: las reseñas se desplazan en bucle continuo (useCarouselMarquee).
+   Sin snap ni scroll suave, que frenarían el movimiento; los puntos no aplican */
+@media (min-width: 821px) {
+  .testimonials-track {
+    scroll-snap-type: none;
+    scroll-behavior: auto;
+  }
+  .testimonials .carousel-dots {
+    display: none;
+  }
+}
+/* En móvil el carrusel es manual: las copias del bucle sobran */
+@media (max-width: 820px) {
+  .testimonials-track .is-clone {
+    display: none;
+  }
+}

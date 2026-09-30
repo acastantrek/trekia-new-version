@@ -1,0 +1,65 @@
+.operations-showcase {
+  background: linear-gradient(180deg, var(--bg), var(--bg-alt-2));
+}
+.showcase-frame {
+  position: relative;
+  height: 460px;
+  max-width: 780px;
+  margin: 56px auto 0;
+}
+.showcase-frame::after {
+  content: '';
+  position: absolute;
+  inset: 10% 8%;
+  border: 1px solid rgba(94, 142, 255, 0.12);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.metrics-row {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 860px;
+  margin-top: 20px;
+  border-top: 1px solid var(--line);
+}
+.metric {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 22px 28px 10px 0;
+}
+.metric + .metric {
+  border-left: 1px solid var(--line);
+  padding-left: 28px;
+}
+.metric strong {
+  font: 700 27px 'Manrope';
+  color: var(--text-soft);
+  white-space: nowrap;
+}
+.metric span {
+  max-width: 150px;
+  color: var(--faint);
+  font-size: 12px;
+  line-height: 1.35;
+}
+.scroll-cue {
+  position: absolute;
+  z-index: 2;
+  bottom: 22px;
+  right: 42px;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--faint);
+  transition: 0.25s;
+}
+.scroll-cue:hover {
+  color: var(--text);
+  border-color: var(--blue);
+}

@@ -1,0 +1,173 @@
+:root {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  color-scheme: dark;
+
+  --bg: #050713;
+  --bg-alt: #070a17;
+  --bg-alt-2: #080b19;
+  --bg-soft: #080c1c;
+
+  --surface-rgb: 11, 16, 35;
+  --panel: rgba(var(--surface-rgb), 0.72);
+
+  --line-rgb: 151, 171, 226;
+  --line: rgba(var(--line-rgb), 0.14);
+  --line-strong: rgba(var(--line-rgb), 0.22);
+  --line-solid: #3f4965;
+
+  --text: #eef2ff;
+  --text-rgb: 238, 242, 255;
+  --text-soft: #dce4f9;
+  --label: #b3c5f5;
+  --muted: #9aa6c8;
+  --faint: #7f8bab;
+
+  --blue: #4f8cff;
+  --violet: #7c5cff;
+  --cyan: #38d6ff;
+  --green: #50d7b1;
+  --negative: #df7087;
+
+  --container: 1360px;
+}
+
+/* Modo mixto: las secciones pares de cada página usan la paleta clara. :where() deja la
+   especificidad a 0 para que el fondo propio de cada sección siga mandando */
+:root[data-theme='light'],
+:where(:root[data-theme='mixed'] main > :nth-child(even)) {
+  color-scheme: light;
+
+  --bg: #f5f7fc;
+  --bg-alt: #eef1f9;
+  --bg-alt-2: #e8ecf6;
+  --bg-soft: #eef1f9;
+
+  --surface-rgb: 255, 255, 255;
+  --panel: rgba(var(--surface-rgb), 0.82);
+
+  --line-rgb: 27, 40, 82;
+  --line: rgba(var(--line-rgb), 0.12);
+  --line-strong: rgba(var(--line-rgb), 0.2);
+  --line-solid: #c7cfe4;
+
+  --text: #0d1428;
+  --text-rgb: 13, 20, 40;
+  --text-soft: #232b4a;
+  --label: #2f5fd1;
+  --muted: #545d7e;
+  --faint: #6b7492;
+
+  --blue: #3568e0;
+  --violet: #6a3de0;
+  --cyan: #0891b2;
+  --green: #0f9d72;
+  --negative: #c23c58;
+}
+:where(:root[data-theme='mixed'] main > :nth-child(even)) {
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Modo mixto con poco salto entre secciones: oscuro más claro y claro más gris que en los
+   modos puros; los textos secundarios se oscurecen para mantener el contraste */
+:root[data-theme='mixed'] {
+  --bg: #141b36;
+  --bg-alt: #161d39;
+  --bg-alt-2: #18203c;
+  --bg-soft: #19213e;
+
+  --surface-rgb: 29, 37, 68;
+  --panel: rgba(var(--surface-rgb), 0.72);
+}
+:where(:root[data-theme='mixed'] main > :nth-child(even)) {
+  --bg: #cdd4e5;
+  --bg-alt: #c8d0e2;
+  --bg-alt-2: #c3cbdf;
+  --bg-soft: #c8d0e2;
+
+  --surface-rgb: 232, 236, 245;
+  --panel: rgba(var(--surface-rgb), 0.82);
+
+  --label: #2750b8;
+  --muted: #454e6e;
+  --faint: #4d5676;
+}
+
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  /* Los saltos a anclas no quedan tapados por el header fijo */
+  scroll-padding-top: 90px;
+}
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+}
+body::selection {
+  background: rgba(79, 140, 255, 0.45);
+  color: white;
+}
+/* Las imágenes llevan width/height reales: la altura se recalcula según el ancho de CSS */
+img {
+  height: auto;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button,
+input,
+textarea {
+  font: inherit;
+}
+button {
+  color: inherit;
+}
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+h1,
+h2,
+h3 {
+  font-family: 'Manrope', 'DM Sans', sans-serif;
+}
+p,
+li {
+  text-align: justify;
+}
+.benefit-card p,
+.form-success p,
+.section-heading-center p {
+  text-align: inherit;
+}
+.site-shell {
+  min-height: 100vh;
+  padding-top: 82px;
+  overflow: hidden;
+}
+.container {
+  width: min(calc(100% - 48px), var(--container));
+  margin-inline: auto;
+}
+@media (min-width: 1700px) {
+  .container {
+    width: min(calc(100% - 96px), 1560px);
+  }
+}
+.section {
+  position: relative;
+  padding: 64px 0;
+}

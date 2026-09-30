@@ -1,0 +1,128 @@
+.cookie-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(2, 5, 16, 0.6);
+  backdrop-filter: blur(4px);
+}
+.cookie-modal {
+  width: 100%;
+  max-width: 640px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(var(--surface-rgb), 0.98);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+}
+.cookie-modal-body {
+  padding: 32px 32px 8px;
+  overflow-y: auto;
+}
+.cookie-modal-body h2 {
+  margin: 0 0 14px;
+  font-size: 22px;
+  letter-spacing: -0.4px;
+}
+.cookie-modal-body > p {
+  margin: 0 0 14px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.7;
+}
+.cookie-modal-more {
+  display: block;
+  margin: -6px 0 16px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.cookie-categories {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--line);
+  margin-top: 8px;
+}
+.cookie-category {
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+}
+.cookie-category-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+.cookie-category-title {
+  font: 700 14px 'Manrope';
+  color: var(--text-soft);
+}
+.cookie-category-locked {
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+.cookie-category p {
+  margin: 0;
+  color: var(--faint);
+  font-size: 15px;
+  line-height: 1.65;
+}
+.cookie-modal-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 20px 32px;
+  border-top: 1px solid var(--line);
+  background: rgba(var(--surface-rgb), 0.6);
+}
+.cookie-modal-footer .cookie-btn {
+  flex: 1;
+  min-width: 140px;
+  text-align: center;
+}
+
+.consent-toggle {
+  position: relative;
+  flex-shrink: 0;
+  width: 42px;
+  height: 24px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(var(--surface-rgb), 0.6);
+  cursor: pointer;
+}
+.consent-toggle-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--faint);
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+.consent-toggle.is-on {
+  border-color: rgba(83, 143, 255, 0.5);
+  background: rgba(43, 86, 180, 0.25);
+}
+.consent-toggle.is-on .consent-toggle-thumb {
+  background: var(--blue);
+  transform: translateX(18px);
+}

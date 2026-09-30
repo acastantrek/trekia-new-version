@@ -1,0 +1,395 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+  padding: 40px 0 30px;
+  background:
+    radial-gradient(circle at 67% 43%, rgba(46, 87, 204, 0.13), transparent 34%),
+    linear-gradient(180deg, var(--bg-alt), var(--bg));
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(91, 121, 190, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(91, 121, 190, 0.045) 1px, transparent 1px);
+  background-size: 70px 70px;
+  mask-image: linear-gradient(to bottom, black, transparent 90%);
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  width: 900px;
+  height: 900px;
+  left: 54%;
+  top: 3%;
+  border: 1px solid rgba(116, 143, 217, 0.06);
+  border-radius: 50%;
+  box-shadow: inset 0 0 120px rgba(67, 103, 218, 0.035);
+  pointer-events: none;
+}
+.hero-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+}
+.hero-glow-one {
+  width: 350px;
+  height: 350px;
+  background: rgba(72, 74, 255, 0.1);
+  left: -150px;
+  top: 150px;
+}
+.hero-glow-two {
+  width: 220px;
+  height: 220px;
+  background: rgba(35, 201, 255, 0.08);
+  right: -50px;
+  top: 25%;
+}
+.hero-grid {
+  position: relative;
+  z-index: 1;
+  min-height: 585px;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: center;
+  gap: 25px;
+}
+.hero-content {
+  padding-bottom: 30px;
+}
+.hero h1 {
+  max-width: 740px;
+  margin: 24px 0;
+  font-size: clamp(42px, 5.2vw, 66px);
+  line-height: 1.01;
+  letter-spacing: -3.2px;
+  font-weight: 700;
+}
+.hero h1 span {
+  display: block;
+  /* Hueco para que el degradado pinte los trazos descendentes (la "g") */
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+  color: transparent;
+  background: linear-gradient(100deg, var(--text) 10%, var(--blue) 55%, var(--violet));
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+.hero-copy {
+  max-width: 620px;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.7;
+}
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 33px;
+}
+.hero-visual {
+  height: 540px;
+  position: relative;
+}
+.visual-frame {
+  position: absolute;
+  inset: 5% -12% 0 -7%;
+}
+.visual-frame::after {
+  content: '';
+  position: absolute;
+  inset: 15% 12%;
+  border: 1px solid rgba(94, 142, 255, 0.12);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.canvas-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+}
+.canvas-wrap:active {
+  cursor: grabbing;
+}
+.canvas-label,
+.canvas-hint {
+  position: absolute;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.1px;
+  color: var(--faint);
+  pointer-events: none;
+}
+.canvas-label {
+  left: 11%;
+  bottom: 12%;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.canvas-hint {
+  right: 7%;
+  bottom: 12%;
+}
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 8px var(--green);
+}
+/* Escena 3D cargada bajo demanda: el loader de porcentaje queda encima hasta que se pinta */
+.scene-3d {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.canvas-3d {
+  transition: opacity 0.5s ease;
+}
+.canvas-3d.is-loading {
+  opacity: 0;
+}
+/* Captura estática que sustituye a la escena si el 3D no puede funcionar */
+.scene-fallback {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.scene-loader {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  pointer-events: none;
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease;
+}
+.scene-loader.is-hidden {
+  opacity: 0;
+  transform: scale(1.15);
+}
+.scene-loader-ring {
+  position: relative;
+  width: 132px;
+  height: 132px;
+  display: grid;
+  place-items: center;
+}
+/* Halo que respira detrás del anillo */
+.scene-loader-ring::before {
+  content: '';
+  position: absolute;
+  inset: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(79, 140, 255, 0.28), transparent 70%);
+  filter: blur(8px);
+  animation: sceneLoaderPulse 1.8s ease-in-out infinite;
+}
+/* Anillo discontinuo exterior que gira (animación CSS: sigue girando aunque el hilo principal esté ocupado) */
+.scene-loader-ring::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border: 1px dashed rgba(var(--line-rgb), 0.35);
+  border-radius: 50%;
+  animation: sceneLoaderSpin 9s linear infinite;
+}
+.scene-loader-ring svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  overflow: visible;
+}
+.scene-loader-track {
+  fill: none;
+  stroke: rgba(var(--line-rgb), 0.16);
+  stroke-width: 4;
+}
+.scene-loader-progress {
+  fill: none;
+  stroke-width: 4;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 6px rgba(79, 140, 255, 0.7));
+}
+/* Punto de luz orbitando el anillo */
+.scene-loader-orbit {
+  position: absolute;
+  inset: 0;
+  animation: sceneLoaderSpin 1.6s linear infinite;
+}
+.scene-loader-orbit::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  margin-left: -4px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow:
+    0 0 10px var(--cyan),
+    0 0 22px rgba(56, 214, 255, 0.6);
+}
+.scene-loader-value {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  font-family: 'Manrope', sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+.scene-loader-value strong {
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  background: linear-gradient(135deg, var(--text), var(--blue) 60%, var(--violet));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.scene-loader-value small {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 700;
+}
+.scene-loader-text {
+  margin: 0;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--faint);
+  animation: sceneLoaderBlink 1.8s ease-in-out infinite;
+}
+@keyframes sceneLoaderSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes sceneLoaderPulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+@keyframes sceneLoaderBlink {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scene-loader-ring::before,
+  .scene-loader-ring::after,
+  .scene-loader-orbit,
+  .scene-loader-text {
+    animation: none;
+  }
+}
+.scroll-arrows {
+  display: none;
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  flex-direction: column;
+  align-items: center;
+  padding: 6px 14px;
+  border: 0;
+  background: none;
+  color: var(--blue);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.scroll-arrows svg {
+  width: 26px;
+  height: 26px;
+  margin-top: -13px;
+  opacity: 0;
+  filter: drop-shadow(0 0 6px rgba(79, 140, 255, 0.55));
+  animation: scrollArrowFade 1.6s ease-in-out infinite;
+}
+.scroll-arrows svg:first-child {
+  margin-top: 0;
+}
+.scroll-arrows svg:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.scroll-arrows svg:nth-child(3) {
+  animation-delay: 0.4s;
+}
+.scroll-arrows svg:nth-child(4) {
+  animation-delay: 0.6s;
+}
+@keyframes scrollArrowFade {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(4px);
+  }
+}
+.floating-chip {
+  position: absolute;
+  min-width: 138px;
+  padding: 14px 15px;
+  border: 1px solid rgba(var(--line-rgb), 0.28);
+  border-radius: 10px;
+  background: rgba(var(--surface-rgb), 0.65);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+}
+.floating-chip small {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--faint);
+  font-size: 10px;
+}
+.floating-chip strong {
+  margin-right: 8px;
+  font: 700 21px 'Manrope';
+}
+.floating-chip span {
+  color: var(--green);
+  font-size: 9px;
+}
+.chip-top {
+  top: 20%;
+  right: -3%;
+  animation: hoverFloat 5s ease-in-out infinite;
+}
+.chip-bottom {
+  bottom: 20%;
+  left: -3%;
+  animation: hoverFloat 6s 1s ease-in-out infinite;
+}
+@keyframes hoverFloat {
+  50% {
+    transform: translateY(-8px);
+  }
+}

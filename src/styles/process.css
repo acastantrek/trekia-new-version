@@ -1,0 +1,167 @@
+.process {
+  background: var(--bg-alt-2);
+  border-block: 1px solid rgba(var(--line-rgb), 0.08);
+}
+.process-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.process-heading h2 {
+  margin-top: 18px;
+  max-width: 620px;
+  font-size: clamp(32px, 4vw, 46px);
+  line-height: 1.15;
+  letter-spacing: -1.5px;
+}
+.text-gradient {
+  color: transparent;
+  background: linear-gradient(100deg, var(--blue), var(--violet));
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+.process-header-description {
+  max-width: 360px;
+  padding-bottom: 6px;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.7;
+}
+.process-steps {
+  margin-top: 60px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+.process-step {
+  position: relative;
+}
+.process-step-line {
+  position: absolute;
+  top: 31px;
+  left: 64px;
+  right: -32px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(79, 140, 255, 0.5), rgba(79, 140, 255, 0));
+  transform-origin: left;
+}
+.step-number {
+  position: relative;
+  z-index: 1;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 24px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(93, 149, 255, 0.35);
+  border-radius: 50%;
+  color: var(--text);
+  background: radial-gradient(circle, rgba(79, 140, 255, 0.16), rgba(var(--surface-rgb), 0.9));
+  box-shadow: 0 0 18px rgba(79, 140, 255, 0.2);
+  font: 700 18px 'Manrope';
+}
+.process-step-label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.process-step h3 {
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+.process-step p {
+  color: var(--muted);
+  line-height: 1.65;
+  font-size: 16px;
+}
+.process-carousel {
+  display: none;
+}
+.process-stepper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 60px;
+}
+.process-stepper::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  top: 50%;
+  z-index: 0;
+  height: 1px;
+  background: var(--line);
+  transform: translateY(-50%);
+}
+.process-stepper-dot {
+  position: relative;
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--bg-alt-2);
+  color: var(--faint);
+  font: 700 14px 'Manrope';
+  cursor: pointer;
+  transition: 0.25s;
+}
+.process-stepper-dot.is-done {
+  border-color: rgba(93, 149, 255, 0.45);
+  color: var(--blue);
+  background: rgba(79, 140, 255, 0.08);
+}
+.process-stepper-dot.is-active {
+  border-color: rgba(93, 149, 255, 0.6);
+  color: var(--text);
+  background: radial-gradient(circle, rgba(79, 140, 255, 0.22), rgba(var(--surface-rgb), 0.9));
+  box-shadow: 0 0 16px rgba(79, 140, 255, 0.25);
+}
+.process-carousel-content {
+  min-height: 150px;
+  margin-top: 24px;
+  padding: 28px 24px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(var(--surface-rgb), 0.5);
+  animation: processCarouselFade 0.35s ease;
+}
+@keyframes processCarouselFade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.process-carousel-content .process-step-label {
+  margin-bottom: 8px;
+}
+.process-carousel-content h3 {
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+.process-carousel-content p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.65;
+  font-size: 16px;
+}
+.process-carousel-nav {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 24px;
+}
