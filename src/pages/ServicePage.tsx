@@ -1,94 +1,132 @@
-import { ArrowLeft, CheckCircle2 } from 'lucide-react'
+import { ArrowLeft } from 'lucide-react'
 import { Link, Navigate, useParams } from 'react-router-dom'
-import { PageHero } from '../components/PageHero'
 import { Reveal } from '../components/Reveal'
-import { CtaSection } from '../sections/CtaSection'
-import { solutions } from '../data/siteData'
 import { ResponsiveImage } from '../components/ResponsiveImage'
+import { businessAreas } from '../data/businessAreas'
+import { CtaSection } from '../sections/CtaSection'
 
+// Página de cada área de "Qué hacemos": poco texto, todo en tarjetas con icono
 export function ServicePage() {
   const { slug } = useParams()
-  const service = solutions.find((item) => item.slug === slug)
+  const area = businessAreas.find((item) => item.slug === slug)
 
-  if (!service) {
+  if (!area) {
     return <Navigate to="/que-hacemos" replace />
   }
 
+  const otherAreas = businessAreas.filter((item) => item.slug !== area.slug)
+
   return (
     <>
-      <PageHero eyebrow="Servicio" title={service.title} description={service.description} />
-      <section className="section legal-section service-detail">
-        <div className="container">
-          <Reveal>
-            <Link className="blog-back-link" to="/que-hacemos">
+      <section className="section area-hero">
+        <div className="container area-hero-grid">
+          <Reveal className="area-hero-content">
+            <Link className="area-back-link" to="/que-hacemos">
               <ArrowLeft size={16} />
-              Volver a qué hacemos
+              Qué hacemos
             </Link>
+            <h1>{area.title}</h1>
+            <p>{area.description}</p>
+            <ul className="area-hero-features">
+              {area.features.map(({ label, icon: Icon }) => (
+                <li key={label}>
+                  <Icon size={18} aria-hidden="true" />
+                  {label}
+                </li>
+              ))}
+            </ul>
           </Reveal>
-          <div className="detail-row">
-            <Reveal className="detail-media" delay={0.05}>
-              <ResponsiveImage
-                image={service.image}
-                sizes="(max-width: 820px) 100vw, 600px"
-                alt={service.title}
-              />
-            </Reveal>
-            <Reveal className="detail-content" delay={0.08}>
-              <p>{service.longDescription}</p>
-            </Reveal>
-          </div>
+          <Reveal className="area-hero-media" delay={0.08}>
+            <ResponsiveImage
+              image={area.image}
+              sizes="(max-width: 820px) 100vw, 560px"
+              alt={area.imageAlt}
+            />
+          </Reveal>
         </div>
       </section>
-      <section className="section service-story">
+
+      <section className="section area-block">
         <div className="container">
-          <div className="detail-row is-reverse">
-            <Reveal className="detail-media">
-              <ResponsiveImage
-                image={service.gallery[0].src}
-                sizes="(max-width: 820px) 100vw, 600px"
-                alt={service.gallery[0].alt}
-                loading="lazy"
-              />
-            </Reveal>
-            <Reveal className="detail-content" delay={0.08}>
-              <p>{service.extendedParagraphs[0]}</p>
-              <p>{service.extendedParagraphs[1]}</p>
-            </Reveal>
-          </div>
-          <div className="detail-row">
-            <Reveal className="detail-media">
-              <ResponsiveImage
-                image={service.gallery[1].src}
-                sizes="(max-width: 820px) 100vw, 600px"
-                alt={service.gallery[1].alt}
-                loading="lazy"
-              />
-            </Reveal>
-            <Reveal className="detail-content" delay={0.08}>
-              <p>{service.extendedParagraphs[2]}</p>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-      <section className="section principles">
-        <div className="container principles-grid">
-          <Reveal>
+          <Reveal className="area-heading">
             <span className="eyebrow">
               <i />
-              Qué incluye
+              ¿Te suena?
             </span>
-            <h2>Cómo lo ponemos en marcha.</h2>
+            <h2>Lo que vemos a menudo.</h2>
           </Reveal>
-          <div>
-            {service.includes.map((item, index) => (
-              <Reveal className="principle" key={item} delay={index * 0.06}>
-                <CheckCircle2 />
-                <p>{item}</p>
+          <div className="area-cards area-cards-3">
+            {area.pains.map(({ title, text, icon: Icon }, index) => (
+              <Reveal className="area-info-card is-pain" key={title} delay={index * 0.06}>
+                <span className="area-info-icon">
+                  <Icon size={22} />
+                </span>
+                <h3>{title}</h3>
+                <p>{text}</p>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
+
+      <section className="section area-block">
+        <div className="container">
+          <Reveal className="area-heading">
+            <span className="eyebrow">
+              <i />
+              La solución
+            </span>
+            <h2>Qué automatizamos.</h2>
+          </Reveal>
+          <div className="area-cards">
+            {area.capabilities.map(({ title, text, icon: Icon }, index) => (
+              <Reveal className="area-info-card" key={title} delay={(index % 3) * 0.06}>
+                <span className="area-info-icon">
+                  <Icon size={22} />
+                </span>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section area-block">
+        <div className="container">
+          <Reveal className="area-heading">
+            <span className="eyebrow">
+              <i />
+              Resultado
+            </span>
+            <h2>Lo que ganas.</h2>
+          </Reveal>
+          <div className="area-results">
+            {area.results.map(({ label, icon: Icon }, index) => (
+              <Reveal className="area-result" key={label} delay={index * 0.06}>
+                <span className="area-result-icon">
+                  <Icon size={26} />
+                </span>
+                <strong>{label}</strong>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal className="area-others">
+            <span className="business-band-label">Otras áreas</span>
+            <ul>
+              {otherAreas.map(({ slug: otherSlug, title, icon: Icon }) => (
+                <li key={otherSlug}>
+                  <Link to={`/servicios/${otherSlug}`}>
+                    <Icon size={16} aria-hidden="true" />
+                    {title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+        </div>
+      </section>
+
       <CtaSection />
     </>
   )

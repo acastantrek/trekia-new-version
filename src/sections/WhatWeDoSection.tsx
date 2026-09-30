@@ -2,7 +2,8 @@ import { ArrowRight, UsersRound } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { Reveal } from '../components/Reveal'
 import { ResponsiveImage } from '../components/ResponsiveImage'
-import { businessAreas, businessTypes } from '../data/siteData'
+import { businessAreas } from '../data/businessAreas'
+import { businessTypes } from '../data/siteData'
 
 interface WhatWeDoSectionProps {
   /** En /que-hacemos es la cabecera de la página: título como h1 */
@@ -43,9 +44,9 @@ export function WhatWeDoSection({ isPageHeader = false }: WhatWeDoSectionProps) 
                   ))}
                 </ul>
                 <Link
-                  to="/contacto"
+                  to={`/servicios/${area.slug}`}
                   className="area-card-arrow"
-                  aria-label={`Hablemos de ${area.title.toLowerCase()}`}
+                  aria-label={`Ver ${area.title}`}
                 >
                   <ArrowRight size={18} />
                 </Link>

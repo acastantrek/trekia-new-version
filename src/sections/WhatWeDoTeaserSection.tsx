@@ -2,10 +2,10 @@ import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { Reveal } from '../components/Reveal'
 import { ResponsiveImage } from '../components/ResponsiveImage'
-import { businessAreas } from '../data/siteData'
+import { businessAreas } from '../data/businessAreas'
 
 // Versión reducida de "Qué hacemos" para el home: las seis áreas como tarjetas pequeñas
-// que llevan a /que-hacemos, donde está el detalle completo
+// que llevan a la página de cada una
 export function WhatWeDoTeaserSection() {
   return (
     <section className="section what-we-do what-we-do-teaser" id="soluciones">
@@ -27,7 +27,7 @@ export function WhatWeDoTeaserSection() {
         <div className="area-tiles">
           {businessAreas.map((area, index) => (
             <Reveal key={area.title} delay={(index % 3) * 0.05}>
-              <Link to="/que-hacemos" className="area-tile">
+              <Link to={`/servicios/${area.slug}`} className="area-tile">
                 <span className="area-tile-media">
                   <ResponsiveImage image={area.image} sizes="80px" alt="" loading="lazy" />
                 </span>

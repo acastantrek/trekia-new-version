@@ -2,7 +2,8 @@ import { ChevronDown, Menu, X, type LucideIcon } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import type { CSSProperties } from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import { navItems, sectors, socialLinks, solutions } from '../data/siteData'
+import { businessAreas } from '../data/businessAreas'
+import { navItems, sectors, socialLinks } from '../data/siteData'
 import { Logo } from '../components/Logo'
 
 interface NavDropdownItem {
@@ -18,10 +19,10 @@ const navDropdowns: Record<string, NavDropdownItem[] | undefined> = {
     title: sector.label,
     Icon: sector.icon,
   })),
-  '/que-hacemos': solutions.map((service) => ({
-    to: `/servicios/${service.slug}`,
-    title: service.title,
-    Icon: service.icon,
+  '/que-hacemos': businessAreas.map((area) => ({
+    to: `/servicios/${area.slug}`,
+    title: area.title,
+    Icon: area.icon,
   })),
 }
 
