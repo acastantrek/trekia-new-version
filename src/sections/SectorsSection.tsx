@@ -1,6 +1,5 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
 import { Reveal } from '../components/Reveal'
 import { SectionHeading } from '../components/SectionHeading'
 import { sectors } from '../data/siteData'
@@ -86,11 +85,8 @@ export function SectorsSection({ carousel = false }: SectorsSectionProps) {
               const Icon = sector.icon
               return (
                 <Reveal className="sector-card" key={sector.slug} delay={index * 0.04}>
-                  <Link
-                    to={`/sectores#${sector.slug}`}
-                    className="sector-card-link glow-card"
-                    onMouseMove={trackSpotlight}
-                  >
+                  {/* Tarjeta informativa: no enlaza a ningún sitio */}
+                  <div className="sector-card-link glow-card" onMouseMove={trackSpotlight}>
                     <div className="sector-card-media">
                       <ResponsiveImage
                         image={sector.image}
@@ -103,7 +99,7 @@ export function SectorsSection({ carousel = false }: SectorsSectionProps) {
                       </div>
                     </div>
                     <strong>{sector.label}</strong>
-                  </Link>
+                  </div>
                 </Reveal>
               )
             })}

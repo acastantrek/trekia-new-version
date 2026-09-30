@@ -38,6 +38,10 @@
   position: relative;
   z-index: 3;
 }
+/* Tarjetas informativas (no enlazan): sin cursor de mano de .glow-card */
+.sector-card-link.glow-card {
+  cursor: default;
+}
 .sector-card-link {
   display: flex;
   flex: 1;
