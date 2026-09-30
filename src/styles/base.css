@@ -72,29 +72,24 @@
   color: var(--text);
 }
 
-/* Modo mixto con poco salto entre secciones: oscuro más claro y claro más gris que en los
-   modos puros; los textos secundarios se oscurecen para mantener el contraste */
+/* Modo mixto: secciones en azul marino profundo alternadas con un blanco azulado limpio */
 :root[data-theme='mixed'] {
-  --bg: #141b36;
-  --bg-alt: #161d39;
-  --bg-alt-2: #18203c;
-  --bg-soft: #19213e;
+  --bg: #0b1024;
+  --bg-alt: #0d1329;
+  --bg-alt-2: #0f152d;
+  --bg-soft: #10172f;
 
-  --surface-rgb: 29, 37, 68;
+  --surface-rgb: 19, 26, 52;
   --panel: rgba(var(--surface-rgb), 0.72);
 }
 :where(:root[data-theme='mixed'] main > :nth-child(even)) {
-  --bg: #cdd4e5;
-  --bg-alt: #c8d0e2;
-  --bg-alt-2: #c3cbdf;
-  --bg-soft: #c8d0e2;
+  --bg: #f1f4fa;
+  --bg-alt: #ecf0f8;
+  --bg-alt-2: #e7ecf6;
+  --bg-soft: #ecf0f8;
 
-  --surface-rgb: 232, 236, 245;
+  --surface-rgb: 255, 255, 255;
   --panel: rgba(var(--surface-rgb), 0.82);
-
-  --label: #2750b8;
-  --muted: #454e6e;
-  --faint: #4d5676;
 }
 
 * {
