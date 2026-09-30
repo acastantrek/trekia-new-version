@@ -40,7 +40,7 @@ export function HeroSection() {
               Automatizamos procesos. <span>Impulsamos negocios.</span>
             </h1>
           </Reveal>
-          <Reveal delay={0.09}>
+          <Reveal className="hero-highlights-wrap" delay={0.09}>
             <ul className="hero-highlights">
               {heroHighlights.map((item) => (
                 <li key={item}>{item}</li>

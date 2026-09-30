@@ -170,9 +170,19 @@
   .hero-grid {
     min-height: 0;
     grid-template-columns: 1fr;
+    gap: 0;
   }
+  /* Una columna: etiqueta y slogan, la figura 3D y debajo las frases. display: contents
+     saca los bloques del texto a la rejilla para poder colocar la figura entre ellos */
   .hero-content {
+    display: contents;
     text-align: center;
+  }
+  .hero-visual {
+    order: 1;
+  }
+  .hero-highlights-wrap {
+    order: 2;
   }
   .hero-content p {
     text-align: center;
@@ -186,7 +196,7 @@
     font-size: clamp(40px, 8vw, 57px);
   }
   .hero-highlights {
-    margin-inline: auto;
+    margin: 8px auto 0;
     justify-content: center;
   }
   .hero-visual {
@@ -304,6 +314,17 @@
   }
   .hero-content .eyebrow i {
     width: 16px;
+  }
+  /* Cada frase en una sola línea: la letra escala con el ancho */
+  .hero-highlights {
+    column-gap: 6px;
+    font-size: clamp(11.5px, 3.5vw, 15px);
+  }
+  .hero-highlights li {
+    white-space: nowrap;
+  }
+  .hero-highlights li:nth-child(even)::before {
+    margin-right: 6px;
   }
   .button {
     width: 100%;
@@ -501,11 +522,17 @@
   .footer-blog p {
     max-width: none;
   }
+  /* Hueco inferior para que el botón fijo de cookies (58px a 14px del borde) no tape los enlaces */
   .footer-bottom {
-    padding: 22px 0;
+    padding: 22px 0 86px;
     flex-direction: column;
     align-items: flex-start;
-    gap: 8px;
+    gap: 10px;
+    font-size: 12.5px;
+  }
+  .footer-legal-links {
+    flex-wrap: wrap;
+    gap: 6px 14px;
   }
   .page-hero {
     padding: 30px 0 45px;
