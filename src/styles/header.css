@@ -11,9 +11,24 @@
 }
 .site-header.is-scrolled {
   height: 70px;
-  background: rgba(var(--surface-rgb), 0.78);
   border-color: var(--line);
+}
+/* Fondo con desenfoque en un pseudo-elemento y no en el propio header: un backdrop-filter en
+   .site-header lo convertiría en el bloque contenedor del menú móvil (position: fixed), que
+   quedaría encajado en la altura del header en vez de cubrir toda la pantalla */
+.site-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(var(--surface-rgb), 0.78);
   backdrop-filter: blur(20px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.site-header.is-scrolled::before {
+  opacity: 1;
 }
 .header-inner {
   height: 100%;
