@@ -1,130 +1,132 @@
-import { GraduationCap, Handshake, Heart, Headphones } from 'lucide-react'
-// Solo la T, sin fondo; sin pérdida para que los bordes del logo queden limpios
-import logoMark from '../assets/logo-mark-t.png?w=300;601&format=webp&lossless=true&as=picture'
-import missionImage from '../assets/about/mision-ia-asistente.jpg'
-import { PageHero } from '../components/PageHero'
-import { SectionHeading } from '../components/SectionHeading'
+import { ArrowRight, Ear, Sparkles, UsersRound } from 'lucide-react'
+import heroPhoto from '../assets/cta/equipo-analizando-datos.jpg'
+import { ButtonLink } from '../components/ButtonLink'
 import { Reveal } from '../components/Reveal'
-import { TeamPhotosCarousel } from '../components/TeamPhotosCarousel'
-import { trackSpotlight } from '../lib/trackSpotlight'
-import { CtaSection } from '../sections/CtaSection'
 import { ResponsiveImage } from '../components/ResponsiveImage'
 
-const story = [
-  'Somos una consultora de ingeniería especializada en software a medida, integración de sistemas, automatización e IA aplicada. Trabajamos con empresas B2B de operaciones complejas y sistemas que no se hablan entre sí.',
-  'Seguimos siempre el mismo orden: escuchamos, diseñamos y construimos, con control en cada flujo crítico. Y no desaparecemos tras la entrega: medimos el impacto y ajustamos la solución a medida que la operación cambia.',
+const ideas = [
+  {
+    title: 'Escuchamos',
+    description: 'Antes de proponer nada, entendemos cómo trabajas.',
+    icon: Ear,
+  },
+  {
+    title: 'Simplificamos',
+    description: 'Usamos tecnología e IA para quitar trabajo, no para añadir complejidad.',
+    icon: Sparkles,
+  },
+  {
+    title: 'Te acompañamos',
+    description: 'Estamos ahí durante el proyecto y también después.',
+    icon: UsersRound,
+  },
 ]
 
-const values = [
-  {
-    title: 'Diagnóstico antes que propuesta',
-    description:
-      'Escuchamos la operación real antes de plantear cualquier solución, sin plantillas genéricas.',
-    icon: GraduationCap,
-  },
-  {
-    title: 'Resultados medibles',
-    description:
-      'Cada proyecto parte de indicadores claros para demostrar el impacto desde el primer sprint.',
-    icon: Heart,
-  },
-  {
-    title: 'Acompañamiento continuo',
-    description:
-      'No entregamos y desaparecemos: damos soporte y evolucionamos la solución con la operación.',
-    icon: Headphones,
-  },
-  {
-    title: 'Comunicación directa',
-    description:
-      'Trabajamos codo a codo con quienes usan el sistema cada día, sin capas de gestión innecesarias.',
-    icon: Handshake,
-  },
+const steps = [
+  { title: 'Entender', description: 'Cómo trabajáis.' },
+  { title: 'Detectar', description: 'Dónde podemos mejorar.' },
+  { title: 'Construir', description: 'La solución.' },
+  { title: 'Acompañar', description: 'Hasta que forme parte de vuestro día a día.' },
 ]
 
 export function AboutPage() {
   return (
     <>
-      <PageHero
-        eyebrow="Quiénes somos"
-        title="Ingeniería y automatización con criterio de negocio."
-        description="Trek.IA combina desarrollo de software, automatización de procesos e inteligencia artificial para que las empresas operen con menos fricción y más control."
-      />
-      <section className="section">
-        <div className="container mission-grid">
-          <Reveal>
-            <SectionHeading
-              eyebrow="Nuestra misión"
-              title="Tecnología que se adapta a cómo ya trabajas, no al revés."
-              description="Trek.IA nace para cerrar la distancia entre lo que la tecnología puede hacer y lo que las operaciones reales necesitan. Ayudamos a empresas B2B a automatizar procesos, conectar sus sistemas y aplicar IA sin añadir complejidad."
-            />
-          </Reveal>
-          <Reveal className="mission-media" delay={0.1}>
-            <ResponsiveImage
-              image={missionImage}
-              sizes="(max-width: 820px) 100vw, 600px"
-              alt="Persona usando el móvil con un asistente de IA"
-              loading="lazy"
-            />
-          </Reveal>
-        </div>
-      </section>
-      <section className="section about-story">
-        <div className="container">
-          <Reveal className="about-story-heading">
+      <section className="about-hero">
+        <div className="page-orb" />
+        <div className="container about-hero-grid">
+          <Reveal className="about-hero-content">
             <span className="eyebrow">
               <i />
-              Nuestra historia
+              Quiénes somos
             </span>
-            <h2>Del diagnóstico a la operación de tu empresa.</h2>
+            <h1>Personas trabajando para personas.</h1>
+            <p className="about-hero-lead">
+              Usamos la tecnología y la IA para hacer más fácil el día a día de tu empresa.
+            </p>
+            <p>
+              Nos integramos en tu equipo, entendemos cómo trabajáis y desarrollamos soluciones que
+              ahorran tiempo, reducen tareas manuales y mejoran procesos.
+            </p>
+            <ButtonLink to="/quienes-somos#tres-ideas">Conócenos</ButtonLink>
           </Reveal>
-          <div className="about-story-grid">
-            <Reveal className="about-story-media">
-              <ResponsiveImage
-                className="about-story-logo"
-                image={logoMark}
-                sizes="(max-width: 820px) 180px, 260px"
-                alt="Trek.IA"
-              />
-            </Reveal>
-            <div>
-              {story.map((paragraph, index) => (
-                <Reveal delay={index * 0.05} key={paragraph.slice(0, 24)}>
-                  <p>{paragraph}</p>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </div>
-        <TeamPhotosCarousel />
-      </section>
-      <section className="section about-values">
-        <div className="container">
-          <Reveal>
-            <SectionHeading
-              eyebrow="Cómo trabajamos"
-              title="Cuatro principios, un mismo criterio."
+          <Reveal className="about-hero-media" delay={0.1}>
+            <ResponsiveImage
+              image={heroPhoto}
+              sizes="(max-width: 820px) 100vw, 640px"
+              alt="Equipo de Trek.IA trabajando junto alrededor de un portátil"
             />
           </Reveal>
-          <div className="benefits-grid">
-            {values.map((item, index) => {
-              const Icon = item.icon
+        </div>
+      </section>
+
+      <section className="section about-ideas" id="tres-ideas">
+        <div className="container">
+          <Reveal className="section-heading section-heading-center">
+            <span className="eyebrow">
+              <i />
+              Tres ideas. Nada más.
+            </span>
+            <h2>
+              La tecnología es la herramienta.{' '}
+              <span className="text-gradient">Las personas, el motivo.</span>
+            </h2>
+          </Reveal>
+          <div className="about-ideas-grid">
+            {ideas.map((idea, index) => {
+              const Icon = idea.icon
               return (
-                <Reveal className="value-card" key={item.title} delay={index * 0.06}>
-                  <div className="benefit-card glow-card" onMouseMove={trackSpotlight}>
-                    <span className="value-card-icon">
-                      <Icon />
-                    </span>
-                    <h3>{item.title}</h3>
-                    <p>{item.description}</p>
-                  </div>
+                <Reveal className="about-idea" key={idea.title} delay={index * 0.08}>
+                  <span className="about-idea-icon">
+                    <Icon size={24} />
+                  </span>
+                  <h3>{idea.title}</h3>
+                  <p>{idea.description}</p>
                 </Reveal>
               )
             })}
           </div>
         </div>
       </section>
-      <CtaSection />
+
+      <section className="section about-fit">
+        <div className="container">
+          <Reveal className="about-fit-heading">
+            <h2>La mejor tecnología es la que encaja en tu forma de trabajar.</h2>
+            <p className="about-fit-statement">
+              <span>No venimos a decirte qué IA necesitas.</span>
+              <span className="text-gradient">Venimos a entender qué podemos mejorar.</span>
+            </p>
+          </Reveal>
+          <div className="about-steps">
+            {steps.map((step, index) => (
+              <Reveal className="about-step" key={step.title} delay={index * 0.1}>
+                <span className="about-step-number">{index + 1}</span>
+                <strong>{step.title}</strong>
+                <span className="about-step-text">{step.description}</span>
+                {index < steps.length - 1 && (
+                  <ArrowRight className="about-step-arrow" size={22} aria-hidden="true" />
+                )}
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section about-closing">
+        <div className="container">
+          <Reveal className="about-closing-content">
+            <h2>
+              Tecnología con sentido. <span className="text-gradient">Personas en el centro.</span>
+            </h2>
+            <p>
+              Tu empresa no necesita más herramientas. Necesita soluciones que funcionen y personas
+              detrás cuando las necesites.
+            </p>
+            <ButtonLink to="/contacto">Cuéntanos cómo trabajas</ButtonLink>
+          </Reveal>
+        </div>
+      </section>
     </>
   )
 }

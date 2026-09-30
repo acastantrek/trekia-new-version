@@ -185,10 +185,8 @@
     margin-inline: auto;
     font-size: clamp(40px, 8vw, 57px);
   }
-  .hero-copy {
+  .hero-highlights {
     margin-inline: auto;
-  }
-  .hero-actions {
     justify-content: center;
   }
   .hero-visual {
@@ -219,9 +217,7 @@
     grid-template-columns: repeat(2, 1fr);
   }
   .principles-grid,
-  .about-story-grid,
   .about-teaser-grid,
-  .mission-grid,
   .contact-layout {
     grid-template-columns: 1fr;
     gap: 55px;
@@ -249,9 +245,6 @@
   }
   .about-teaser-grid {
     gap: 36px;
-  }
-  .about-story-logo {
-    max-width: 160px;
   }
   .model-grid {
     grid-template-columns: 1fr;
@@ -309,13 +302,6 @@
   }
   .hero-content .eyebrow i {
     width: 16px;
-  }
-  .hero-copy {
-    font-size: 17px;
-  }
-  .hero-actions {
-    flex-direction: column;
-    align-items: stretch;
   }
   .button {
     width: 100%;
@@ -545,8 +531,7 @@
   .submit-button {
     justify-content: space-between;
   }
-  .principles-grid,
-  .about-story-grid {
+  .principles-grid {
     gap: 40px;
   }
   .cookie-banner {

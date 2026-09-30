@@ -115,10 +115,8 @@
   font-size: 16px;
   line-height: 1.65;
 }
-.tab-panel-nav {
-  display: flex;
-  gap: 12px;
-  margin-top: 20px;
+.tab-panel-content p:last-child {
+  margin-bottom: 0;
 }
 
 @media (max-width: 1040px) {
@@ -172,8 +170,5 @@
   }
   .tab-panel-content p {
     font-size: 15px;
-  }
-  .tab-panel-nav {
-    justify-content: center;
   }
 }

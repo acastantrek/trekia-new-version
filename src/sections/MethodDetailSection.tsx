@@ -2,7 +2,6 @@ import construirImage from '../assets/method/construir.jpg'
 import definirImage from '../assets/method/definir.jpg'
 import entenderImage from '../assets/method/entender.jpg'
 import mejorarImage from '../assets/method/mejorar.jpg'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useState } from 'react'
 import { Reveal } from '../components/Reveal'
 import { ResponsiveImage } from '../components/ResponsiveImage'
@@ -68,10 +67,6 @@ export function MethodDetailSection() {
   const [active, setActive] = useState(0)
   const current = methodDetails[active]
 
-  const goTo = (index: number) => {
-    setActive(Math.max(0, Math.min(methodDetails.length - 1, index)))
-  }
-
   return (
     <section className="section method-detail">
       <div className="container">
@@ -97,7 +92,7 @@ export function MethodDetailSection() {
                 className={`tab ${index === active ? 'is-active' : ''} ${
                   index < active ? 'is-done' : ''
                 }`}
-                onClick={() => goTo(index)}
+                onClick={() => setActive(index)}
               >
                 <span className="tab-badge">{step.number}</span>
                 <span className="tab-text">
@@ -127,26 +122,6 @@ export function MethodDetailSection() {
               {current.paragraphs.map((paragraph) => (
                 <p key={paragraph.slice(0, 24)}>{paragraph}</p>
               ))}
-              <div className="tab-panel-nav">
-                <button
-                  type="button"
-                  className="carousel-arrow"
-                  onClick={() => goTo(active - 1)}
-                  disabled={active === 0}
-                  aria-label="Fase anterior"
-                >
-                  <ChevronLeft size={20} />
-                </button>
-                <button
-                  type="button"
-                  className="carousel-arrow"
-                  onClick={() => goTo(active + 1)}
-                  disabled={active === methodDetails.length - 1}
-                  aria-label="Fase siguiente"
-                >
-                  <ChevronRight size={20} />
-                </button>
-              </div>
             </div>
           </div>
         </Reveal>

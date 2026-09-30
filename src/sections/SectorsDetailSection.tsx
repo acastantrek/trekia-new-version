@@ -1,4 +1,4 @@
-import { CheckCircle2, ChevronLeft, ChevronRight } from 'lucide-react'
+import { CheckCircle2 } from 'lucide-react'
 import { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Reveal } from '../components/Reveal'
@@ -108,10 +108,6 @@ export function SectorsDetailSection() {
   const sector = sectors[active]
   const detail = sectorDetails[active]
 
-  const goTo = (index: number) => {
-    setActive(Math.max(0, Math.min(sectors.length - 1, index)))
-  }
-
   return (
     <section className="section sectors-detail">
       {/* Anclas para el scroll de /sectores#slug: el panel solo muestra un sector cada vez */}
@@ -132,7 +128,7 @@ export function SectorsDetailSection() {
                   aria-selected={index === active}
                   aria-controls="sector-panel"
                   className={`tab ${index === active ? 'is-active' : ''}`}
-                  onClick={() => goTo(index)}
+                  onClick={() => setActive(index)}
                 >
                   <span className="tab-badge">
                     <Icon size={18} />
@@ -173,26 +169,6 @@ export function SectorsDetailSection() {
                   </li>
                 ))}
               </ul>
-              <div className="tab-panel-nav">
-                <button
-                  type="button"
-                  className="carousel-arrow"
-                  onClick={() => goTo(active - 1)}
-                  disabled={active === 0}
-                  aria-label="Sector anterior"
-                >
-                  <ChevronLeft size={20} />
-                </button>
-                <button
-                  type="button"
-                  className="carousel-arrow"
-                  onClick={() => goTo(active + 1)}
-                  disabled={active === sectors.length - 1}
-                  aria-label="Sector siguiente"
-                >
-                  <ChevronRight size={20} />
-                </button>
-              </div>
             </div>
           </div>
         </Reveal>

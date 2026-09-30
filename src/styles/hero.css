@@ -79,16 +79,23 @@
   background-clip: text;
   -webkit-background-clip: text;
 }
-.hero-copy {
-  max-width: 620px;
-  color: var(--muted);
-  font-size: 18px;
-  line-height: 1.7;
-}
-.hero-actions {
+/* Resultados clave bajo el slogan, separados por puntos medios */
+.hero-highlights {
+  max-width: 640px;
+  margin: 0 0 18px;
+  padding: 0;
   display: flex;
-  gap: 12px;
-  margin-top: 33px;
+  flex-wrap: wrap;
+  gap: 6px 0;
+  list-style: none;
+  color: var(--text-soft);
+  font: 600 16px / 1.5 'Manrope';
+}
+.hero-highlights li:not(:last-child)::after {
+  content: '·';
+  margin: 0 10px;
+  color: var(--blue);
+  font-weight: 800;
 }
 .hero-visual {
   height: 540px;

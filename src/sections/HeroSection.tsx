@@ -1,7 +1,6 @@
 import { ChevronDown } from 'lucide-react'
 import { lazy, useRef } from 'react'
 import operationsFallback from '../assets/three/operations-core.png'
-import { ButtonLink } from '../components/ButtonLink'
 import { LazyScene3D } from '../components/LazyScene3D'
 import { Reveal } from '../components/Reveal'
 import { metrics } from '../data/siteData'
@@ -9,6 +8,13 @@ import { metrics } from '../data/siteData'
 const OperationsCore = lazy(() =>
   import('../three/OperationsCore').then((module) => ({ default: module.OperationsCore })),
 )
+
+const heroHighlights = [
+  'Almacenes digitalizados',
+  'Compras automatizadas',
+  'Trazabilidad total',
+  'Menos tareas repetitivas',
+]
 
 export function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -34,17 +40,12 @@ export function HeroSection() {
               Automatizamos procesos. <span>Impulsamos negocios.</span>
             </h1>
           </Reveal>
-          <Reveal delay={0.12}>
-            <p className="hero-copy">
-              Automatizamos procesos, conectamos ERP y CRM, y aplicamos IA para reducir costes y
-              escalar sin añadir complejidad.
-            </p>
-          </Reveal>
-          <Reveal className="hero-actions" delay={0.18}>
-            <ButtonLink to="/contacto">Solicitar diagnóstico</ButtonLink>
-            <ButtonLink to="/que-hacemos" variant="secondary">
-              Ver soluciones
-            </ButtonLink>
+          <Reveal delay={0.09}>
+            <ul className="hero-highlights">
+              {heroHighlights.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
           </Reveal>
         </div>
         <Reveal className="hero-visual" delay={0.14}>
