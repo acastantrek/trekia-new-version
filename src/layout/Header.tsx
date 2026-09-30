@@ -4,7 +4,6 @@ import type { CSSProperties } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { navItems, sectors, socialLinks, solutions } from '../data/siteData'
 import { Logo } from '../components/Logo'
-import { ThemeToggle } from '../components/ThemeToggle'
 
 interface NavDropdownItem {
   to: string
@@ -149,7 +148,8 @@ export function Header({ onMenuOpenChange }: HeaderProps) {
               Diagnóstico gratuito <span>↗</span>
             </Link>
           </nav>
-          <ThemeToggle />
+          {/* Selector de tema (claro / mixto / oscuro) oculto por ahora: para recuperarlo,
+              volver a renderizar aquí <ThemeToggle /> de '../components/ThemeToggle' */}
           <button
             className="menu-toggle"
             onClick={() => setOpen((value) => !value)}
