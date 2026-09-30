@@ -14,11 +14,11 @@ export function AboutTeaserSection() {
             <i />
             Quiénes somos
           </span>
-          <h2>Ingeniería y automatización con criterio de negocio.</h2>
+          <h2>Tu departamento de IA.</h2>
           <p>
-            Somos el equipo detrás de Trek.IA: profesionales con experiencia real en desarrollo de
-            software, integración de sistemas e inteligencia artificial. Escuchamos primero,
-            entendemos la operación de cada empresa y solo después proponemos qué construir.
+            Nos integramos en tu empresa para encontrar oportunidades, desarrollar soluciones y
+            acompañar a tu equipo en su uso diario. Con personas a las que conoces, objetivos
+            claros y trabajo continuo.
           </p>
           <ButtonLink to="/quienes-somos" variant="secondary">
             Conócenos

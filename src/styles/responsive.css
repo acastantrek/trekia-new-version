@@ -12,14 +12,6 @@
   .solutions-intro-media {
     order: -1;
   }
-  .sectors-intro-grid {
-    grid-template-columns: 1fr;
-    gap: 36px;
-  }
-  .sectors-intro-media {
-    min-height: 0;
-    aspect-ratio: 16 / 10;
-  }
   .nav-links {
     gap: 17px;
   }
@@ -281,12 +273,6 @@
 }
 
 @media (max-width: 600px) {
-  .sectors-intro {
-    padding: 10px 0 40px;
-  }
-  .sectors-intro p {
-    font-size: 16px;
-  }
   .container {
     width: min(calc(100% - 28px), var(--container));
   }

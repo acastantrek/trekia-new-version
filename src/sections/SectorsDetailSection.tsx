@@ -1,4 +1,6 @@
-import { CheckCircle2 } from 'lucide-react'
+import { CheckCircle2, ChevronLeft, ChevronRight } from 'lucide-react'
+import { useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import { Reveal } from '../components/Reveal'
 import { sectors } from '../data/siteData'
 import { ResponsiveImage } from '../components/ResponsiveImage'
@@ -85,48 +87,115 @@ const sectorDetails = [
   },
 ]
 
+const indexFromHash = (hash: string) =>
+  Math.max(
+    0,
+    sectors.findIndex((sector) => `#${sector.slug}` === hash),
+  )
+
+// Los seis sectores en un solo bloque con pestañas. Los enlaces /sectores#slug (menú y home)
+// abren directamente la pestaña de ese sector
 export function SectorsDetailSection() {
+  const location = useLocation()
+  const [active, setActive] = useState(() => indexFromHash(location.hash))
+  const [prevHash, setPrevHash] = useState(location.hash)
+
+  if (location.hash !== prevHash) {
+    setPrevHash(location.hash)
+    if (location.hash) setActive(indexFromHash(location.hash))
+  }
+
+  const sector = sectors[active]
+  const detail = sectorDetails[active]
+
+  const goTo = (index: number) => {
+    setActive(Math.max(0, Math.min(sectors.length - 1, index)))
+  }
+
   return (
     <section className="section sectors-detail">
+      {/* Anclas para el scroll de /sectores#slug: el panel solo muestra un sector cada vez */}
+      {sectors.map((item) => (
+        <span className="sectors-anchor" id={item.slug} key={item.slug} aria-hidden="true" />
+      ))}
       <div className="container">
-        {sectors.map((sector, index) => {
-          const detail = sectorDetails[index]
-          const Icon = sector.icon
-          return (
-            <div
-              className={`detail-row ${index % 2 === 1 ? 'is-reverse' : ''}`}
-              id={sector.slug}
-              key={sector.slug}
-            >
-              <Reveal className="detail-media">
-                <ResponsiveImage
-                  image={sector.image}
-                  sizes="(max-width: 820px) 100vw, 600px"
-                  alt={detail.imageAlt}
-                  loading="lazy"
-                />
-              </Reveal>
-              <Reveal className="detail-content" delay={0.08}>
-                <div className="detail-number">
-                  <Icon size={20} />
-                </div>
-                <span className="process-step-label">{sector.label}</span>
-                <h3>{detail.heading}</h3>
-                {detail.paragraphs.map((paragraph) => (
-                  <p key={paragraph.slice(0, 24)}>{paragraph}</p>
-                ))}
-                <ul className="sector-detail-examples">
-                  {detail.examples.map((example) => (
-                    <li key={example}>
-                      <CheckCircle2 size={18} />
-                      {example}
-                    </li>
-                  ))}
-                </ul>
-              </Reveal>
+        <Reveal>
+          <div className="tabs-nav sectors-tabs" role="tablist" aria-label="Sectores">
+            {sectors.map((item, index) => {
+              const Icon = item.icon
+              return (
+                <button
+                  key={item.slug}
+                  type="button"
+                  role="tab"
+                  id={`sector-tab-${item.slug}`}
+                  aria-selected={index === active}
+                  aria-controls="sector-panel"
+                  className={`tab ${index === active ? 'is-active' : ''}`}
+                  onClick={() => goTo(index)}
+                >
+                  <span className="tab-badge">
+                    <Icon size={18} />
+                  </span>
+                  <span className="tab-text">
+                    <strong>{item.label}</strong>
+                  </span>
+                </button>
+              )
+            })}
+          </div>
+          <div
+            className="tab-panel"
+            id="sector-panel"
+            role="tabpanel"
+            aria-labelledby={`sector-tab-${sector.slug}`}
+            key={active}
+          >
+            <div className="tab-panel-media">
+              <ResponsiveImage
+                image={sector.image}
+                sizes="(max-width: 820px) 100vw, 480px"
+                alt={detail.imageAlt}
+                loading="lazy"
+              />
             </div>
-          )
-        })}
+            <div className="tab-panel-content">
+              <span className="process-step-label">{sector.label}</span>
+              <h3>{detail.heading}</h3>
+              {detail.paragraphs.map((paragraph) => (
+                <p key={paragraph.slice(0, 24)}>{paragraph}</p>
+              ))}
+              <ul className="sector-detail-examples">
+                {detail.examples.map((example) => (
+                  <li key={example}>
+                    <CheckCircle2 size={18} />
+                    {example}
+                  </li>
+                ))}
+              </ul>
+              <div className="tab-panel-nav">
+                <button
+                  type="button"
+                  className="carousel-arrow"
+                  onClick={() => goTo(active - 1)}
+                  disabled={active === 0}
+                  aria-label="Sector anterior"
+                >
+                  <ChevronLeft size={20} />
+                </button>
+                <button
+                  type="button"
+                  className="carousel-arrow"
+                  onClick={() => goTo(active + 1)}
+                  disabled={active === sectors.length - 1}
+                  aria-label="Sector siguiente"
+                >
+                  <ChevronRight size={20} />
+                </button>
+              </div>
+            </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   )

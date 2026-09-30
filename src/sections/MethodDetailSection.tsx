@@ -2,6 +2,8 @@ import construirImage from '../assets/method/construir.jpg'
 import definirImage from '../assets/method/definir.jpg'
 import entenderImage from '../assets/method/entender.jpg'
 import mejorarImage from '../assets/method/mejorar.jpg'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { useState } from 'react'
 import { Reveal } from '../components/Reveal'
 import { ResponsiveImage } from '../components/ResponsiveImage'
 
@@ -60,32 +62,94 @@ const methodDetails = [
   },
 ]
 
+// Las cuatro fases en un solo bloque con pestañas: se muestra una fase cada vez
+// para que la página no sea una sucesión larga de filas imagen + texto
 export function MethodDetailSection() {
+  const [active, setActive] = useState(0)
+  const current = methodDetails[active]
+
+  const goTo = (index: number) => {
+    setActive(Math.max(0, Math.min(methodDetails.length - 1, index)))
+  }
+
   return (
     <section className="section method-detail">
       <div className="container">
-        {methodDetails.map((step, index) => (
-          <div className={`detail-row ${index % 2 === 1 ? 'is-reverse' : ''}`} key={step.number}>
-            <Reveal className="detail-media">
+        <Reveal className="process-heading">
+          <span className="eyebrow">
+            <i />
+            Nuestro método
+          </span>
+          <h2>
+            Cuatro etapas. <span className="text-gradient">Una dirección clara.</span>
+          </h2>
+        </Reveal>
+        <Reveal delay={0.08}>
+          <div className="tabs-nav" role="tablist" aria-label="Fases del método">
+            {methodDetails.map((step, index) => (
+              <button
+                key={step.number}
+                type="button"
+                role="tab"
+                id={`method-tab-${step.number}`}
+                aria-selected={index === active}
+                aria-controls="tab-panel"
+                className={`tab ${index === active ? 'is-active' : ''} ${
+                  index < active ? 'is-done' : ''
+                }`}
+                onClick={() => goTo(index)}
+              >
+                <span className="tab-badge">{step.number}</span>
+                <span className="tab-text">
+                  <span className="process-step-label">{step.label}</span>
+                  <strong>{step.title}</strong>
+                </span>
+              </button>
+            ))}
+          </div>
+          <div
+            className="tab-panel"
+            id="tab-panel"
+            role="tabpanel"
+            aria-labelledby={`method-tab-${current.number}`}
+            key={active}
+          >
+            <div className="tab-panel-media">
               <ResponsiveImage
-                image={step.image}
-                sizes="(max-width: 820px) 100vw, 600px"
-                alt={step.imageAlt}
+                image={current.image}
+                sizes="(max-width: 820px) 100vw, 480px"
+                alt={current.imageAlt}
                 loading="lazy"
               />
-            </Reveal>
-            <Reveal className="detail-content" delay={0.08}>
-              <div className="detail-number">{step.number}</div>
-              <span className="process-step-label">
-                {step.label} · {step.title}
-              </span>
-              <h3>{step.heading}</h3>
-              {step.paragraphs.map((paragraph) => (
+            </div>
+            <div className="tab-panel-content">
+              <h3>{current.heading}</h3>
+              {current.paragraphs.map((paragraph) => (
                 <p key={paragraph.slice(0, 24)}>{paragraph}</p>
               ))}
-            </Reveal>
+              <div className="tab-panel-nav">
+                <button
+                  type="button"
+                  className="carousel-arrow"
+                  onClick={() => goTo(active - 1)}
+                  disabled={active === 0}
+                  aria-label="Fase anterior"
+                >
+                  <ChevronLeft size={20} />
+                </button>
+                <button
+                  type="button"
+                  className="carousel-arrow"
+                  onClick={() => goTo(active + 1)}
+                  disabled={active === methodDetails.length - 1}
+                  aria-label="Fase siguiente"
+                >
+                  <ChevronRight size={20} />
+                </button>
+              </div>
+            </div>
           </div>
-        ))}
+        </Reveal>
       </div>
     </section>
   )

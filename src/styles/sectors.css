@@ -1,30 +1,3 @@
-.sectors-intro {
-  padding: 20px 0 70px;
-  background: var(--bg);
-}
-.sectors-intro-grid {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 60px;
-  align-items: stretch;
-}
-.sectors-intro-media {
-  min-height: 320px;
-  border-radius: 0;
-  overflow: hidden;
-  border: 1px solid var(--line);
-}
-.sectors-intro-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.sectors-intro p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 17px;
-  line-height: 1.8;
-}
 .sectors {
   background: var(--bg-alt);
 }
@@ -164,7 +137,56 @@
   color: var(--blue);
   transform: translateX(4px);
 }
-/* Al llegar desde el home, que el sector no quede pegado al borde superior */
-.sectors-detail .detail-row {
-  scroll-margin-top: 110px;
+/* Anclas de /sectores#slug: el scroll lleva al inicio del bloque de pestañas */
+.sectors-anchor {
+  display: block;
+  height: 0;
+}
+/* Seis sectores: icono encima del nombre, en una fila en desktop y 3 x 2 en pantallas menores */
+.sectors-tabs {
+  margin-top: 0;
+  grid-template-columns: repeat(6, 1fr);
+}
+.sectors-tabs .tab {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+.sectors-tabs .tab-text strong {
+  font-size: 15px;
+  line-height: 1.3;
+}
+.sectors-detail .tab-panel-content .process-step-label {
+  margin-bottom: 10px;
+}
+.sectors-detail .sector-detail-examples {
+  gap: 8px;
+  margin-top: 16px;
+  padding-top: 16px;
+}
+.sectors-detail .sector-detail-examples li {
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+@media (max-width: 1040px) {
+  .sectors-tabs {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .sectors-tabs .tab {
+    align-items: center;
+    text-align: center;
+  }
+  .sectors-tabs .tab-badge {
+    width: 34px;
+    height: 34px;
+  }
+  /* En móvil se mantiene el nombre del sector (no hay etiqueta corta como en Método) */
+  .sectors-tabs .tab-text strong {
+    display: block;
+    font-size: 11px;
+  }
 }
