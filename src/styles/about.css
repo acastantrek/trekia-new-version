@@ -213,8 +213,8 @@
   .about-hero-grid {
     grid-template-columns: 1fr;
   }
+  /* En una columna la foto va después del texto y el botón */
   .about-hero-media {
-    order: -1;
     aspect-ratio: 16 / 10;
   }
   .about-ideas-grid {
