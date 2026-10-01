@@ -3,6 +3,7 @@ import { Reveal } from '../components/Reveal'
 import { CtaSection } from '../sections/CtaSection'
 import { EconomicModelSection } from '../sections/EconomicModelSection'
 import { WhatWeDoSection } from '../sections/WhatWeDoSection'
+import { Seo } from '../components/Seo'
 
 const principles = [
   [
@@ -22,6 +23,10 @@ const principles = [
 export function WhatWeDoPage() {
   return (
     <>
+      <Seo
+        title="Qué hacemos: automatización de procesos y software a medida"
+        description="Automatizamos compras, almacén, administración, atención al cliente y datos. Conectamos tus sistemas y reducimos el trabajo manual."
+      />
       <WhatWeDoSection isPageHeader />
       <section className="section principles">
         <div className="container principles-grid">

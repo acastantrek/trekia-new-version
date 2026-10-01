@@ -2,6 +2,7 @@ import { BarChart3, CalendarCheck, Check, Lightbulb, Mail, Phone, Search } from 
 import { ContactForm } from '../components/ContactForm'
 import { PageHero } from '../components/PageHero'
 import { Reveal } from '../components/Reveal'
+import { Seo } from '../components/Seo'
 
 const heroPoints = [
   { label: 'Análisis a medida', icon: Search },
@@ -12,6 +13,10 @@ const heroPoints = [
 export function ContactPage() {
   return (
     <>
+      <Seo
+        title="Contacto y diagnóstico gratuito"
+        description="Cuéntanos qué proceso quieres mejorar y te proponemos soluciones concretas. Diagnóstico gratuito de 30 minutos, sin compromiso."
+      />
       <PageHero
         eyebrow="Diagnóstico gratuito"
         title="Nosotros encontramos dónde la tecnología puede ayudarte."

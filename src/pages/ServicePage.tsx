@@ -4,6 +4,7 @@ import { Reveal } from '../components/Reveal'
 import { ResponsiveImage } from '../components/ResponsiveImage'
 import { businessAreas } from '../data/businessAreas'
 import { CtaSection } from '../sections/CtaSection'
+import { Seo } from '../components/Seo'
 
 // Página de cada área de "Qué hacemos": poco texto, todo en tarjetas con icono
 export function ServicePage() {
@@ -18,6 +19,10 @@ export function ServicePage() {
 
   return (
     <>
+      <Seo
+        title={`${area.title}: qué automatizamos`}
+        description={`${area.description} Te ayudamos a conectar tus sistemas y reducir el trabajo manual.`}
+      />
       <section className="section area-hero">
         <div className="container area-hero-grid">
           <Reveal className="area-hero-content">

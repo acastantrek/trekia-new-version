@@ -3,6 +3,7 @@ import heroPhoto from '../assets/cta/equipo-analizando-datos.jpg'
 import { ButtonLink } from '../components/ButtonLink'
 import { Reveal } from '../components/Reveal'
 import { ResponsiveImage } from '../components/ResponsiveImage'
+import { Seo } from '../components/Seo'
 
 const ideas = [
   {
@@ -32,6 +33,10 @@ const steps = [
 export function AboutPage() {
   return (
     <>
+      <Seo
+        title="Quiénes somos"
+        description="Somos tu departamento de IA: nos integramos en tu equipo, entendemos cómo trabajáis y desarrollamos soluciones que ahorran tiempo y tareas manuales."
+      />
       <section className="about-hero">
         <div className="page-orb" />
         <div className="container about-hero-grid">

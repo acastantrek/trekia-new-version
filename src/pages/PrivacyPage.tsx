@@ -1,10 +1,15 @@
 import { Link } from 'react-router-dom'
 import { PageHero } from '../components/PageHero'
 import { Reveal } from '../components/Reveal'
+import { Seo } from '../components/Seo'
 
 export function PrivacyPage() {
   return (
     <>
+      <Seo
+        title="Política de privacidad"
+        description="Cómo trata Trek.IA los datos personales recogidos en este sitio web, conforme al RGPD y la LOPDGDD, y cómo ejercer tus derechos."
+      />
       <PageHero
         eyebrow="Política de privacidad"
         title="Cómo tratamos tus datos personales."

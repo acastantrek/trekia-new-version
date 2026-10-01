@@ -20,9 +20,11 @@
     <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
     <link rel="icon" type="image/png" sizes="256x256" href="/favicon-256.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <!-- Respaldo para clientes sin JS: main.tsx los retira y cada página pone los suyos (<Seo>) -->
     <meta
+      data-fallback
       name="description"
-      content="Trek.IA crea software, automatizaciones e IA aplicada para hacer más eficientes las operaciones B2B."
+      content="Automatizamos procesos, conectamos tus sistemas y aplicamos IA para que tu empresa trabaje con menos tareas manuales. Diagnóstico gratuito."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -30,7 +32,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <title>Trek.IA — Operaciones conectadas</title>
+    <title data-fallback>Trek.IA — Automatización de procesos e IA para empresas</title>
   </head>
   <body>
     <div id="root"></div>

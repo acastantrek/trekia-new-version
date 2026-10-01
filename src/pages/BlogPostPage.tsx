@@ -5,6 +5,7 @@ import { Reveal } from '../components/Reveal'
 import { CtaSection } from '../sections/CtaSection'
 import { blogPosts } from '../data/blogPosts'
 import { ResponsiveImage } from '../components/ResponsiveImage'
+import { Seo } from '../components/Seo'
 
 export function BlogPostPage() {
   const { slug } = useParams()
@@ -16,6 +17,7 @@ export function BlogPostPage() {
 
   return (
     <>
+      <Seo title={post.title} description={post.excerpt} />
       <PageHero
         eyebrow={post.tag}
         title={post.title}

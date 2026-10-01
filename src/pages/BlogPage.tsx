@@ -3,10 +3,15 @@ import { PageHero } from '../components/PageHero'
 import { Reveal } from '../components/Reveal'
 import { ButtonLink } from '../components/ButtonLink'
 import { blogPosts } from '../data/blogPosts'
+import { Seo } from '../components/Seo'
 
 export function BlogPage() {
   return (
     <>
+      <Seo
+        title="Blog: automatización, datos e IA aplicada"
+        description="Ideas prácticas sobre automatización de procesos, integraciones, datos e IA aplicada a operaciones de empresa, escritas sin relleno."
+      />
       <PageHero
         eyebrow="Blog"
         title="Ideas prácticas sobre automatización, datos e IA aplicada."

@@ -1,9 +1,14 @@
 import { PageHero } from '../components/PageHero'
 import { Reveal } from '../components/Reveal'
+import { Seo } from '../components/Seo'
 
 export function CookiesPage() {
   return (
     <>
+      <Seo
+        title="Política de cookies"
+        description="Información sobre las cookies que utiliza el sitio web de Trek.IA y cómo puedes gestionarlas o desactivarlas."
+      />
       <PageHero
         eyebrow="Política de cookies"
         title="Cómo usamos las cookies en este sitio."

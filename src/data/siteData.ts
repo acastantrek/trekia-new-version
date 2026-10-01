@@ -29,6 +29,10 @@ import equipoDesarrolloImage from '../assets/about/equipo-desarrollo.jpg'
 import equipoOficinaImage from '../assets/about/equipo-oficina.jpg'
 import equipoRevisionCodigoImage from '../assets/about/equipo-revision-codigo.jpg'
 
+// Dominio de producción (el dominio sin www redirige aquí): base de las URLs canónicas
+export const SITE_URL = 'https://www.trek-ia.com'
+export const SITE_NAME = 'Trek.IA'
+
 export interface BenefitItem {
   title: string
   description: string

@@ -1,9 +1,14 @@
 import { PageHero } from '../components/PageHero'
 import { Reveal } from '../components/Reveal'
+import { Seo } from '../components/Seo'
 
 export function LegalPage() {
   return (
     <>
+      <Seo
+        title="Aviso legal"
+        description="Datos identificativos de Kenned Group SL (Trek.IA) y condiciones de uso de este sitio web, conforme a la LSSI-CE."
+      />
       <PageHero
         eyebrow="Aviso legal"
         title="Información legal sobre Trek.IA."
