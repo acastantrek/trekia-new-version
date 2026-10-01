@@ -91,13 +91,14 @@ export function Header({ onMenuOpenChange }: HeaderProps) {
         <div className="header-actions">
           <nav className={`main-nav ${open ? 'is-open' : ''}`} aria-label="Navegación principal">
             <div className="nav-links">
-              {navItems.map((item) => {
+              {navItems.map((item, navIndex) => {
                 const dropdownItems = navDropdowns[item.href]
                 const link = (
                   <NavLink
                     key={item.label}
                     to={item.href}
                     end={item.href === '/'}
+                    style={{ '--m': navIndex } as CSSProperties}
                     className={({ isActive }) => (isActive ? 'is-active' : undefined)}
                     onClick={(event) => {
                       // Con ratón, quita el foco para que :focus-within no deje el desplegable
@@ -145,7 +146,12 @@ export function Header({ onMenuOpenChange }: HeaderProps) {
                 )
               })}
             </div>
-            <Link className="nav-cta" to="/contacto" onClick={() => setOpen(false)}>
+            <Link
+              className="nav-cta"
+              to="/contacto"
+              style={{ '--m': navItems.length } as CSSProperties}
+              onClick={() => setOpen(false)}
+            >
               Diagnóstico gratuito <span>↗</span>
             </Link>
           </nav>
@@ -157,7 +163,8 @@ export function Header({ onMenuOpenChange }: HeaderProps) {
             aria-expanded={open}
             aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
           >
-            {open ? <X /> : <Menu />}
+            {/* La key remonta el icono para que se reproduzca su animación de entrada */}
+            {open ? <X key="close" /> : <Menu key="open" />}
           </button>
         </div>
       </div>
