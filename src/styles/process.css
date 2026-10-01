@@ -131,11 +131,15 @@
   color: var(--blue);
   background: rgba(79, 140, 255, 0.08);
 }
+/* Paso seleccionado: relleno con el degradado de marca, anillo exterior y algo más grande */
 .process-stepper-dot.is-active {
-  border-color: rgba(93, 149, 255, 0.6);
-  color: var(--text);
-  background: radial-gradient(circle, rgba(79, 140, 255, 0.22), rgba(var(--surface-rgb), 0.9));
-  box-shadow: 0 0 16px rgba(79, 140, 255, 0.25);
+  border-color: transparent;
+  color: #fff;
+  background: linear-gradient(135deg, var(--blue), var(--violet));
+  box-shadow:
+    0 0 0 4px rgba(79, 140, 255, 0.18),
+    0 8px 22px -4px rgba(79, 140, 255, 0.65);
+  transform: scale(1.15);
 }
 .process-carousel-content {
   min-height: 150px;
@@ -168,10 +172,4 @@
   color: var(--muted);
   line-height: 1.65;
   font-size: 16px;
-}
-.process-carousel-nav {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  margin-top: 24px;
 }

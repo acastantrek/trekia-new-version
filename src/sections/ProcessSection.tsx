@@ -1,5 +1,5 @@
 import { motion, useReducedMotion, type Variants } from 'framer-motion'
-import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Reveal } from '../components/Reveal'
@@ -111,26 +111,6 @@ export function ProcessSection() {
             <span className="process-step-label">{current.label}</span>
             <h3>{current.title}</h3>
             <p>{current.description}</p>
-          </div>
-          <div className="process-carousel-nav">
-            <button
-              type="button"
-              className="carousel-arrow"
-              onClick={() => goTo(active - 1)}
-              disabled={active === 0}
-              aria-label="Paso anterior"
-            >
-              <ChevronLeft size={20} />
-            </button>
-            <button
-              type="button"
-              className="carousel-arrow"
-              onClick={() => goTo(active + 1)}
-              disabled={active === processSteps.length - 1}
-              aria-label="Paso siguiente"
-            >
-              <ChevronRight size={20} />
-            </button>
           </div>
         </div>
       </div>
