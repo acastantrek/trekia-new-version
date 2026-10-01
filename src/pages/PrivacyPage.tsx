@@ -50,8 +50,8 @@ export function PrivacyPage() {
             <p>
               La base legal para el tratamiento de tus datos es tu consentimiento, otorgado al
               marcar la casilla correspondiente y enviar el formulario, así como la ejecución de
-              medidas precontractuales a solicitud tuya cuando el contacto tiene como fin valorar
-              la prestación de un servicio.
+              medidas precontractuales a solicitud tuya cuando el contacto tiene como fin valorar la
+              prestación de un servicio.
             </p>
           </Reveal>
 
@@ -68,21 +68,30 @@ export function PrivacyPage() {
             <h2>5. Destinatarios</h2>
             <p>
               No se ceden datos a terceros salvo obligación legal. Determinados proveedores de
-              servicios tecnológicos (hosting, envío de formularios) pueden acceder a los datos
-              como encargados del tratamiento, en cumplimiento del artículo 28 del RGPD y siempre
-              bajo un contrato que garantiza la confidencialidad y seguridad de la información.
+              servicios tecnológicos (hosting, envío de formularios) pueden acceder a los datos como
+              encargados del tratamiento, en cumplimiento del artículo 28 del RGPD y siempre bajo un
+              contrato que garantiza la confidencialidad y seguridad de la información.
+            </p>
+            <p>
+              En concreto, los datos que envías a través del formulario de contacto (nombre,
+              empresa, email, teléfono y mensaje) se transmiten mediante el servicio Web3Forms, que
+              los reenvía a nuestro correo electrónico. El sitio web está alojado en Vercel Inc.
+              Algunos de estos proveedores pueden tratar los datos fuera del Espacio Económico
+              Europeo; en ese caso, las transferencias internacionales se realizan con las garantías
+              adecuadas previstas en el RGPD, como las cláusulas contractuales tipo aprobadas por la
+              Comisión Europea.
             </p>
           </Reveal>
 
           <Reveal delay={0.2}>
             <h2>6. Derechos del interesado</h2>
             <p>
-              Puedes ejercer en cualquier momento tus derechos de acceso, rectificación,
-              supresión, oposición, limitación del tratamiento y portabilidad de los datos,
-              dirigiéndote por escrito a hello@trek-ia.com, adjuntando copia de un documento que
-              acredite tu identidad. Asimismo, tienes derecho a presentar una reclamación ante la
-              Agencia Española de Protección de Datos (www.aepd.es) si consideras que el
-              tratamiento no se ajusta a la normativa vigente.
+              Puedes ejercer en cualquier momento tus derechos de acceso, rectificación, supresión,
+              oposición, limitación del tratamiento y portabilidad de los datos, dirigiéndote por
+              escrito a hello@trek-ia.com, adjuntando copia de un documento que acredite tu
+              identidad. Asimismo, tienes derecho a presentar una reclamación ante la Agencia
+              Española de Protección de Datos (www.aepd.es) si consideras que el tratamiento no se
+              ajusta a la normativa vigente.
             </p>
           </Reveal>
 

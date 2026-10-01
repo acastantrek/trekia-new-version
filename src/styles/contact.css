@@ -176,12 +176,36 @@
   gap: 20px;
   padding-top: 5px;
 }
-.form-footer p {
-  max-width: 300px;
-  margin: 0;
+.form-consent {
+  max-width: 320px;
+}
+.contact-form .form-consent label {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 10px;
   color: var(--faint);
   font-size: 12px;
+  font-weight: 400;
   line-height: 1.5;
+  cursor: pointer;
+}
+.contact-form .form-consent input {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin: 1px 0 0;
+  accent-color: var(--blue);
+  cursor: pointer;
+}
+.form-consent a {
+  color: var(--text);
+  text-decoration: underline;
+}
+.form-consent small {
+  display: block;
+  margin: 6px 0 0 26px;
+  color: var(--negative);
+  font-size: 12px;
 }
 .submit-button {
   height: 49px;

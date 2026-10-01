@@ -1,5 +1,6 @@
 import { ArrowRight, CheckCircle2 } from 'lucide-react'
 import { useState, type FormEvent } from 'react'
+import { Link } from 'react-router-dom'
 
 interface FormData {
   name: string
@@ -21,6 +22,8 @@ export function ContactForm() {
   const [success, setSuccess] = useState(false)
   const [sending, setSending] = useState(false)
   const [sendError, setSendError] = useState(false)
+  const [privacyAccepted, setPrivacyAccepted] = useState(false)
+  const [privacyError, setPrivacyError] = useState(false)
 
   const validate = () => {
     const next: FormErrors = {}
@@ -32,7 +35,8 @@ export function ContactForm() {
     if (form.process.trim().length < 15)
       next.process = 'Cuéntanos un poco más (mínimo 15 caracteres).'
     setErrors(next)
-    return Object.keys(next).length === 0
+    setPrivacyError(!privacyAccepted)
+    return Object.keys(next).length === 0 && privacyAccepted
   }
 
   const submit = async (event: FormEvent<HTMLFormElement>) => {
@@ -62,6 +66,7 @@ export function ContactForm() {
       if (!response.ok || !result.success) throw new Error(result.message)
       setSuccess(true)
       setForm(initialForm)
+      setPrivacyAccepted(false)
     } catch (error) {
       console.error('Error al enviar el formulario de contacto:', error)
       setSendError(true)
@@ -162,7 +167,27 @@ export function ContactForm() {
         </p>
       )}
       <div className="form-footer">
-        <p>Al enviar aceptas que tratemos tus datos para responder a esta solicitud.</p>
+        <div className="form-consent">
+          <label>
+            <input
+              type="checkbox"
+              checked={privacyAccepted}
+              onChange={(e) => {
+                setPrivacyAccepted(e.target.checked)
+                setPrivacyError(false)
+              }}
+              aria-invalid={privacyError}
+            />
+            <span>
+              He leído y acepto la{' '}
+              <Link to="/politica-privacidad" target="_blank" rel="noopener">
+                política de privacidad
+              </Link>
+              .
+            </span>
+          </label>
+          {privacyError && <small>Debes aceptar la política de privacidad.</small>}
+        </div>
         <button className="submit-button" type="submit" disabled={sending}>
           {sending ? 'Enviando…' : 'Enviar solicitud'} <ArrowRight size={18} />
         </button>
