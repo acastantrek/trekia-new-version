@@ -70,73 +70,42 @@
   .menu-toggle {
     display: block;
   }
-  .menu-toggle svg {
-    display: block;
-    animation: menu-icon-in 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-  /* El menú se revela con un círculo que crece desde el botón de hamburguesa */
+  /* Apertura sencilla (solo opacity y transform) para que vaya fluida en móviles antiguos */
   .main-nav {
-    --menu-origin: calc(100% - 36px) 41px;
     position: fixed;
     inset: 0;
     padding: 110px 25px 35px;
     flex-direction: column;
     align-items: stretch;
     justify-content: space-between;
-    background: rgba(var(--surface-rgb), 0.97);
-    backdrop-filter: blur(20px);
+    background: rgba(var(--surface-rgb), 0.98);
+    opacity: 0;
     visibility: hidden;
-    clip-path: circle(0 at var(--menu-origin));
+    transform: translateY(-12px);
     transition:
-      clip-path 0.45s cubic-bezier(0.65, 0, 0.35, 1),
-      visibility 0s linear 0.45s;
-    will-change: clip-path;
-  }
-  .site-header.is-scrolled .main-nav {
-    --menu-origin: calc(100% - 36px) 35px;
+      opacity 0.25s ease,
+      transform 0.25s ease,
+      visibility 0s linear 0.25s;
   }
   .main-nav.is-open {
-    visibility: visible;
-    clip-path: circle(150% at var(--menu-origin));
-    transition:
-      clip-path 0.75s cubic-bezier(0.22, 1, 0.36, 1),
-      visibility 0s;
-  }
-  /* Halo de color que se enciende detrás de los enlaces */
-  .main-nav::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background:
-      radial-gradient(60% 40% at 100% 0%, rgba(79, 140, 255, 0.22), transparent 70%),
-      radial-gradient(70% 45% at 0% 100%, rgba(124, 92, 255, 0.18), transparent 70%);
-    opacity: 0;
-    transform: scale(1.15);
-    transition:
-      opacity 0.4s ease,
-      transform 0.4s ease;
-    pointer-events: none;
-  }
-  .main-nav.is-open::before {
     opacity: 1;
+    visibility: visible;
     transform: none;
     transition:
-      opacity 1s ease 0.2s,
-      transform 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;
+      opacity 0.3s ease,
+      transform 0.3s ease,
+      visibility 0s;
   }
-  /* Enlaces y CTA entran escalonados (--m es su posición en el menú) */
+  /* Los enlaces y el CTA suben un poco justo después de aparecer el panel */
   .main-nav .nav-links a,
   .main-nav .nav-cta {
     opacity: 0;
-    transform: translateY(22px);
-    filter: blur(4px);
+    transform: translateY(10px);
   }
   .main-nav.is-open .nav-links a,
   .main-nav.is-open .nav-cta {
     opacity: 1;
     transform: none;
-    filter: none;
   }
   .nav-links {
     flex-direction: column;
@@ -159,20 +128,17 @@
       color 0.3s ease,
       padding-left 0.3s ease,
       opacity 0.2s ease,
-      transform 0.2s ease,
-      filter 0.2s ease;
+      transform 0.2s ease;
   }
   .main-nav.is-open .nav-links a,
   .main-nav.is-open .nav-cta {
-    --menu-delay: calc(0.18s + var(--m, 0) * 0.06s);
     transition:
       color 0.3s ease,
       padding-left 0.3s ease,
       background 0.25s ease,
       border-color 0.25s ease,
-      opacity 0.5s ease var(--menu-delay),
-      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) var(--menu-delay),
-      filter 0.5s ease var(--menu-delay);
+      opacity 0.35s ease 0.1s,
+      transform 0.35s ease 0.1s;
   }
   .nav-links a::before {
     content: '';
@@ -227,8 +193,7 @@
       background 0.25s ease,
       border-color 0.25s ease,
       opacity 0.2s ease,
-      transform 0.2s ease,
-      filter 0.2s ease;
+      transform 0.2s ease;
   }
   .hero {
     padding-top: 20px;
