@@ -8,6 +8,7 @@ import { CookiesPage } from './pages/CookiesPage'
 import { HomePage } from './pages/HomePage'
 import { LegalPage } from './pages/LegalPage'
 import { MethodPage } from './pages/MethodPage'
+import { NotFoundPage } from './pages/NotFoundPage'
 import { PrivacyPage } from './pages/PrivacyPage'
 import { SectorsPage } from './pages/SectorsPage'
 import { ServicePage } from './pages/ServicePage'
@@ -29,6 +30,7 @@ export default function App() {
         <Route path="/aviso-legal" element={<LegalPage />} />
         <Route path="/politica-privacidad" element={<PrivacyPage />} />
         <Route path="/politica-cookies" element={<CookiesPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
   )

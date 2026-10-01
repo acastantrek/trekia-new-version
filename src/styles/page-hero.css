@@ -31,6 +31,12 @@
   font-size: 18px;
   line-height: 1.7;
 }
+.not-found-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 36px;
+}
 .page-orb {
   position: absolute;
   width: 450px;
