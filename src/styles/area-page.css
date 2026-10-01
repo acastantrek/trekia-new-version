@@ -254,6 +254,9 @@
     font-size: 13px;
   }
   /* Los problemas van en una columna, con icono al lado */
+  .area-cards-3 {
+    grid-template-columns: 1fr;
+  }
   .area-cards-3 .area-info-card {
     display: grid;
     grid-template-columns: auto 1fr;
