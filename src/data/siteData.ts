@@ -35,8 +35,8 @@ export interface BenefitItem {
   icon: LucideIcon
 }
 
-// TODO: sustituir por la URL real de Instagram. Facebook y YouTube están ocultos por ahora;
-// para mostrarlos, añadir aquí sus entradas con los iconos Facebook y Youtube de lucide-react
+// Facebook y YouTube están ocultos por ahora; para mostrarlos, añadir aquí sus entradas
+// con los iconos Facebook y Youtube de lucide-react
 export const socialLinks = [
   {
     label: 'LinkedIn',
@@ -44,7 +44,12 @@ export const socialLinks = [
     Icon: Linkedin,
     color: '#0A66C2',
   },
-  { label: 'Instagram', href: '#', Icon: Instagram, color: '#E4405F' },
+  {
+    label: 'Instagram',
+    href: 'https://www.instagram.com/trekia_solutions/',
+    Icon: Instagram,
+    color: '#E4405F',
+  },
 ]
 
 export const navItems = [
