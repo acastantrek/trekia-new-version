@@ -119,6 +119,27 @@
   margin-bottom: 0;
 }
 
+/* Fuera del móvil las pestañas no se apagan con opacidad: los títulos (Analizamos,
+   Diseñamos...) se leen siempre y la activa se distingue por color, fondo y borde */
+@media (min-width: 601px) {
+  .tab,
+  .tab:hover {
+    opacity: 1;
+  }
+  .tab-text strong {
+    font-size: 20px;
+    color: var(--text-soft);
+    transition: color 0.25s;
+  }
+  .tab:hover .tab-text strong,
+  .tab.is-active .tab-text strong {
+    color: var(--text);
+  }
+  .tab-text .process-step-label {
+    font-size: 12px;
+  }
+}
+
 @media (max-width: 1040px) {
   .tab {
     flex-direction: column;
