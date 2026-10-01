@@ -11,7 +11,10 @@ export interface BlogPost {
   tag: string
   title: string
   excerpt: string
+  /** Fecha para mostrar ("Septiembre 2026") */
   date: string
+  /** La misma fecha en ISO 8601 (año-mes), para los datos estructurados */
+  published: string
   image: Picture
   content: string[]
 }
@@ -24,6 +27,7 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       'Las señales más comunes: tareas repetitivas que dependen de una persona, hojas de cálculo que hacen de base de datos y decisiones que tardan días por falta de visibilidad.',
     date: 'Septiembre 2026',
+    published: '2026-09',
     image: operacionListaImage,
     content: [
       'La mayoría de las empresas con las que trabajamos no llegan a nosotros preguntando por automatización. Llegan preguntando por qué un proceso que debería tardar minutos les sigue tardando días, o por qué dos personas del equipo dedican media jornada a tareas que ya deberían estar resueltas por el sistema.',
@@ -40,6 +44,7 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       'Cuando cada sistema tiene su propia versión de la verdad, el error no es de las personas, es de la arquitectura. Cómo detectarlo y por dónde empezar a resolverlo.',
     date: 'Agosto 2026',
+    published: '2026-08',
     image: erpCrmImage,
     content: [
       'Es habitual encontrar empresas con un ERP para la gestión económica, un CRM para comercial y, entre medias, exportaciones manuales de Excel que alguien sube o descarga cada semana para que ambos "cuadren". El resultado casi nunca cuadra del todo.',
@@ -56,6 +61,7 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       'La IA no soluciona un proceso mal diseñado, lo amplifica. Qué condiciones tiene que cumplir un flujo operativo antes de incorporar un modelo o un agente.',
     date: 'Julio 2026',
+    published: '2026-07',
     image: iaAplicadaImage,
     content: [
       'La pregunta que más recibimos últimamente no es "qué puede hacer la IA", sino "dónde deberíamos aplicarla nosotros". Es la pregunta correcta, pero la respuesta casi nunca empieza por la tecnología.',
@@ -72,6 +78,7 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       'Muchas empresas ya tienen un panel de indicadores. Pocas lo usan para decidir. La diferencia casi nunca está en el diseño del dashboard, sino en lo que hay detrás.',
     date: 'Junio 2026',
+    published: '2026-06',
     image: dashboardImage,
     content: [
       'Es habitual llegar a una empresa y encontrar un dashboard ya construido, a veces más de uno, que casi nadie mira. Cuando preguntamos por qué, la respuesta se repite: "esos números no son fiables" o "hay que preguntarle a alguien para saber si eso es verdad".',
@@ -88,6 +95,7 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       'No es una decisión ideológica. Depende de cuánto se parece tu proceso a los de cualquier otra empresa y de cuánto valor compite exactamente ahí.',
     date: 'Mayo 2026',
+    published: '2026-05',
     image: softwareMedidaImage,
     content: [
       'Nos preguntan a menudo si conviene construir una herramienta a medida o resolver el problema con una plataforma low-code o un producto ya existente. La respuesta correcta casi nunca es una postura fija: depende de qué parte del proceso se está resolviendo.',
@@ -104,6 +112,7 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       'La mayoría de los sobrecostes no vienen del desarrollo, sino de alcance mal definido y de integraciones que aparecen a mitad de proyecto. Cómo anticiparlos.',
     date: 'Abril 2026',
+    published: '2026-04',
     image: costeRealImage,
     content: [
       'Cuando un proyecto de automatización se dispara en coste, casi nunca es porque el desarrollo en sí fue más caro de lo previsto. Es porque el alcance inicial no incluía piezas que resultaron imprescindibles: una integración con un sistema que nadie mencionó en la primera reunión, un caso excepcional que representa el 20% de los casos reales, un requisito legal que aparece al llegar a producción.',

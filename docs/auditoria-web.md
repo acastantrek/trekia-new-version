@@ -79,13 +79,22 @@ Prioridad: 🔴 crítico · 🟠 alta · 🟡 media · 🟢 baja
     canonical. El título y la descripción de `index.html` quedan como respaldo para clientes sin JS
     (`data-fallback`) y `main.tsx` los quita al arrancar para que no haya duplicados.
 
-- [ ] **10. Archivos y metadatos básicos**
+- [x] **10. Archivos y metadatos básicos**
   - No existen `public/robots.txt` ni `public/sitemap.xml` (incluir `/blog/:slug` y `/servicios/:slug`).
   - Sin etiquetas Open Graph / Twitter Card: las previews en LinkedIn y WhatsApp salen sin imagen ni
     texto. Crear una imagen `og.png` 1200×630.
   - Datos estructurados JSON-LD: `Organization`/`LocalBusiness` (con dirección, teléfono, redes) en el
     layout y `BlogPosting` en cada artículo.
   - No hay `/favicon.ico`: la petición automática del navegador acaba en el rewrite a `index.html`.
+  - ✅ Hecho (01/10/2026): `public/robots.txt`; `sitemap.xml` generado en cada build por un plugin de
+    `vite.config.ts` (rutas fijas de `src/data/site.ts` + slugs de blog y servicios, 22 URLs).
+    `<Seo>` añade Open Graph y Twitter Card con `public/og-image.png` (1200×630); los artículos llevan
+    `og:type=article`. JSON-LD `Organization` en el layout y `BlogPosting` en cada artículo (fecha ISO en
+    el nuevo campo `published` de `blogPosts.ts`). `public/favicon.ico` con los PNG de 32 y 48 px. La
+    imagen OG y el ICO se regeneran con `node scripts/generate-static-images.mjs`.
+  - Pendiente: hasta el prerender (tarea 11), LinkedIn/WhatsApp ven el Open Graph de respaldo de la
+    home en todas las páginas, porque no ejecutan JS. En `sameAs` va el LinkedIn actual, que es un
+    perfil personal (ver tarea 16).
 
 - [ ] **11. Prerender del HTML de cada ruta**
   - El HTML inicial es un `<div id="root">` vacío. Generar HTML estático por ruta en el build (p. ej.

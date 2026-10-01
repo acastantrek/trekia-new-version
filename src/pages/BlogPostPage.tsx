@@ -5,7 +5,9 @@ import { Reveal } from '../components/Reveal'
 import { CtaSection } from '../sections/CtaSection'
 import { blogPosts } from '../data/blogPosts'
 import { ResponsiveImage } from '../components/ResponsiveImage'
+import { JsonLd } from '../components/JsonLd'
 import { Seo } from '../components/Seo'
+import { SITE_URL } from '../data/site'
 
 export function BlogPostPage() {
   const { slug } = useParams()
@@ -17,7 +19,20 @@ export function BlogPostPage() {
 
   return (
     <>
-      <Seo title={post.title} description={post.excerpt} />
+      <Seo title={post.title} description={post.excerpt} type="article" />
+      <JsonLd
+        data={{
+          '@type': 'BlogPosting',
+          headline: post.title,
+          description: post.excerpt,
+          image: new URL(post.image.img.src, SITE_URL).href,
+          datePublished: post.published,
+          inLanguage: 'es',
+          mainEntityOfPage: `${SITE_URL}/blog/${post.slug}`,
+          author: { '@type': 'Organization', name: 'Equipo Trek.IA', url: SITE_URL },
+          publisher: { '@id': `${SITE_URL}/#organization` },
+        }}
+      />
       <PageHero
         eyebrow={post.tag}
         title={post.title}
