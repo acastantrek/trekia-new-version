@@ -63,8 +63,8 @@ export function HeroSection() {
           </div>
           <div className="floating-chip chip-bottom">
             <small>Eficiencia operativa</small>
-            <strong>92.4%</strong>
-            <span className="trend">↗ 18.6%</span>
+            <strong>{'92,4 %'}</strong>
+            <span className="trend">{'↗ 18,6 %'}</span>
           </div>
           <button
             type="button"

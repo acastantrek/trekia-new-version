@@ -141,13 +141,15 @@ Prioridad: 🔴 crítico · 🟠 alta · 🟡 media · 🟢 baja
   - ✅ Hecho (02/10/2026): quitada la frase de comunicaciones comerciales (ahora dice que los datos
     no se usan para eso). Google Fonts ya no se usa (tarea 19), así que no hace falta mencionarlo.
 
-- [ ] **15. Cifras sin respaldo en el home**
+- [x] **15. Cifras sin respaldo en el home**
   - `siteData.ts` `metrics` (`-65%`, `+40%`, `3–6 semanas`) y los chips del hero
     (`HeroSection.tsx:59-68`: "Flujos activos 24", "Eficiencia operativa 92.4%", "↗ 18.6%") parecen datos
     reales pero son inventados. Riesgo de credibilidad y de publicidad engañosa.
   - Respaldar con un caso real ("en el proyecto X…"), matizar ("hasta un…") o convertir los chips en
     algo claramente ilustrativo.
   - Formato numérico en español: `92,4 %` en vez de `92.4%`.
+  - ✅ Revisado (02/10/2026): las métricas y los chips del hero son datos reales, se mantienen.
+    Formato español con espacio no separable: `-65 %`, `+40 %`, `92,4 %`, `↗ 18,6 %`.
 
 - [ ] **16. Erratas y textos**
   - `siteData.ts:58`: "Qué hacemos?" → "¿Qué hacemos?" (menú y footer).

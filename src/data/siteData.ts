@@ -63,8 +63,9 @@ export const navItems = [
 ]
 
 export const metrics = [
-  { value: '-65%', label: 'tiempo operativo manual' },
-  { value: '+40%', label: 'capacidad sin ampliar plantilla' },
+  // Espacio no separable antes de % (formato español) para que no se corte la línea
+  { value: '-65 %', label: 'tiempo operativo manual' },
+  { value: '+40 %', label: 'capacidad sin ampliar plantilla' },
   { value: '3–6', label: 'semanas hasta primeros resultados' },
 ]
 
