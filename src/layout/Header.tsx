@@ -1,5 +1,5 @@
 import { ChevronDown, Menu, X, type LucideIcon } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { CSSProperties } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { businessAreas } from '../data/businessAreas'
@@ -27,17 +27,18 @@ const navDropdowns: Record<string, NavDropdownItem[] | undefined> = {
 }
 
 interface HeaderProps {
-  onMenuOpenChange?: (open: boolean) => void
+  // El estado del menú móvil vive en SiteLayout, que oculta el banner de cookies mientras está abierto
+  menuOpen: boolean
+  onMenuOpenChange: (open: boolean) => void
 }
 
-export function Header({ onMenuOpenChange }: HeaderProps) {
-  const [open, setOpenState] = useState(false)
-  const setOpen = (value: boolean | ((prev: boolean) => boolean)) => {
-    setOpenState((prev) => {
-      const next = typeof value === 'function' ? (value as (prev: boolean) => boolean)(prev) : value
-      onMenuOpenChange?.(next)
-      return next
-    })
+export function Header({ menuOpen: open, onMenuOpenChange: setOpen }: HeaderProps) {
+  // Si el menú se cierra al pulsar un enlace no se vuelve a la posición anterior: SiteLayout lleva
+  // la página nueva arriba y restaurarla provocaría un salto
+  const closingToNavigate = useRef(false)
+  const closeToNavigate = () => {
+    if (open) closingToNavigate.current = true
+    setOpen(false)
   }
   const [scrolled, setScrolled] = useState(false)
   const [closedDropdown, setClosedDropdown] = useState<string | null>(null)
@@ -61,7 +62,9 @@ export function Header({ onMenuOpenChange }: HeaderProps) {
       body.style.top = ''
       body.style.left = ''
       body.style.right = ''
-      window.scrollTo({ top: scrollY, left: 0, behavior: 'instant' })
+      if (!closingToNavigate.current)
+        window.scrollTo({ top: scrollY, left: 0, behavior: 'instant' })
+      closingToNavigate.current = false
     }
   }, [open])
 
@@ -103,11 +106,13 @@ export function Header({ onMenuOpenChange }: HeaderProps) {
                       // Con ratón, quita el foco para que :focus-within no deje el desplegable
                       // abierto al salir; con teclado (detail === 0) se mantiene
                       if (event.detail > 0) event.currentTarget.blur()
-                      setOpen(false)
+                      closeToNavigate()
                     }}
                   >
                     {item.label}
-                    {dropdownItems && <ChevronDown className="nav-caret" size={14} aria-hidden="true" />}
+                    {dropdownItems && (
+                      <ChevronDown className="nav-caret" size={14} aria-hidden="true" />
+                    )}
                   </NavLink>
                 )
                 if (!dropdownItems) return link
@@ -116,6 +121,10 @@ export function Header({ onMenuOpenChange }: HeaderProps) {
                     className={`nav-item has-dropdown ${closedDropdown === item.href ? 'is-closed' : ''}`}
                     key={item.label}
                     onMouseLeave={() => setClosedDropdown(null)}
+                    // Con teclado no hay mouseleave: al volver a entrar con el foco se reabre
+                    onFocus={(event) => {
+                      if (event.target.matches(':focus-visible')) setClosedDropdown(null)
+                    }}
                   >
                     {link}
                     <div className="nav-dropdown">
@@ -145,7 +154,7 @@ export function Header({ onMenuOpenChange }: HeaderProps) {
                 )
               })}
             </div>
-            <Link className="nav-cta" to="/contacto" onClick={() => setOpen(false)}>
+            <Link className="nav-cta" to="/contacto" onClick={closeToNavigate}>
               Diagnóstico gratuito <span>↗</span>
             </Link>
           </nav>
@@ -153,7 +162,7 @@ export function Header({ onMenuOpenChange }: HeaderProps) {
               volver a renderizar aquí <ThemeToggle /> de '../components/ThemeToggle' */}
           <button
             className="menu-toggle"
-            onClick={() => setOpen((value) => !value)}
+            onClick={() => setOpen(!open)}
             aria-expanded={open}
             aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
           >

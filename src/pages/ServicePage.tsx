@@ -1,10 +1,11 @@
 import { ArrowLeft } from 'lucide-react'
-import { Link, Navigate, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { Reveal } from '../components/Reveal'
 import { ResponsiveImage } from '../components/ResponsiveImage'
 import { businessAreas } from '../data/businessAreas'
 import { CtaSection } from '../sections/CtaSection'
 import { Seo } from '../components/Seo'
+import { NotFoundPage } from './NotFoundPage'
 
 // Página de cada área de "Qué hacemos": poco texto, todo en tarjetas con icono
 export function ServicePage() {
@@ -12,7 +13,7 @@ export function ServicePage() {
   const area = businessAreas.find((item) => item.slug === slug)
 
   if (!area) {
-    return <Navigate to="/que-hacemos" replace />
+    return <NotFoundPage />
   }
 
   const otherAreas = businessAreas.filter((item) => item.slug !== area.slug)

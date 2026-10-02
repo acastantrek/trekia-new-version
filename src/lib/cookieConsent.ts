@@ -35,6 +35,12 @@ export function getStoredConsent(): CookiePreferences | null {
   }
 }
 
+// Con el almacenamiento bloqueado (navegación privada, políticas de empresa) la elección vale
+// solo para esta visita, pero el banner se cierra igual
 export function saveConsent(preferences: CookiePreferences) {
-  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(preferences))
+  try {
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(preferences))
+  } catch {
+    // Sin almacenamiento: no se guarda
+  }
 }

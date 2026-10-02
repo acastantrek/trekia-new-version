@@ -13,7 +13,7 @@ Prioridad: 🔴 crítico · 🟠 alta · 🟡 media · 🟢 baja
 
 ## 🔴 Bugs
 
-- [ ] **1. Una URL con un hash raro deja la web en blanco**
+- [x] **1. Una URL con un hash raro deja la web en blanco**
   - `src/layout/SiteLayout.tsx:25`: `document.querySelector(location.hash)` lanza `SyntaxError` si el hash
     no es un selector CSS válido (empieza por número, lleva `%`, `:`, `.`…). Ejemplo: `/contacto#1` o un
     enlace de una campaña con `#123`.
@@ -21,51 +21,64 @@ Prioridad: 🔴 crítico · 🟠 alta · 🟡 media · 🟢 baja
     la app y queda la página en blanco.
   - Solución: `document.getElementById(decodeURIComponent(location.hash.slice(1)))` dentro de un
     `try/catch`, y añadir un error boundary global en `App.tsx` con una pantalla de "algo ha fallado".
+  - ✅ Hecho (02/10/2026): `getElementById` con el hash decodificado (en `try/catch`). `ErrorBoundary`
+    alrededor del `<Outlet>` en `SiteLayout` (con `key` por ruta) que muestra `ErrorPage` y mantiene
+    header y footer.
 
-- [ ] **2. El 3D del hero bloquea el scroll en móvil**
+- [x] **2. El 3D del hero bloquea el scroll en móvil**
   - `src/three/OperationsCore.tsx`: `OrbitControls` pone `touch-action: none` en el canvas. En móvil la
     figura ocupa ~350–440 px de alto (`responsive.css`), así que si el usuario desliza el dedo sobre ella
     la página no se desplaza y "parece colgada". Verificar en un móvil real.
   - Opciones: desactivar `OrbitControls` en pantallas táctiles (`(pointer: coarse)`), o dejar solo
     `autoRotate` sin interacción en móvil.
+  - ✅ Hecho (02/10/2026): con `(pointer: coarse)` la figura solo gira sola (`enableRotate={false}`),
+    el canvas lleva `touch-action: pan-x pan-y !important` y se oculta "Arrastra para explorar".
+    Pendiente probarlo en un móvil real.
 
-- [ ] **3. Slugs inexistentes redirigen en vez de dar 404**
+- [x] **3. Slugs inexistentes redirigen en vez de dar 404**
   - `src/pages/BlogPostPage.tsx:14` y `src/pages/ServicePage.tsx:14` hacen `<Navigate>` a `/blog` y
     `/que-hacemos` cuando el slug no existe. El usuario no sabe que el enlace estaba mal y Google lo trata
     como un soft 404.
   - Renderizar `<NotFoundPage />` en esos casos, igual que la ruta `*`.
+  - ✅ Hecho (02/10/2026): ambas páginas renderizan `<NotFoundPage />` (con `noindex`).
 
-- [ ] **4. Saltos de scroll al navegar desde el menú móvil**
+- [x] **4. Saltos de scroll al navegar desde el menú móvil**
   - `src/layout/Header.tsx:59-65`: al cerrar el menú se restaura la posición anterior (`scrollTo(scrollY)`)
     y a la vez `SiteLayout` hace `scrollTo({ top: 0, behavior: 'smooth' })` por el cambio de ruta. Al
     pulsar un enlace del menú con la página bajada se ve la página nueva bajando y luego subiendo
     animada.
   - Al cambiar de ruta, salto instantáneo arriba (`behavior: 'instant'`); scroll suave solo para anclas
     `#`. En el cierre del menú por navegación, no restaurar la posición antigua.
+  - ✅ Hecho (02/10/2026): al cambiar de ruta salto instantáneo arriba; al cerrar el menú por un
+    enlace no se restaura la posición (`closingToNavigate` en `Header`).
 
-- [ ] **5. Volver a pulsar el mismo ancla no hace nada**
+- [x] **5. Volver a pulsar el mismo ancla no hace nada**
   - `SiteLayout.tsx:23-30`: el efecto depende de `location.hash` + `pathname`. Si ya estás en
     `/sectores#industria`, bajas, y vuelves a elegir "Industria" en el desplegable, no se desplaza porque
     la URL no cambia.
   - Usar `location.key` como dependencia (cambia en cada navegación).
+  - ✅ Hecho (02/10/2026): el efecto depende de `location.key`.
 
-- [ ] **6. Efecto secundario dentro de un `setState`**
+- [x] **6. Efecto secundario dentro de un `setState`**
   - `Header.tsx:35-41`: `setOpen` llama a `onMenuOpenChange` (que actualiza el estado de `SiteLayout`)
     desde dentro de la función actualizadora de `setOpenState`. React puede ejecutar esa función durante
     el render (y dos veces en StrictMode), lo que da el aviso *"Cannot update a component while
     rendering a different component"* y es frágil.
   - Subir el estado `menuOpen` a `SiteLayout` y pasarlo como prop, o notificar en un `useEffect([open])`.
+  - ✅ Hecho (02/10/2026): `menuOpen` vive en `SiteLayout` y `Header` lo recibe por props.
 
-- [ ] **7. Guardar el consentimiento de cookies puede fallar**
+- [x] **7. Guardar el consentimiento de cookies puede fallar**
   - `src/lib/cookieConsent.ts:39`: `saveConsent` no tiene `try/catch` (a diferencia de `getStoredConsent`
     y `useTheme`). Con el almacenamiento bloqueado (Safari privado, políticas de empresa) el clic en
     "Aceptar/Rechazar" lanza una excepción y el banner no se cierra.
+  - ✅ Hecho (02/10/2026): `saveConsent` con `try/catch`; el banner se cierra aunque no se guarde.
 
-- [ ] **8. Desplegable bloqueado tras usarlo con teclado**
+- [x] **8. Desplegable bloqueado tras usarlo con teclado**
   - `Header.tsx:128-132`: al elegir una opción del desplegable se marca `is-closed`, que solo se limpia
     con `onMouseLeave`. Un usuario de teclado no dispara ese evento, así que ese desplegable ya no se
     vuelve a abrir con el foco hasta que pase el ratón por encima.
   - Limpiar también en `onBlur`/`onFocus` o al cambiar de ruta.
+  - ✅ Hecho (02/10/2026): `onFocus` con `:focus-visible` limpia `is-closed` al volver con teclado.
 
 ## 🟠 SEO
 

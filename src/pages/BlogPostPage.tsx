@@ -1,5 +1,5 @@
 import { ArrowLeft } from 'lucide-react'
-import { Link, Navigate, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { PageHero } from '../components/PageHero'
 import { Reveal } from '../components/Reveal'
 import { CtaSection } from '../sections/CtaSection'
@@ -7,6 +7,7 @@ import { blogPosts } from '../data/blogPosts'
 import { ResponsiveImage } from '../components/ResponsiveImage'
 import { JsonLd } from '../components/JsonLd'
 import { Seo } from '../components/Seo'
+import { NotFoundPage } from './NotFoundPage'
 import { SITE_URL } from '../data/site'
 
 export function BlogPostPage() {
@@ -14,7 +15,7 @@ export function BlogPostPage() {
   const post = blogPosts.find((item) => item.slug === slug)
 
   if (!post) {
-    return <Navigate to="/blog" replace />
+    return <NotFoundPage />
   }
 
   return (
