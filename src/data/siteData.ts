@@ -58,7 +58,6 @@ export const navItems = [
   { label: '¿Qué hacemos?', href: '/que-hacemos' },
   { label: 'Sectores', href: '/sectores' },
   { label: 'Método', href: '/metodo' },
-  { label: 'Catálogo', href: '/catalogo' },
   { label: 'Blog', href: '/blog' },
   { label: 'Contáctanos', href: '/contacto' },
 ]
