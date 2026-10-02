@@ -35,6 +35,8 @@ const organization = {
 export function SiteLayout() {
   const location = useLocation()
   const [menuOpen, setMenuOpen] = useState(false)
+  // El catálogo se ve solo, sin cabecera ni pie: la página es únicamente el libro
+  const bare = location.pathname.replace(/\/+$/, '') === '/catalogo'
 
   // Depende de location.key (cambia en cada navegación) para que volver a pulsar el mismo ancla
   // también desplace. Al cambiar de página se salta arriba sin animación; el scroll suave es solo
@@ -79,9 +81,9 @@ export function SiteLayout() {
   return (
     <div className="site-shell">
       <JsonLd data={organization} />
-      <Header menuOpen={menuOpen} onMenuOpenChange={setMenuOpen} />
+      {!bare && <Header menuOpen={menuOpen} onMenuOpenChange={setMenuOpen} />}
       <main>{page}</main>
-      <Footer />
+      {!bare && <Footer />}
       <CookieConsent menuOpen={menuOpen} />
     </div>
   )

@@ -1,19 +1,33 @@
-.page-hero:has(+ .catalog-section) {
-  padding-bottom: 30px;
-}
-.catalog-section {
+/* /catalogo es solo el libro: sin cabecera fija no hace falta reservar su altura */
+.site-shell:has(.catalog-stage) {
   padding-top: 0;
 }
+.catalog-title {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.catalog-stage {
+  container-type: inline-size;
+}
+/* A todo el ancho. El alto sale del ancho para que el libro no quede limitado por la altura de la
+   pantalla y se lea sin zoom (se baja con scroll). Dentro del catálogo hay 16px de margen a cada
+   lado, 140px para los controles y páginas A4 (1 : 1.414); a doble página cada una mide la mitad
+   del ancho y el libro, como mucho, 1588px */
 .catalog-frame {
   display: block;
   width: 100%;
-  height: min(calc(100dvh - 120px), 1000px);
-  min-height: 520px;
+  height: calc(min(100cqw - 32px, 1588px) / 1.414 + 140px);
+  min-height: 100dvh;
   border: 0;
-  border-radius: 16px;
 }
-.catalog-open {
-  margin: 16px 0 0;
-  text-align: center;
-  font-size: 14px;
+/* Por debajo de 872px el catálogo muestra una sola página (minWidth 420 en su script), que mide
+   como mucho 794px de ancho */
+@container (max-width: 871px) {
+  .catalog-frame {
+    height: calc(min(100cqw - 32px, 794px) * 1.414 + 140px);
+  }
 }

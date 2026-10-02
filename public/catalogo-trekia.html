@@ -218,7 +218,7 @@ body { margin: 0; background: var(--stage); color: var(--stage-ink); font-family
   }
   function setState(i, portrait) { counter.textContent = label(i, portrait); prevBtn.disabled = i <= 0; nextBtn.disabled = i >= TOTAL - 1; }
   if (window.St && window.St.PageFlip) {
-    var flip = new St.PageFlip(bookEl, { width: W, height: H, size: 'stretch', minWidth: 260, maxWidth: W, minHeight: 368, maxHeight: H, showCover: true, usePortrait: true, mobileScrollSupport: false, maxShadowOpacity: 0.35, flippingTime: 800 });
+    var flip = new St.PageFlip(bookEl, { width: W, height: H, size: 'stretch', minWidth: Math.max(260, Math.min(420, window.innerWidth - 32)), maxWidth: W, minHeight: 368, maxHeight: H, showCover: true, usePortrait: true, mobileScrollSupport: false, maxShadowOpacity: 0.35, flippingTime: 800 });
     flip.loadFromHTML(leaves);
     var portrait = function () { return flip.getOrientation() === 'portrait'; };
     var refit = function () { try { fit(flip.getBoundsRect().pageWidth); } catch (e) { fit(); } };
