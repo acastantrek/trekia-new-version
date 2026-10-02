@@ -32,6 +32,7 @@ export const STATIC_ROUTES = [
   '/sectores',
   '/metodo',
   '/blog',
+  '/catalogo',
   '/contacto',
   '/aviso-legal',
   '/politica-privacidad',

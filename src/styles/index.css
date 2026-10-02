@@ -34,6 +34,7 @@
 @import './method-detail.css';
 @import './blog.css';
 @import './legal.css';
+@import './catalog.css';
 @import './contact.css';
 
 /* Responsive overrides (must stay last to preserve cascade order) */

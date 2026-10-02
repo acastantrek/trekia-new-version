@@ -18,6 +18,7 @@ const ServicePage = page(() => import('./pages/ServicePage'), 'ServicePage')
 const MethodPage = page(() => import('./pages/MethodPage'), 'MethodPage')
 const BlogPage = page(() => import('./pages/BlogPage'), 'BlogPage')
 const BlogPostPage = page(() => import('./pages/BlogPostPage'), 'BlogPostPage')
+const CatalogPage = page(() => import('./pages/CatalogPage'), 'CatalogPage')
 const ContactPage = page(() => import('./pages/ContactPage'), 'ContactPage')
 const LegalPage = page(() => import('./pages/LegalPage'), 'LegalPage')
 const PrivacyPage = page(() => import('./pages/PrivacyPage'), 'PrivacyPage')
@@ -45,6 +46,7 @@ export default function App() {
             <Route path="/metodo" element={<MethodPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:slug" element={<BlogPostPage />} />
+            <Route path="/catalogo" element={<CatalogPage />} />
             <Route path="/contacto" element={<ContactPage />} />
             <Route path="/aviso-legal" element={<LegalPage />} />
             <Route path="/politica-privacidad" element={<PrivacyPage />} />
