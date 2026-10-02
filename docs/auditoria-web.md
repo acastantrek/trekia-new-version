@@ -10,8 +10,8 @@ casilla (`[x]`) y apunta el commit o una nota breve debajo.
 Prioridad: 🔴 crítico · 🟠 alta · 🟡 media · 🟢 baja
 
 **Estado (02/10/2026, `develop` = `main`):** hechas 1–12, 14, 15 y 19 · parcial 16 · pendientes 13,
-17, 18 y 20–37. Pendiente de verificar en un móvil real: tarea 2 (giro y scroll sobre la figura 3D) y
-el scroll de las tareas 4 y 5.
+17, 18 y 20–37. Verificado en un móvil real (tareas 2, 4 y 5) y previews de LinkedIn y WhatsApp con
+la web publicada (tareas 10 y 11).
 
 ---
 
@@ -37,8 +37,8 @@ el scroll de las tareas 4 y 5.
     `autoRotate` sin interacción en móvil.
   - ✅ Hecho (02/10/2026, `9d1b1b3`; el primer intento de `1e7b1be` no tenía efecto): la figura se sigue pudiendo girar en móvil. `.canvas-3d` (el div de R3F
     donde OrbitControls pone `touch-action: none`) lleva `touch-action: pan-y !important`: el
-    arrastre horizontal gira la figura y el vertical desplaza la página. Pendiente probarlo en un
-    móvil real.
+    arrastre horizontal gira la figura y el vertical desplaza la página. Verificado en un
+    móvil real (02/10/2026).
 
 - [x] **3. Slugs inexistentes redirigen en vez de dar 404**
   - `src/pages/BlogPostPage.tsx:14` y `src/pages/ServicePage.tsx:14` hacen `<Navigate>` a `/blog` y
@@ -56,6 +56,7 @@ el scroll de las tareas 4 y 5.
     `#`. En el cierre del menú por navegación, no restaurar la posición antigua.
   - ✅ Hecho (02/10/2026, `1e7b1be`): al cambiar de ruta salto instantáneo arriba; al cerrar el menú por un
     enlace no se restaura la posición (`closingToNavigate` en `Header`).
+  - Verificado en un móvil real (02/10/2026).
 
 - [x] **5. Volver a pulsar el mismo ancla no hace nada**
   - `SiteLayout.tsx:23-30`: el efecto depende de `location.hash` + `pathname`. Si ya estás en
@@ -63,6 +64,7 @@ el scroll de las tareas 4 y 5.
     la URL no cambia.
   - Usar `location.key` como dependencia (cambia en cada navegación).
   - ✅ Hecho (02/10/2026, `1e7b1be`): el efecto depende de `location.key`.
+  - Verificado en un móvil real (02/10/2026).
 
 - [x] **6. Efecto secundario dentro de un `setState`**
   - `Header.tsx:35-41`: `setOpen` llama a `onMenuOpenChange` (que actualiza el estado de `SiteLayout`)
@@ -110,8 +112,9 @@ el scroll de las tareas 4 y 5.
     `og:type=article`. JSON-LD `Organization` en el layout y `BlogPosting` en cada artículo (fecha ISO en
     el nuevo campo `published` de `blogPosts.ts`). `public/favicon.ico` con los PNG de 32 y 48 px. La
     imagen OG y el ICO se regeneran con `node scripts/generate-static-images.mjs`.
-  - Con el prerender (tarea 11) cada página ya sirve su propio Open Graph sin JS. Pendiente: en
-    `sameAs` va el LinkedIn actual, que es un perfil personal (ver tarea 16).
+  - Con el prerender (tarea 11) cada página ya sirve su propio Open Graph sin JS: previews de
+    LinkedIn y WhatsApp verificadas con la web publicada (02/10/2026). Pendiente: en `sameAs` va el
+    LinkedIn actual, que es un perfil personal (ver tarea 16).
 
 - [x] **11. Prerender del HTML de cada ruta**
   - El HTML inicial es un `<div id="root">` vacío. Generar HTML estático por ruta en el build (p. ej.
