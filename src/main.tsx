@@ -1,5 +1,5 @@
 import { StrictMode } from 'react'
-import { hydrateRoot } from 'react-dom/client'
+import { createRoot, hydrateRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App'
 // Fuentes alojadas en la propia web (no en Google Fonts): sin petición externa ni envío de la IP
@@ -13,13 +13,16 @@ import './styles/index.css'
 // en el <head>
 document.head.querySelectorAll('[data-fallback]').forEach((element) => element.remove())
 
-// El HTML de cada ruta viene prerenderizado (scripts/prerender.mjs): se hidrata en lugar de
-// volver a pintarlo
-hydrateRoot(
-  document.getElementById('root')!,
+const root = document.getElementById('root')!
+const app = (
   <StrictMode>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </StrictMode>,
+  </StrictMode>
 )
+
+// En el build el HTML de cada ruta viene prerenderizado (scripts/prerender.mjs) y se hidrata en
+// lugar de volver a pintarlo. En `npm run dev` no hay prerender y #root llega vacío
+if (root.hasChildNodes()) hydrateRoot(root, app)
+else createRoot(root).render(app)
