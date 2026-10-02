@@ -235,7 +235,7 @@ la web publicada (tareas 10 y 11).
     muestra tras cargar el JS y animar 0,65 s. Eso retrasa el LCP.
   - No animar el bloque que está en el primer pantallazo, o animar solo `transform` sin `opacity`.
   - ✅ Hecho (02/10/2026): `<Reveal onLoad>` en los heros (home, `PageHero`, Quiénes somos,
-    servicios y sectores) anima con CSS (`.reveal-on-load` en `ui.css`) solo el desplazamiento, sin
+    servicios, sectores y la cabecera de /que-hacemos) anima con CSS (`.reveal-on-load` en `ui.css`) solo el desplazamiento, sin
     opacidad y sin esperar al JS: el título es visible desde el primer pintado del HTML
     prerenderizado. Respeta `prefers-reduced-motion`.
 

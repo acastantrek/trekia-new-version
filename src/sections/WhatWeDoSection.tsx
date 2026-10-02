@@ -16,7 +16,7 @@ export function WhatWeDoSection({ isPageHeader = false }: WhatWeDoSectionProps) 
   return (
     <section className={`section what-we-do ${isPageHeader ? 'is-page-header' : ''}`} id="soluciones">
       <div className="container">
-        <Reveal className="what-we-do-heading">
+        <Reveal onLoad={isPageHeader} className="what-we-do-heading">
           <span className="eyebrow">
             <i />
             Qué hacemos
