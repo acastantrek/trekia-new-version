@@ -172,9 +172,10 @@ la web publicada (tareas 10 y 11).
   - El enlace de LinkedIn (`siteData.ts:43`) es un perfil personal (`/in/…`); si existe página de
     empresa (`/company/…`), usar esa.
   - Parcial (02/10/2026, `e217348`): corregidos "¿Qué hacemos?" y "o simplemente lo cambia".
-  - Pendiente: horario de atención bajo el teléfono (lo decide la empresa). LinkedIn: el enlace sí
-    lleva a la cuenta de Trek.IA, pero es un perfil personal (`/in/`); cuando se cree la página de
-    empresa (`/company/…`), cambiar `siteData.ts` (también alimenta `sameAs` del JSON-LD).
+  - Horario de atención: decidido no ponerlo; se mantiene "Respuesta en 1–2 días laborables".
+  - Pendiente: LinkedIn. El enlace sí lleva a la cuenta de Trek.IA, pero es un perfil personal
+    (`/in/`); cuando se cree la página de empresa (`/company/…`), cambiar `siteData.ts` (también
+    alimenta `sameAs` del JSON-LD).
 
 - [ ] **17. Testimonios ficticios con fotos de terceros**
   - `siteData.ts:203-247`: los testimonios son de ejemplo y usan avatares de `i.pravatar.cc` (fotos de
