@@ -106,18 +106,26 @@ Prioridad: 🔴 crítico · 🟠 alta · 🟡 media · 🟢 baja
     `og:type=article`. JSON-LD `Organization` en el layout y `BlogPosting` en cada artículo (fecha ISO en
     el nuevo campo `published` de `blogPosts.ts`). `public/favicon.ico` con los PNG de 32 y 48 px. La
     imagen OG y el ICO se regeneran con `node scripts/generate-static-images.mjs`.
-  - Pendiente: hasta el prerender (tarea 11), LinkedIn/WhatsApp ven el Open Graph de respaldo de la
-    home en todas las páginas, porque no ejecutan JS. En `sameAs` va el LinkedIn actual, que es un
-    perfil personal (ver tarea 16).
+  - Con el prerender (tarea 11) cada página ya sirve su propio Open Graph sin JS. Pendiente: en
+    `sameAs` va el LinkedIn actual, que es un perfil personal (ver tarea 16).
 
-- [ ] **11. Prerender del HTML de cada ruta**
+- [x] **11. Prerender del HTML de cada ruta**
   - El HTML inicial es un `<div id="root">` vacío. Generar HTML estático por ruta en el build (p. ej.
     `vite-react-ssg` o prerender propio) sin cambiar de hosting. Muy importante para el blog.
+  - ✅ Hecho (02/10/2026): `npm run build` hace también un build de servidor de
+    `src/entry-server.tsx` y `scripts/prerender.mjs` genera un HTML por ruta (22 rutas: fijas, blog y
+    servicios) con su `<title>`, descripción, canonical, Open Graph, JSON-LD y el contenido. La app no
+    se hidrata: `createRoot` sustituye el HTML al arrancar. El banner de cookies solo se pinta en el
+    navegador. El 3D sale como la imagen estática en el HTML generado.
 
-- [ ] **12. La página 404 devuelve HTTP 200**
+- [x] **12. La página 404 devuelve HTTP 200**
   - `vercel.json` reescribe todo a `index.html`, así que una URL inexistente responde 200 aunque se vea la
     404. Con el prerender (tarea 11) se puede generar un `404.html` y limitar el rewrite a las rutas
     reales; mientras tanto, al menos `<meta name="robots" content="noindex">` en `NotFoundPage`.
+  - ✅ Hecho (02/10/2026): `scripts/prerender.mjs` genera `404.html` y `vercel.json` usa
+    `cleanUrls` + `trailingSlash: false` sin rewrite general: Vercel sirve `/blog/slug` desde
+    `blog/slug.html` y cualquier otra ruta devuelve 404 con `404.html`. Al añadir una ruta nueva en
+    `App.tsx` hay que añadirla también a `STATIC_ROUTES` (o a sus datos) para que se genere.
 
 ## 🟠 Legal y contenido
 

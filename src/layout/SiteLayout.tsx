@@ -41,6 +41,10 @@ const organization = {
   sameAs: socialLinks.map((link) => link.href),
 }
 
+// En el prerender (scripts/prerender.mjs) no se sabe si el visitante ya eligió sus cookies: el
+// banner y el botón de preferencias solo se pintan en el navegador
+const isServer = typeof window === 'undefined'
+
 export function SiteLayout() {
   const location = useLocation()
   const [preferences, setPreferences] = useState<CookiePreferences>(
@@ -89,7 +93,7 @@ export function SiteLayout() {
         </ErrorBoundary>
       </main>
       <Footer />
-      {bannerOpen && (
+      {!isServer && bannerOpen && (
         <div style={{ display: menuOpen ? 'none' : undefined }}>
           <CookieBanner
             onAcceptAll={() => finalize(allAcceptedPreferences)}
@@ -102,7 +106,7 @@ export function SiteLayout() {
         </div>
       )}
       {modalOpen && <CookiePreferencesModal initialPreferences={preferences} onClose={finalize} />}
-      {!bannerOpen && !modalOpen && (
+      {!isServer && !bannerOpen && !modalOpen && (
         <div style={{ display: menuOpen ? 'none' : undefined }}>
           <CookieSettingsButton onClick={() => setModalOpen(true)} />
         </div>
