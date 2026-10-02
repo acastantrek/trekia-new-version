@@ -1,4 +1,4 @@
-import { domAnimation, LazyMotion } from 'framer-motion'
+import { domAnimation, LazyMotion, MotionConfig } from 'framer-motion'
 import { lazy, type ComponentType } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { SiteLayout } from './layout/SiteLayout'
@@ -32,23 +32,27 @@ export default function App() {
     // contexto de LazyMotion, la página aún sin hidratar recibe esa actualización y React descarta
     // su HTML prerenderizado y la vuelve a pintar entera
     <LazyMotion features={domAnimation} strict>
-      <Routes>
-        <Route element={<SiteLayout />}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/quienes-somos" element={<AboutPage />} />
-          <Route path="/sectores" element={<SectorsPage />} />
-          <Route path="/que-hacemos" element={<WhatWeDoPage />} />
-          <Route path="/servicios/:slug" element={<ServicePage />} />
-          <Route path="/metodo" element={<MethodPage />} />
-          <Route path="/blog" element={<BlogPage />} />
-          <Route path="/blog/:slug" element={<BlogPostPage />} />
-          <Route path="/contacto" element={<ContactPage />} />
-          <Route path="/aviso-legal" element={<LegalPage />} />
-          <Route path="/politica-privacidad" element={<PrivacyPage />} />
-          <Route path="/politica-cookies" element={<CookiesPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Route>
-      </Routes>
+      {/* Con "reducir movimiento" activado en el sistema, framer-motion no anima x, y, scale…
+          (Reveal anima `transform` entero y lo resuelve por su cuenta) */}
+      <MotionConfig reducedMotion="user">
+        <Routes>
+          <Route element={<SiteLayout />}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/quienes-somos" element={<AboutPage />} />
+            <Route path="/sectores" element={<SectorsPage />} />
+            <Route path="/que-hacemos" element={<WhatWeDoPage />} />
+            <Route path="/servicios/:slug" element={<ServicePage />} />
+            <Route path="/metodo" element={<MethodPage />} />
+            <Route path="/blog" element={<BlogPage />} />
+            <Route path="/blog/:slug" element={<BlogPostPage />} />
+            <Route path="/contacto" element={<ContactPage />} />
+            <Route path="/aviso-legal" element={<LegalPage />} />
+            <Route path="/politica-privacidad" element={<PrivacyPage />} />
+            <Route path="/politica-cookies" element={<CookiesPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Route>
+        </Routes>
+      </MotionConfig>
     </LazyMotion>
   )
 }

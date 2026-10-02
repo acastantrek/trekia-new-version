@@ -9,8 +9,8 @@ casilla (`[x]`) y apunta el commit o una nota breve debajo.
 
 Prioridad: 🔴 crítico · 🟠 alta · 🟡 media · 🟢 baja
 
-**Estado (02/10/2026, `develop` = `main`):** hechas 1–15, 17, 18, 19 y 21 · parciales 16, 20 y
-33 · pendientes 22–32 y 34–37. Verificado en un móvil real (tareas 2, 4 y 5) y previews de LinkedIn y WhatsApp con
+**Estado (02/10/2026, `develop` = `main`):** hechas 1–15, 17–19, 21 y 22 · parciales 16, 20 y 33 ·
+pendientes 23–32 y 34–37. Verificado en un móvil real (tareas 2, 4 y 5) y previews de LinkedIn y WhatsApp con
 la web publicada (tareas 10 y 11).
 
 ---
@@ -243,10 +243,17 @@ la web publicada (tareas 10 y 11).
 
 ## 🟡 Accesibilidad
 
-- [ ] **22. Las animaciones ignoran "reducir movimiento"**
+- [x] **22. Las animaciones ignoran "reducir movimiento"**
   - `src/components/Reveal.tsx` anima siempre: framer-motion no respeta `prefers-reduced-motion` salvo
     que se configure. Envolver la app en `<MotionConfig reducedMotion="user">` (en `main.tsx` o
     `SiteLayout`).
+  - ✅ Hecho (02/10/2026): `<MotionConfig reducedMotion="user">` en `App.tsx` y, como `Reveal`
+    anima `transform` entero (que MotionConfig no cubre), `Reveal` usa `useReducedMotion` para que
+    el desplazamiento dure 0 y solo quede el fundido. Regla global en `base.css` que anula
+    animaciones, transiciones y scroll suave por CSS. Verificado en Chrome headless emulando la
+    preferencia: sin posiciones intermedias, y la hidratación sigue sin errores.
+  - Pendiente menor: los `scrollIntoView`/`scrollTo` con `behavior: 'smooth'` en JS y el giro
+    automático de la figura 3D siguen activos con la preferencia.
 
 - [ ] **23. Navegación con teclado en menú y modales**
   - Menú móvil (`Header.tsx`): cerrar con Escape, mantener el foco dentro mientras está abierto y
