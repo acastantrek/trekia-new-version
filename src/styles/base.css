@@ -2,7 +2,7 @@
 :root,
 :where(:root[data-theme='mixed'] main > :nth-child(even)),
 :where(:root[data-theme='mixed'] .site-footer) {
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: 'DM Sans Variable', system-ui, sans-serif;
   color: var(--text);
   background: var(--bg);
   font-synthesis: none;
@@ -143,7 +143,7 @@ p {
 h1,
 h2,
 h3 {
-  font-family: 'Manrope', 'DM Sans', sans-serif;
+  font-family: 'Manrope Variable', 'DM Sans Variable', sans-serif;
 }
 p,
 li {

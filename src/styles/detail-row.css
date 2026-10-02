@@ -32,7 +32,7 @@
   color: var(--text);
   background: radial-gradient(circle, rgba(79, 140, 255, 0.16), rgba(var(--surface-rgb), 0.9));
   box-shadow: 0 0 16px rgba(79, 140, 255, 0.18);
-  font: 700 17px 'Manrope';
+  font: 700 17px 'Manrope Variable';
 }
 .detail-content .process-step-label {
   display: block;

@@ -91,7 +91,7 @@
   column-gap: 10px;
   list-style: none;
   color: var(--text-soft);
-  font: 600 16px / 1.7 'Manrope';
+  font: 600 16px / 1.7 'Manrope Variable';
 }
 /* Anula el justify global de li: en pantallas estrechas una frase puede partirse en dos líneas */
 .hero-highlights li {
@@ -268,7 +268,7 @@
   display: flex;
   align-items: baseline;
   gap: 2px;
-  font-family: 'Manrope', sans-serif;
+  font-family: 'Manrope Variable', sans-serif;
   font-variant-numeric: tabular-nums;
 }
 .scene-loader-value strong {
@@ -392,7 +392,7 @@
 }
 .floating-chip strong {
   margin-right: 8px;
-  font: 700 21px 'Manrope';
+  font: 700 21px 'Manrope Variable';
 }
 .floating-chip span {
   color: var(--green);

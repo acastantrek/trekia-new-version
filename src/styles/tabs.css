@@ -60,7 +60,7 @@
   border: 1px solid var(--line);
   border-radius: 50%;
   color: var(--faint);
-  font: 700 15px 'Manrope';
+  font: 700 15px 'Manrope Variable';
   transition: 0.25s;
 }
 .tab.is-done .tab-badge {
@@ -79,7 +79,7 @@
 }
 .tab-text strong {
   display: block;
-  font: 700 17px 'Manrope';
+  font: 700 17px 'Manrope Variable';
 }
 .tab-panel {
   margin-top: 20px;

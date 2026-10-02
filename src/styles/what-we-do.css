@@ -57,7 +57,7 @@
 }
 .area-card-index {
   color: var(--blue);
-  font: 700 13px 'Manrope';
+  font: 700 13px 'Manrope Variable';
 }
 .area-card h3 {
   margin: 6px 0 8px;
@@ -158,7 +158,7 @@
 }
 .business-band-intro strong {
   display: block;
-  font: 700 clamp(19px, 1.6vw, 23px) / 1.25 'Manrope';
+  font: 700 clamp(19px, 1.6vw, 23px) / 1.25 'Manrope Variable';
   letter-spacing: -0.5px;
 }
 .business-band-intro p {
@@ -281,7 +281,7 @@
 }
 .area-tile strong {
   margin: 2px 0 4px;
-  font: 700 17px / 1.25 'Manrope';
+  font: 700 17px / 1.25 'Manrope Variable';
 }
 .area-tile-description {
   color: var(--muted);
@@ -357,7 +357,7 @@
   padding: 16px 18px 20px;
 }
 .sector-tile strong {
-  font: 700 18px / 1.2 'Manrope';
+  font: 700 18px / 1.2 'Manrope Variable';
   letter-spacing: -0.3px;
 }
 .sector-tile-text span {

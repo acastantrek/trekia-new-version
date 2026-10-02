@@ -122,7 +122,7 @@
     position: relative;
     padding: 16px 14px 16px 20px;
     border-bottom: 1px solid var(--line);
-    font: 600 22px 'Manrope';
+    font: 600 22px 'Manrope Variable';
     color: var(--text-soft);
     transition:
       color 0.3s ease,

@@ -133,11 +133,13 @@ Prioridad: 🔴 crítico · 🟠 alta · 🟡 media · 🟢 baja
   - `src/pages/LegalPage.tsx`: la LSSI (art. 10.1.b) exige los datos de inscripción en el Registro
     Mercantil (tomo, folio, hoja, inscripción) de Kenned Group SL. Añadirlos.
 
-- [ ] **14. Política de privacidad: incoherencias**
+- [x] **14. Política de privacidad: incoherencias**
   - `PrivacyPage.tsx:42`: dice que, "si lo autorizas", se envían comunicaciones comerciales, pero el
     formulario no tiene casilla para ello. Quitar la frase o añadir una casilla opcional separada.
   - No menciona Google Fonts (se envía la IP del visitante a Google al cargar la web). Se resuelve mejor
     con la tarea 19 (fuentes propias); si no, añadirlo a privacidad y cookies.
+  - ✅ Hecho (02/10/2026): quitada la frase de comunicaciones comerciales (ahora dice que los datos
+    no se usan para eso). Google Fonts ya no se usa (tarea 19), así que no hace falta mencionarlo.
 
 - [ ] **15. Cifras sin respaldo en el home**
   - `siteData.ts` `metrics` (`-65%`, `+40%`, `3–6 semanas`) y los chips del hero
@@ -155,6 +157,8 @@ Prioridad: 🔴 crítico · 🟠 alta · 🟡 media · 🟢 baja
     atención (p. ej. "L–V, 9:00–18:00").
   - El enlace de LinkedIn (`siteData.ts:43`) es un perfil personal (`/in/…`); si existe página de
     empresa (`/company/…`), usar esa.
+  - Parcial (02/10/2026): corregidos "¿Qué hacemos?" y "o simplemente lo cambia". Pendiente: horario
+    de atención bajo el teléfono y página de empresa de LinkedIn.
 
 - [ ] **17. Testimonios ficticios con fotos de terceros**
   - `siteData.ts:203-247`: los testimonios son de ejemplo y usan avatares de `i.pravatar.cc` (fotos de
@@ -171,11 +175,14 @@ Prioridad: 🔴 crítico · 🟠 alta · 🟡 media · 🟢 baja
     cargar solo las features necesarias (~30 KB menos), o sustituir `Reveal` por CSS +
     `IntersectionObserver`.
 
-- [ ] **19. Alojar las fuentes en la propia web**
+- [x] **19. Alojar las fuentes en la propia web**
   - `index.html:27-32` carga DM Sans y Manrope desde Google Fonts: CSS bloqueante + petición externa +
     IP a Google sin consentimiento.
   - Usar `@fontsource-variable/dm-sans` y `@fontsource-variable/manrope` (o archivos `woff2` en `public`
     con `preload`) y quitar los `preconnect`.
+  - ✅ Hecho (02/10/2026): `@fontsource-variable/dm-sans` y `@fontsource-variable/manrope`
+    importadas en `main.tsx`; el CSS usa `'DM Sans Variable'` y `'Manrope Variable'`. Sin peticiones
+    externas: el navegador solo descarga el bloque latino de cada fuente (~62 KB en total).
 
 - [ ] **20. Escena 3D pesada y siempre activa**
   - El chunk `OperationsCore` pesa 924 KB (253 KB gzip) y se descarga también en móvil.

@@ -43,10 +43,10 @@ export function PrivacyPage() {
             <h2>2. Finalidad del tratamiento</h2>
             <p>
               Los datos personales que nos facilitas a través de los formularios de contacto y
-              diagnóstico se tratan con las siguientes finalidades: responder a tus consultas,
-              valorar tu solicitud de diagnóstico o presupuesto, y, si lo autorizas, enviarte
-              comunicaciones sobre nuestros servicios. No se toman decisiones automatizadas ni se
-              elaboran perfiles a partir de estos datos.
+              diagnóstico se tratan con las siguientes finalidades: responder a tus consultas y
+              valorar tu solicitud de diagnóstico o presupuesto. No se utilizan para enviarte
+              comunicaciones comerciales, no se toman decisiones automatizadas ni se elaboran
+              perfiles a partir de estos datos.
             </p>
           </Reveal>
 

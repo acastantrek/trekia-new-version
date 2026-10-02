@@ -29,7 +29,7 @@
   border-bottom: 1px solid var(--line);
 }
 .comparison-title span {
-  font: 700 20px 'Manrope';
+  font: 700 20px 'Manrope Variable';
 }
 .comparison-title small {
   color: var(--faint);

@@ -55,7 +55,7 @@ export const socialLinks = [
 export const navItems = [
   { label: 'Home', href: '/' },
   { label: 'Quiénes somos', href: '/quienes-somos' },
-  { label: 'Qué hacemos?', href: '/que-hacemos' },
+  { label: '¿Qué hacemos?', href: '/que-hacemos' },
   { label: 'Sectores', href: '/sectores' },
   { label: 'Método', href: '/metodo' },
   { label: 'Blog', href: '/blog' },

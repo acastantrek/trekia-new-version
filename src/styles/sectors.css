@@ -106,7 +106,7 @@
   position: relative;
   z-index: 2;
   padding: 16px 18px 18px;
-  font: 600 15px 'Manrope';
+  font: 600 15px 'Manrope Variable';
   color: var(--text-soft);
   transition:
     color 0.35s ease,

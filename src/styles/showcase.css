@@ -35,7 +35,7 @@
   padding-left: 28px;
 }
 .metric strong {
-  font: 700 27px 'Manrope';
+  font: 700 27px 'Manrope Variable';
   color: var(--text-soft);
   white-space: nowrap;
 }
