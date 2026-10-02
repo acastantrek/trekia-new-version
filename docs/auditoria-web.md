@@ -9,8 +9,8 @@ casilla (`[x]`) y apunta el commit o una nota breve debajo.
 
 Prioridad: 🔴 crítico · 🟠 alta · 🟡 media · 🟢 baja
 
-**Estado (02/10/2026, `develop` = `main`):** hechas 1–15, 18, 19 y 21 · parciales 16 y 20 ·
-pendientes 17 y 22–37. Verificado en un móvil real (tareas 2, 4 y 5) y previews de LinkedIn y WhatsApp con
+**Estado (02/10/2026, `develop` = `main`):** hechas 1–15, 17, 18, 19 y 21 · parciales 16, 20 y
+33 · pendientes 22–32 y 34–37. Verificado en un móvil real (tareas 2, 4 y 5) y previews de LinkedIn y WhatsApp con
 la web publicada (tareas 10 y 11).
 
 ---
@@ -189,11 +189,13 @@ la web publicada (tareas 10 y 11).
     (`/in/`); cuando se cree la página de empresa (`/company/…`), cambiar `siteData.ts` (también
     alimenta `sameAs` del JSON-LD).
 
-- [ ] **17. Testimonios ficticios con fotos de terceros**
+- [x] **17. Testimonios ficticios con fotos de terceros**
   - `siteData.ts:203-247`: los testimonios son de ejemplo y usan avatares de `i.pravatar.cc` (fotos de
     personas reales, servidas desde un dominio externo). Ahora mismo `TestimonialsSection` no se usa,
     pero si se reactiva tal cual sería contenido engañoso. No publicarlos hasta tener testimonios reales
     (con nombre de empresa o logo y permiso).
+  - ✅ Hecho (02/10/2026): borrados `TestimonialsSection`, `testimonials.css`, los datos de
+    `siteData.ts` y sus reglas en `responsive.css`. Si hay testimonios reales, se rehace desde git.
 
 ## 🟡 Rendimiento
 
@@ -332,6 +334,8 @@ la web publicada (tareas 10 y 11).
     `automatizacion-reglas`, `dashboards-presentacion`, `erp-conexion`, `erp-multisistema`,
     `ia-abstracto`, `software-codigo`, `software-equipo`, `trazabilidad-planta`.
   - Decidir qué se conserva para el futuro (p. ej. moverlo a una carpeta `archive/`) y borrar el resto.
+  - Parcial (02/10/2026): `TestimonialsSection`, `testimonials.css` y los datos `testimonials` ya
+    están borrados (tarea 17).
 
 - [ ] **34. Lógica de carrusel duplicada**
   - `SectorsSection`, `TeamPhotosCarousel`, `BlogTeaserSection` y `TestimonialsSection` repiten el

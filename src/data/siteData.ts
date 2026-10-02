@@ -201,52 +201,6 @@ export const teamPhotos = [
   { src: equipoOficinaImage, alt: 'Equipo de Trek.IA trabajando en la oficina' },
 ]
 
-// Contenido de ejemplo: sustituir por testimonios reales de clientes en cuanto se disponga de ellos.
-export const testimonials = [
-  {
-    quote:
-      'Automatizamos en seis semanas un proceso que llevaba años haciéndose a mano. El equipo entendió nuestra operación antes de tocar una sola línea de código.',
-    role: 'Directora de Operaciones',
-    sector: 'Sector logística',
-    avatar: 'https://i.pravatar.cc/150?img=47',
-  },
-  {
-    quote:
-      'Lo que más valoramos es que no nos vendieron una plataforma cerrada: conectaron lo que ya teníamos y resolvieron el problema real, no uno genérico.',
-    role: 'Responsable de Sistemas',
-    sector: 'Distribución industrial',
-    avatar: 'https://i.pravatar.cc/150?img=12',
-  },
-  {
-    quote:
-      'Pasamos de depender de una persona para saber el estado de cada pedido a tener un panel que consulta todo el equipo en tiempo real.',
-    role: 'Gerencia',
-    sector: 'Servicios B2B',
-    avatar: 'https://i.pravatar.cc/150?img=33',
-  },
-  {
-    quote:
-      'El diagnóstico inicial ya nos aportó valor: nos hicieron ver cuellos de botella que dábamos por normales después de años funcionando así.',
-    role: 'Director de Producción',
-    sector: 'Industria manufacturera',
-    avatar: 'https://i.pravatar.cc/150?img=52',
-  },
-  {
-    quote:
-      'Necesitábamos cumplir con protección de datos sin frenar el día a día de las consultas. Encontraron el equilibrio sin añadir burocracia al equipo clínico.',
-    role: 'Coordinadora de Operaciones',
-    sector: 'Sector salud',
-    avatar: 'https://i.pravatar.cc/150?img=44',
-  },
-  {
-    quote:
-      'Redujimos a la mitad el tiempo que dedicábamos a tareas administrativas repetitivas. Ahora ese tiempo lo invertimos en atender mejor a los clientes.',
-    role: 'Responsable Administrativo',
-    sector: 'Servicios administrativos',
-    avatar: 'https://i.pravatar.cc/150?img=56',
-  },
-]
-
 export const economicModel = [
   {
     tag: 'Arranque',

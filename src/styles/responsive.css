@@ -49,9 +49,6 @@
   .benefits-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  .testimonial-card {
-    flex-basis: calc((100% - 20px) / 2);
-  }
   .blog-track .blog-card {
     flex-basis: calc((100% - 20px) / 2);
   }
@@ -434,7 +431,6 @@
     text-align: left;
   }
   /* Fotos y cards a todo el ancho: sin flechas, se pasa deslizando */
-  .testimonials-carousel,
   .blog-carousel,
   .about-teaser-carousel,
   .sectors-has-carousel .sectors-carousel {
@@ -487,10 +483,6 @@
     flex: 0 0 85%;
     scroll-snap-align: start;
     border: 1px solid var(--line);
-  }
-  .testimonial-card {
-    flex-basis: 100%;
-    padding: 26px 22px;
   }
   .blog-track .blog-card {
     position: relative;
