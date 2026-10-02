@@ -9,6 +9,10 @@ casilla (`[x]`) y apunta el commit o una nota breve debajo.
 
 Prioridad: 🔴 crítico · 🟠 alta · 🟡 media · 🟢 baja
 
+**Estado (02/10/2026, `develop` = `main`):** hechas 1–12, 14, 15 y 19 · parcial 16 · pendientes 13,
+17, 18 y 20–37. Pendiente de verificar en un móvil real: tarea 2 (giro y scroll sobre la figura 3D) y
+el scroll de las tareas 4 y 5.
+
 ---
 
 ## 🔴 Bugs
@@ -21,7 +25,7 @@ Prioridad: 🔴 crítico · 🟠 alta · 🟡 media · 🟢 baja
     la app y queda la página en blanco.
   - Solución: `document.getElementById(decodeURIComponent(location.hash.slice(1)))` dentro de un
     `try/catch`, y añadir un error boundary global en `App.tsx` con una pantalla de "algo ha fallado".
-  - ✅ Hecho (02/10/2026): `getElementById` con el hash decodificado (en `try/catch`). `ErrorBoundary`
+  - ✅ Hecho (02/10/2026, `1e7b1be`): `getElementById` con el hash decodificado (en `try/catch`). `ErrorBoundary`
     alrededor del `<Outlet>` en `SiteLayout` (con `key` por ruta) que muestra `ErrorPage` y mantiene
     header y footer.
 
@@ -31,7 +35,7 @@ Prioridad: 🔴 crítico · 🟠 alta · 🟡 media · 🟢 baja
     la página no se desplaza y "parece colgada". Verificar en un móvil real.
   - Opciones: desactivar `OrbitControls` en pantallas táctiles (`(pointer: coarse)`), o dejar solo
     `autoRotate` sin interacción en móvil.
-  - ✅ Hecho (02/10/2026): la figura se sigue pudiendo girar en móvil. `.canvas-3d` (el div de R3F
+  - ✅ Hecho (02/10/2026, `9d1b1b3`; el primer intento de `1e7b1be` no tenía efecto): la figura se sigue pudiendo girar en móvil. `.canvas-3d` (el div de R3F
     donde OrbitControls pone `touch-action: none`) lleva `touch-action: pan-y !important`: el
     arrastre horizontal gira la figura y el vertical desplaza la página. Pendiente probarlo en un
     móvil real.
@@ -41,7 +45,7 @@ Prioridad: 🔴 crítico · 🟠 alta · 🟡 media · 🟢 baja
     `/que-hacemos` cuando el slug no existe. El usuario no sabe que el enlace estaba mal y Google lo trata
     como un soft 404.
   - Renderizar `<NotFoundPage />` en esos casos, igual que la ruta `*`.
-  - ✅ Hecho (02/10/2026): ambas páginas renderizan `<NotFoundPage />` (con `noindex`).
+  - ✅ Hecho (02/10/2026, `1e7b1be`): ambas páginas renderizan `<NotFoundPage />` (con `noindex`).
 
 - [x] **4. Saltos de scroll al navegar desde el menú móvil**
   - `src/layout/Header.tsx:59-65`: al cerrar el menú se restaura la posición anterior (`scrollTo(scrollY)`)
@@ -50,7 +54,7 @@ Prioridad: 🔴 crítico · 🟠 alta · 🟡 media · 🟢 baja
     animada.
   - Al cambiar de ruta, salto instantáneo arriba (`behavior: 'instant'`); scroll suave solo para anclas
     `#`. En el cierre del menú por navegación, no restaurar la posición antigua.
-  - ✅ Hecho (02/10/2026): al cambiar de ruta salto instantáneo arriba; al cerrar el menú por un
+  - ✅ Hecho (02/10/2026, `1e7b1be`): al cambiar de ruta salto instantáneo arriba; al cerrar el menú por un
     enlace no se restaura la posición (`closingToNavigate` en `Header`).
 
 - [x] **5. Volver a pulsar el mismo ancla no hace nada**
@@ -58,7 +62,7 @@ Prioridad: 🔴 crítico · 🟠 alta · 🟡 media · 🟢 baja
     `/sectores#industria`, bajas, y vuelves a elegir "Industria" en el desplegable, no se desplaza porque
     la URL no cambia.
   - Usar `location.key` como dependencia (cambia en cada navegación).
-  - ✅ Hecho (02/10/2026): el efecto depende de `location.key`.
+  - ✅ Hecho (02/10/2026, `1e7b1be`): el efecto depende de `location.key`.
 
 - [x] **6. Efecto secundario dentro de un `setState`**
   - `Header.tsx:35-41`: `setOpen` llama a `onMenuOpenChange` (que actualiza el estado de `SiteLayout`)
@@ -66,20 +70,20 @@ Prioridad: 🔴 crítico · 🟠 alta · 🟡 media · 🟢 baja
     el render (y dos veces en StrictMode), lo que da el aviso *"Cannot update a component while
     rendering a different component"* y es frágil.
   - Subir el estado `menuOpen` a `SiteLayout` y pasarlo como prop, o notificar en un `useEffect([open])`.
-  - ✅ Hecho (02/10/2026): `menuOpen` vive en `SiteLayout` y `Header` lo recibe por props.
+  - ✅ Hecho (02/10/2026, `1e7b1be`): `menuOpen` vive en `SiteLayout` y `Header` lo recibe por props.
 
 - [x] **7. Guardar el consentimiento de cookies puede fallar**
   - `src/lib/cookieConsent.ts:39`: `saveConsent` no tiene `try/catch` (a diferencia de `getStoredConsent`
     y `useTheme`). Con el almacenamiento bloqueado (Safari privado, políticas de empresa) el clic en
     "Aceptar/Rechazar" lanza una excepción y el banner no se cierra.
-  - ✅ Hecho (02/10/2026): `saveConsent` con `try/catch`; el banner se cierra aunque no se guarde.
+  - ✅ Hecho (02/10/2026, `1e7b1be`): `saveConsent` con `try/catch`; el banner se cierra aunque no se guarde.
 
 - [x] **8. Desplegable bloqueado tras usarlo con teclado**
   - `Header.tsx:128-132`: al elegir una opción del desplegable se marca `is-closed`, que solo se limpia
     con `onMouseLeave`. Un usuario de teclado no dispara ese evento, así que ese desplegable ya no se
     vuelve a abrir con el foco hasta que pase el ratón por encima.
   - Limpiar también en `onBlur`/`onFocus` o al cambiar de ruta.
-  - ✅ Hecho (02/10/2026): `onFocus` con `:focus-visible` limpia `is-closed` al volver con teclado.
+  - ✅ Hecho (02/10/2026, `1e7b1be`): `onFocus` con `:focus-visible` limpia `is-closed` al volver con teclado.
 
 ## 🟠 SEO
 
@@ -112,7 +116,7 @@ Prioridad: 🔴 crítico · 🟠 alta · 🟡 media · 🟢 baja
 - [x] **11. Prerender del HTML de cada ruta**
   - El HTML inicial es un `<div id="root">` vacío. Generar HTML estático por ruta en el build (p. ej.
     `vite-react-ssg` o prerender propio) sin cambiar de hosting. Muy importante para el blog.
-  - ✅ Hecho (02/10/2026): `npm run build` hace también un build de servidor de
+  - ✅ Hecho (02/10/2026, `f74672c`): `npm run build` hace también un build de servidor de
     `src/entry-server.tsx` y `scripts/prerender.mjs` genera un HTML por ruta (22 rutas: fijas, blog y
     servicios) con su `<title>`, descripción, canonical, Open Graph, JSON-LD y el contenido. La app no
     se hidrata: `createRoot` sustituye el HTML al arrancar. El banner de cookies solo se pinta en el
@@ -122,23 +126,27 @@ Prioridad: 🔴 crítico · 🟠 alta · 🟡 media · 🟢 baja
   - `vercel.json` reescribe todo a `index.html`, así que una URL inexistente responde 200 aunque se vea la
     404. Con el prerender (tarea 11) se puede generar un `404.html` y limitar el rewrite a las rutas
     reales; mientras tanto, al menos `<meta name="robots" content="noindex">` en `NotFoundPage`.
-  - ✅ Hecho (02/10/2026): `scripts/prerender.mjs` genera `404.html` y `vercel.json` usa
+  - ✅ Hecho (02/10/2026, `f74672c`): `scripts/prerender.mjs` genera `404.html` y `vercel.json` usa
     `cleanUrls` + `trailingSlash: false` sin rewrite general: Vercel sirve `/blog/slug` desde
     `blog/slug.html` y cualquier otra ruta devuelve 404 con `404.html`. Al añadir una ruta nueva en
     `App.tsx` hay que añadirla también a `STATIC_ROUTES` (o a sus datos) para que se genere.
+  - Verificado en la preview de Vercel: rutas anidadas 200, rutas inexistentes 404 y `/blog/`
+    redirige a `/blog`.
 
 ## 🟠 Legal y contenido
 
 - [ ] **13. Aviso legal incompleto**
   - `src/pages/LegalPage.tsx`: la LSSI (art. 10.1.b) exige los datos de inscripción en el Registro
     Mercantil (tomo, folio, hoja, inscripción) de Kenned Group SL. Añadirlos.
+  - Pendiente de la empresa: tomo, folio, hoja e inscripción de Kenned Group SL en el Registro
+    Mercantil de Barcelona (aparecen en la nota simple).
 
 - [x] **14. Política de privacidad: incoherencias**
   - `PrivacyPage.tsx:42`: dice que, "si lo autorizas", se envían comunicaciones comerciales, pero el
     formulario no tiene casilla para ello. Quitar la frase o añadir una casilla opcional separada.
   - No menciona Google Fonts (se envía la IP del visitante a Google al cargar la web). Se resuelve mejor
     con la tarea 19 (fuentes propias); si no, añadirlo a privacidad y cookies.
-  - ✅ Hecho (02/10/2026): quitada la frase de comunicaciones comerciales (ahora dice que los datos
+  - ✅ Hecho (02/10/2026, `e217348`): quitada la frase de comunicaciones comerciales (ahora dice que los datos
     no se usan para eso). Google Fonts ya no se usa (tarea 19), así que no hace falta mencionarlo.
 
 - [x] **15. Cifras sin respaldo en el home**
@@ -148,8 +156,8 @@ Prioridad: 🔴 crítico · 🟠 alta · 🟡 media · 🟢 baja
   - Respaldar con un caso real ("en el proyecto X…"), matizar ("hasta un…") o convertir los chips en
     algo claramente ilustrativo.
   - Formato numérico en español: `92,4 %` en vez de `92.4%`.
-  - ✅ Revisado (02/10/2026): las métricas y los chips del hero son datos reales, se mantienen.
-    Formato español con espacio no separable: `-65 %`, `+40 %`, `92,4 %`, `↗ 18,6 %`.
+  - ✅ Revisado (02/10/2026, `3cb586a`): las métricas y los chips del hero son datos reales, se mantienen.
+    Formato español con espacio no separable: `-65 %`, `+40 %`, `92,4 %`, `↗ 18,6 %` y el `20 %` del artículo de costes.
 
 - [ ] **16. Erratas y textos**
   - `siteData.ts:58`: "Qué hacemos?" → "¿Qué hacemos?" (menú y footer).
@@ -159,8 +167,10 @@ Prioridad: 🔴 crítico · 🟠 alta · 🟡 media · 🟢 baja
     atención (p. ej. "L–V, 9:00–18:00").
   - El enlace de LinkedIn (`siteData.ts:43`) es un perfil personal (`/in/…`); si existe página de
     empresa (`/company/…`), usar esa.
-  - Parcial (02/10/2026): corregidos "¿Qué hacemos?" y "o simplemente lo cambia". Pendiente: horario
-    de atención bajo el teléfono y página de empresa de LinkedIn.
+  - Parcial (02/10/2026, `e217348`): corregidos "¿Qué hacemos?" y "o simplemente lo cambia".
+  - Pendiente: horario de atención bajo el teléfono (lo decide la empresa). LinkedIn: el enlace sí
+    lleva a la cuenta de Trek.IA, pero es un perfil personal (`/in/`); cuando se cree la página de
+    empresa (`/company/…`), cambiar `siteData.ts` (también alimenta `sameAs` del JSON-LD).
 
 - [ ] **17. Testimonios ficticios con fotos de terceros**
   - `siteData.ts:203-247`: los testimonios son de ejemplo y usan avatares de `i.pravatar.cc` (fotos de
@@ -182,7 +192,7 @@ Prioridad: 🔴 crítico · 🟠 alta · 🟡 media · 🟢 baja
     IP a Google sin consentimiento.
   - Usar `@fontsource-variable/dm-sans` y `@fontsource-variable/manrope` (o archivos `woff2` en `public`
     con `preload`) y quitar los `preconnect`.
-  - ✅ Hecho (02/10/2026): `@fontsource-variable/dm-sans` y `@fontsource-variable/manrope`
+  - ✅ Hecho (02/10/2026, `e217348`): `@fontsource-variable/dm-sans` y `@fontsource-variable/manrope`
     importadas en `main.tsx`; el CSS usa `'DM Sans Variable'` y `'Manrope Variable'`. Sin peticiones
     externas: el navegador solo descarga el bloque latino de cada fuente (~62 KB en total).
 
@@ -308,6 +318,9 @@ Prioridad: 🔴 crítico · 🟠 alta · 🟡 media · 🟢 baja
   - Email, teléfono, dirección y CIF están escritos a mano en `Footer.tsx`, `ContactPage.tsx`,
     `LegalPage.tsx` y `PrivacyPage.tsx`. Centralizarlos en `siteData.ts` (también servirá para el
     JSON-LD de la tarea 10).
+  - Parcial: `company` en `src/data/site.ts` ya tiene todos los datos y lo usa el JSON-LD de
+    `SiteLayout`, pero `Footer`, `ContactPage`, `LegalPage` y `PrivacyPage` siguen con los datos
+    escritos a mano.
 
 - [ ] **37. CI y calidad**
   - Workflow de GitHub Actions que ejecute `tsc -b`, `eslint` y `vite build` en cada push/PR a
