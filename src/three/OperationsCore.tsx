@@ -102,13 +102,8 @@ function Core() {
   )
 }
 
-// En pantallas táctiles la figura solo gira sola: si se pudiera arrastrar, deslizar el dedo sobre
-// ella no desplazaría la página (OrbitControls pone touch-action: none en el canvas)
-const isTouchScreen = () => window.matchMedia('(pointer: coarse)').matches
-
 export function OperationsCore({ onLoaded, onReady, onFail }: Scene3DProps) {
   const [ready, setReady] = useState(false)
-  const [touch] = useState(isTouchScreen)
   const handleReady = useCallback(() => {
     setReady(true)
     onReady()
@@ -119,10 +114,7 @@ export function OperationsCore({ onLoaded, onReady, onFail }: Scene3DProps) {
   }, [onLoaded])
 
   return (
-    <div
-      className={`canvas-wrap ${touch ? 'is-touch' : ''}`}
-      aria-label="Modelo 3D interactivo de operaciones conectadas"
-    >
+    <div className="canvas-wrap" aria-label="Modelo 3D interactivo de operaciones conectadas">
       <Canvas
         className={`canvas-3d ${ready ? '' : 'is-loading'}`}
         dpr={[1, 1.6]}
@@ -154,7 +146,6 @@ export function OperationsCore({ onLoaded, onReady, onFail }: Scene3DProps) {
         <OrbitControls
           enablePan={false}
           enableZoom={false}
-          enableRotate={!touch}
           autoRotate
           autoRotateSpeed={0.35}
           minPolarAngle={Math.PI / 2.7}
@@ -164,7 +155,7 @@ export function OperationsCore({ onLoaded, onReady, onFail }: Scene3DProps) {
       <div className="canvas-label">
         <span className="status-dot" /> Sistema operativo conectado
       </div>
-      {!touch && <div className="canvas-hint">Arrastra para explorar</div>}
+      <div className="canvas-hint">Arrastra para explorar</div>
     </div>
   )
 }

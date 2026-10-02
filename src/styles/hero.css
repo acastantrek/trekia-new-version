@@ -128,13 +128,12 @@
 .canvas-wrap:active {
   cursor: grabbing;
 }
-/* Táctil: sin arrastre (ver OperationsCore). !important para ganar al estilo en línea que pone
-   OrbitControls y que el dedo desplace la página */
-.canvas-wrap.is-touch {
-  cursor: default;
-}
-.canvas-wrap.is-touch canvas {
-  touch-action: pan-x pan-y !important;
+/* En pantallas táctiles el arrastre horizontal gira la figura y el vertical desplaza la página.
+   OrbitControls pone touch-action: none en línea en el div de R3F (.canvas-3d), no en el canvas:
+   !important para ganarle */
+.canvas-3d,
+.canvas-3d * {
+  touch-action: pan-y !important;
 }
 .canvas-label,
 .canvas-hint {

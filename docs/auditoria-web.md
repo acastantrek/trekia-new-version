@@ -31,9 +31,10 @@ Prioridad: 🔴 crítico · 🟠 alta · 🟡 media · 🟢 baja
     la página no se desplaza y "parece colgada". Verificar en un móvil real.
   - Opciones: desactivar `OrbitControls` en pantallas táctiles (`(pointer: coarse)`), o dejar solo
     `autoRotate` sin interacción en móvil.
-  - ✅ Hecho (02/10/2026): con `(pointer: coarse)` la figura solo gira sola (`enableRotate={false}`),
-    el canvas lleva `touch-action: pan-x pan-y !important` y se oculta "Arrastra para explorar".
-    Pendiente probarlo en un móvil real.
+  - ✅ Hecho (02/10/2026): la figura se sigue pudiendo girar en móvil. `.canvas-3d` (el div de R3F
+    donde OrbitControls pone `touch-action: none`) lleva `touch-action: pan-y !important`: el
+    arrastre horizontal gira la figura y el vertical desplaza la página. Pendiente probarlo en un
+    móvil real.
 
 - [x] **3. Slugs inexistentes redirigen en vez de dar 404**
   - `src/pages/BlogPostPage.tsx:14` y `src/pages/ServicePage.tsx:14` hacen `<Navigate>` a `/blog` y
