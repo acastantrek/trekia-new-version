@@ -1,19 +1,10 @@
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useMemo, useState } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
-import { CookieBanner } from '../components/CookieBanner'
-import { CookiePreferencesModal } from '../components/CookiePreferencesModal'
-import { CookieSettingsButton } from '../components/CookieSettingsButton'
+import { CookieConsent } from '../components/CookieConsent'
 import { ErrorBoundary } from '../components/ErrorBoundary'
 import { JsonLd } from '../components/JsonLd'
 import { company, SITE_NAME, SITE_URL } from '../data/site'
 import { socialLinks } from '../data/siteData'
-import {
-  allAcceptedPreferences,
-  defaultPreferences,
-  getStoredConsent,
-  saveConsent,
-  type CookiePreferences,
-} from '../lib/cookieConsent'
 import { ErrorPage } from '../pages/ErrorPage'
 import { Footer } from './Footer'
 import { Header } from './Header'
@@ -41,17 +32,8 @@ const organization = {
   sameAs: socialLinks.map((link) => link.href),
 }
 
-// En el prerender (scripts/prerender.mjs) no se sabe si el visitante ya eligió sus cookies: el
-// banner y el botón de preferencias solo se pintan en el navegador
-const isServer = typeof window === 'undefined'
-
 export function SiteLayout() {
   const location = useLocation()
-  const [preferences, setPreferences] = useState<CookiePreferences>(
-    () => getStoredConsent() ?? defaultPreferences,
-  )
-  const [bannerOpen, setBannerOpen] = useState(() => !getStoredConsent())
-  const [modalOpen, setModalOpen] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
   // Depende de location.key (cambia en cada navegación) para que volver a pulsar el mismo ancla
@@ -75,42 +57,31 @@ export function SiteLayout() {
     return () => window.clearTimeout(timeout)
   }, [location.key, location.hash])
 
-  const finalize = (value: CookiePreferences) => {
-    saveConsent(value)
-    setPreferences(value)
-    setBannerOpen(false)
-    setModalOpen(false)
-  }
+  // La página se memoriza por ruta: si SiteLayout se vuelve a pintar (p. ej. al abrir el menú)
+  // mientras el chunk de la página aún no ha llegado, React no toca el HTML prerenderizado. Si le
+  // llegara una actualización antes de hidratarse, lo descartaría y lo pintaría de cero.
+  // Las páginas se cargan bajo demanda (ver App.tsx). El Suspense va fuera del ErrorBoundary para
+  // no remontarse al navegar: así la transición mantiene la página anterior en lugar de dejar el
+  // hueco vacío mientras llega el chunk. key: al navegar a otra página se sale de la pantalla de
+  // error
+  const page = useMemo(
+    () => (
+      <Suspense fallback={null}>
+        <ErrorBoundary key={location.pathname} fallback={<ErrorPage />}>
+          <Outlet />
+        </ErrorBoundary>
+      </Suspense>
+    ),
+    [location.pathname],
+  )
 
   return (
     <div className="site-shell">
       <JsonLd data={organization} />
       <Header menuOpen={menuOpen} onMenuOpenChange={setMenuOpen} />
-      <main>
-        {/* key: al navegar a otra página se sale de la pantalla de error */}
-        <ErrorBoundary key={location.pathname} fallback={<ErrorPage />}>
-          <Outlet />
-        </ErrorBoundary>
-      </main>
+      <main>{page}</main>
       <Footer />
-      {!isServer && bannerOpen && (
-        <div style={{ display: menuOpen ? 'none' : undefined }}>
-          <CookieBanner
-            onAcceptAll={() => finalize(allAcceptedPreferences)}
-            onRejectAll={() => finalize(defaultPreferences)}
-            onCustomize={() => {
-              setBannerOpen(false)
-              setModalOpen(true)
-            }}
-          />
-        </div>
-      )}
-      {modalOpen && <CookiePreferencesModal initialPreferences={preferences} onClose={finalize} />}
-      {!isServer && !bannerOpen && !modalOpen && (
-        <div style={{ display: menuOpen ? 'none' : undefined }}>
-          <CookieSettingsButton onClick={() => setModalOpen(true)} />
-        </div>
-      )}
+      <CookieConsent menuOpen={menuOpen} />
     </div>
   )
 }

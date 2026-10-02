@@ -14,7 +14,7 @@ export function PageHero({ eyebrow, title, description, children }: PageHeroProp
     <section className="page-hero">
       <div className="page-orb" />
       <div className="container">
-        <Reveal>
+        <Reveal onLoad>
           <span className="eyebrow">
             <i />
             {eyebrow}

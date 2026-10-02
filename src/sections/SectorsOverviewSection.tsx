@@ -8,7 +8,7 @@ export function SectorsOverviewSection() {
   return (
     <section className="section what-we-do is-page-header sectors-overview">
       <div className="container">
-        <Reveal className="what-we-do-heading">
+        <Reveal onLoad className="what-we-do-heading">
           <span className="eyebrow">
             <i />
             Sectores

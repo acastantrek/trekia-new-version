@@ -62,7 +62,10 @@ export function Footer() {
         </div>
       </div>
       <div className="container footer-bottom">
-        <span>© {new Date().getFullYear()} Trek.IA. Tecnología con impacto operativo.</span>
+        {/* El año del prerender puede no coincidir con el del visitante (cambio de año) */}
+        <span suppressHydrationWarning>
+          © {new Date().getFullYear()} Trek.IA. Tecnología con impacto operativo.
+        </span>
         <div className="footer-legal-links">
           <Link to="/aviso-legal">Aviso legal</Link>
           <Link to="/politica-privacidad">Política de privacidad</Link>

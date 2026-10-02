@@ -9,8 +9,8 @@ casilla (`[x]`) y apunta el commit o una nota breve debajo.
 
 Prioridad: 🔴 crítico · 🟠 alta · 🟡 media · 🟢 baja
 
-**Estado (02/10/2026, `develop` = `main`):** hechas 1–15 y 19 · parcial 16 · pendientes 17, 18 y
-20–37. Verificado en un móvil real (tareas 2, 4 y 5) y previews de LinkedIn y WhatsApp con
+**Estado (02/10/2026, `develop` = `main`):** hechas 1–15, 18, 19 y 21 · parciales 16 y 20 ·
+pendientes 17 y 22–37. Verificado en un móvil real (tareas 2, 4 y 5) y previews de LinkedIn y WhatsApp con
 la web publicada (tareas 10 y 11).
 
 ---
@@ -124,6 +124,15 @@ la web publicada (tareas 10 y 11).
     servicios) con su `<title>`, descripción, canonical, Open Graph, JSON-LD y el contenido. La app no
     se hidrata: `createRoot` sustituye el HTML al arrancar. El banner de cookies solo se pinta en el
     navegador. El 3D sale como la imagen estática en el HTML generado.
+  - Actualización (02/10/2026): la app ya se hidrata (`hydrateRoot`) en lugar de repintar el HTML,
+    y el prerender usa `prerenderToNodeStream` para esperar a las páginas cargadas con `lazy()`.
+    Lo que depende del navegador (banner de cookies, comprobación de WebGL) se pinta tras hidratar
+    con `useIsClient`. Verificado en Chrome headless: las 22 rutas y la 404 se hidratan sobre el
+    HTML original sin errores (un HTML alterado a propósito sí da el error #418).
+  - Ojo al tocar el layout: si `SiteLayout` o un contexto (p. ej. `LazyMotion` con features
+    asíncronas) cambia antes de que la página se hidrate, React descarta su HTML y la repinta
+    entera sin avisar. Por eso el estado de cookies vive en `CookieConsent`, la página está
+    memorizada en `SiteLayout` y `domAnimation` se carga de forma síncrona.
 
 - [x] **12. La página 404 devuelve HTTP 200**
   - `vercel.json` reescribe todo a `index.html`, así que una URL inexistente responde 200 aunque se vea la
@@ -185,12 +194,16 @@ la web publicada (tareas 10 y 11).
 
 ## 🟡 Rendimiento
 
-- [ ] **18. Code splitting por ruta**
+- [x] **18. Code splitting por ruta**
   - Bundle principal: 461 KB (149 KB gzip) porque todas las páginas se importan de forma estática en
     `src/App.tsx`. Cargarlas con `lazy()` + `Suspense`.
   - `framer-motion` se usa solo para el `Reveal` y el `ProcessSection`: valorar `LazyMotion` + `m` para
     cargar solo las features necesarias (~30 KB menos), o sustituir `Reveal` por CSS +
     `IntersectionObserver`.
+  - ✅ Hecho (02/10/2026): cada página es un chunk con `lazy()` (`App.tsx`) y framer-motion usa
+    `LazyMotion` + `m` con `domAnimation`. JS principal: 466 → 355 KB (150 → 117 KB gzip); las
+    páginas pesan 1–13 KB cada una. Al navegar se mantiene la página anterior hasta que llega la
+    nueva (transición de React Router + `Suspense` fuera del `ErrorBoundary`).
 
 - [x] **19. Alojar las fuentes en la propia web**
   - `index.html:27-32` carga DM Sans y Manrope desde Google Fonts: CSS bloqueante + petición externa +
@@ -210,11 +223,18 @@ la web publicada (tareas 10 y 11).
     sombras en móvil o mostrar directamente la imagen estática en móviles/gama baja.
   - Importar de `@react-three/drei` solo lo necesario o sustituir `Line`/`Sparkles` por geometría propia
     para reducir el chunk.
+  - Parcial (02/10/2026): la escena deja de pintarse fuera de pantalla (`frameloop="never"` con
+    `IntersectionObserver` en `OperationsCore`): medido en Chrome, ~3.900 draw calls/s en pantalla y
+    0 fuera. Pendiente: tamaño del chunk (es casi todo three.js) y coste de GPU en móvil.
 
-- [ ] **21. El título principal aparece tarde (LCP)**
+- [x] **21. El título principal aparece tarde (LCP)**
   - El `h1` del hero y de `PageHero` va dentro de `<Reveal>`, que arranca con `opacity: 0` y solo se
     muestra tras cargar el JS y animar 0,65 s. Eso retrasa el LCP.
   - No animar el bloque que está en el primer pantallazo, o animar solo `transform` sin `opacity`.
+  - ✅ Hecho (02/10/2026): `<Reveal onLoad>` en los heros (home, `PageHero`, Quiénes somos,
+    servicios y sectores) anima con CSS (`.reveal-on-load` en `ui.css`) solo el desplazamiento, sin
+    opacidad y sin esperar al JS: el título es visible desde el primer pintado del HTML
+    prerenderizado. Respeta `prefers-reduced-motion`.
 
 ## 🟡 Accesibilidad
 

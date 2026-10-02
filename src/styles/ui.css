@@ -14,6 +14,21 @@
   background: linear-gradient(90deg, var(--cyan), var(--violet));
   box-shadow: 0 0 8px var(--blue);
 }
+/* <Reveal onLoad>: entrada del primer pantallazo con CSS, sin esperar al JS. Solo desplazamiento
+   (sin opacidad) para que el contenido sea visible y cuente para el LCP desde el primer pintado */
+.reveal-on-load {
+  animation: reveal-on-load 0.65s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s) both;
+}
+@keyframes reveal-on-load {
+  from {
+    transform: translateY(24px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-load {
+    animation: none;
+  }
+}
 .button {
   width: fit-content;
   min-height: 50px;

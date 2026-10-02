@@ -26,7 +26,7 @@ export function ServicePage() {
       />
       <section className="section area-hero">
         <div className="container area-hero-grid">
-          <Reveal className="area-hero-content">
+          <Reveal onLoad className="area-hero-content">
             <Link className="area-back-link" to="/que-hacemos">
               <ArrowLeft size={16} />
               Qué hacemos
@@ -42,7 +42,7 @@ export function ServicePage() {
               ))}
             </ul>
           </Reveal>
-          <Reveal className="area-hero-media" delay={0.08}>
+          <Reveal onLoad className="area-hero-media" delay={0.08}>
             <ResponsiveImage
               image={area.image}
               sizes="(max-width: 820px) 100vw, 560px"

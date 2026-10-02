@@ -40,7 +40,7 @@ export function AboutPage() {
       <section className="about-hero">
         <div className="page-orb" />
         <div className="container about-hero-grid">
-          <Reveal className="about-hero-content">
+          <Reveal onLoad className="about-hero-content">
             <span className="eyebrow">
               <i />
               Quiénes somos
@@ -55,7 +55,7 @@ export function AboutPage() {
             </p>
             <ButtonLink to="/quienes-somos#tres-ideas">Conócenos</ButtonLink>
           </Reveal>
-          <Reveal className="about-hero-media" delay={0.1}>
+          <Reveal onLoad className="about-hero-media" delay={0.1}>
             <ResponsiveImage
               image={heroPhoto}
               sizes="(max-width: 820px) 100vw, 640px"

@@ -29,18 +29,18 @@ export function HeroSection() {
       <div className="hero-glow hero-glow-two" />
       <div className="container hero-grid">
         <div className="hero-content">
-          <Reveal>
+          <Reveal onLoad>
             <span className="eyebrow">
               <i />
               Software · Automatización · IA aplicada
             </span>
           </Reveal>
-          <Reveal delay={0.06}>
+          <Reveal onLoad delay={0.06}>
             <h1>
               Automatizamos procesos. <span>Impulsamos negocios.</span>
             </h1>
           </Reveal>
-          <Reveal className="hero-highlights-wrap" delay={0.09}>
+          <Reveal onLoad className="hero-highlights-wrap" delay={0.09}>
             <ul className="hero-highlights">
               {heroHighlights.map((item) => (
                 <li key={item}>{item}</li>
@@ -48,7 +48,7 @@ export function HeroSection() {
             </ul>
           </Reveal>
         </div>
-        <Reveal className="hero-visual" delay={0.14}>
+        <Reveal onLoad className="hero-visual" delay={0.14}>
           <div className="visual-frame">
             <LazyScene3D
               scene={OperationsCore}

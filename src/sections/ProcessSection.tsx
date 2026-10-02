@@ -1,4 +1,4 @@
-import { motion, useReducedMotion, type Variants } from 'framer-motion'
+import { m, useReducedMotion, type Variants } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
@@ -64,7 +64,7 @@ export function ProcessSection() {
             <ArrowRight size={16} />
           </Link>
         </Reveal>
-        <motion.div
+        <m.div
           className="process-steps"
           initial={reduceMotion ? false : 'hidden'}
           whileInView="visible"
@@ -72,25 +72,25 @@ export function ProcessSection() {
         >
           {processSteps.map((step, index) => (
             <div className="process-step" key={step.number}>
-              <motion.div className="step-number" variants={stepNumberVariants} custom={index}>
+              <m.div className="step-number" variants={stepNumberVariants} custom={index}>
                 {step.number}
-              </motion.div>
+              </m.div>
               {index < processSteps.length - 1 && (
-                <motion.span
+                <m.span
                   className="process-step-line"
                   variants={stepLineVariants}
                   custom={index}
                   aria-hidden="true"
                 />
               )}
-              <motion.div variants={stepTextVariants} custom={index}>
+              <m.div variants={stepTextVariants} custom={index}>
                 <span className="process-step-label">{step.label}</span>
                 <h3>{step.title}</h3>
                 <p>{step.description}</p>
-              </motion.div>
+              </m.div>
             </div>
           ))}
-        </motion.div>
+        </m.div>
         <div className="process-carousel">
           <div className="process-stepper">
             {processSteps.map((step, index) => (

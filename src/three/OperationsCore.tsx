@@ -113,10 +113,27 @@ export function OperationsCore({ onLoaded, onReady, onFail }: Scene3DProps) {
     onLoaded()
   }, [onLoaded])
 
+  // Fuera de pantalla la escena deja de pintarse: sin esto el canvas seguiría a 60 fps mientras se
+  // lee el resto del home, gastando CPU, GPU y batería
+  const wrapRef = useRef<HTMLDivElement>(null)
+  const [onScreen, setOnScreen] = useState(true)
+  useEffect(() => {
+    const wrap = wrapRef.current
+    if (!wrap) return
+    const observer = new IntersectionObserver(([entry]) => setOnScreen(entry.isIntersecting))
+    observer.observe(wrap)
+    return () => observer.disconnect()
+  }, [])
+
   return (
-    <div className="canvas-wrap" aria-label="Modelo 3D interactivo de operaciones conectadas">
+    <div
+      ref={wrapRef}
+      className="canvas-wrap"
+      aria-label="Modelo 3D interactivo de operaciones conectadas"
+    >
       <Canvas
         className={`canvas-3d ${ready ? '' : 'is-loading'}`}
+        frameloop={onScreen ? 'always' : 'never'}
         dpr={[1, 1.6]}
         // Sin debounce en la medición: con el de por defecto (50 ms) la primera medida del
         // contenedor a veces se pierde, el canvas nunca arranca y el loader se queda en 93 %

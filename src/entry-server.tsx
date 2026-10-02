@@ -1,5 +1,5 @@
 import { StrictMode } from 'react'
-import { renderToString } from 'react-dom/server'
+import { prerenderToNodeStream } from 'react-dom/static'
 import { StaticRouter } from 'react-router-dom'
 import App from './App'
 import { blogPosts } from './data/blogPosts'
@@ -15,12 +15,17 @@ export const routes = [
   ...businessAreas.map((area) => `/servicios/${area.slug}`),
 ]
 
-export function render(url: string) {
-  return renderToString(
+// prerender (y no renderToString) espera a las páginas cargadas con lazy() antes de devolver el
+// HTML; renderToString pintaría el fallback vacío de Suspense
+export async function render(url: string) {
+  const { prelude } = await prerenderToNodeStream(
     <StrictMode>
       <StaticRouter location={url}>
         <App />
       </StaticRouter>
     </StrictMode>,
   )
+  const chunks: Buffer[] = []
+  for await (const chunk of prelude) chunks.push(Buffer.from(chunk))
+  return Buffer.concat(chunks).toString('utf-8')
 }

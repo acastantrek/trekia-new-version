@@ -1,6 +1,7 @@
 import { Component, Suspense, useCallback, useEffect, useRef, useState } from 'react'
 import type { ComponentType, LazyExoticComponent, ReactNode } from 'react'
 import type { Picture } from 'vite-imagetools'
+import { useIsClient } from '../hooks/useIsClient'
 import { isWebGLAvailable } from '../lib/webgl'
 import { ResponsiveImage } from './ResponsiveImage'
 import { Scene3DLoader, type Scene3DStage } from './Scene3DLoader'
@@ -50,7 +51,10 @@ class SceneErrorBoundary extends Component<
 // `fallback` en su lugar
 export function LazyScene3D({ scene: Scene, fallback, fallbackAlt }: LazyScene3DProps) {
   const [stage, setStage] = useState<Scene3DStage>('download')
-  const [failed, setFailed] = useState(() => !isWebGLAvailable())
+  const [failed, setFailed] = useState(false)
+  // WebGL solo se puede comprobar en el navegador: en el prerender y al hidratar se pinta solo el
+  // loader, igual en ambos lados
+  const isClient = useIsClient()
   const isReady = useRef(false)
 
   // Las fases solo avanzan: un aviso tardío de "cargado" no devuelve el loader atrás
@@ -68,7 +72,15 @@ export function LazyScene3D({ scene: Scene, fallback, fallbackAlt }: LazyScene3D
     return () => window.clearTimeout(timer)
   }, [])
 
-  if (failed) {
+  if (!isClient) {
+    return (
+      <div className="scene-3d">
+        <Scene3DLoader stage={stage} />
+      </div>
+    )
+  }
+
+  if (failed || !isWebGLAvailable()) {
     return (
       <div className="scene-3d">
         <ResponsiveImage

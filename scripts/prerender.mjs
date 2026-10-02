@@ -9,8 +9,8 @@
 //   /blog/slug   → dist/blog/slug.html
 //   resto        → dist/404.html (con estado HTTP 404)
 //
-// En el navegador la app no se hidrata: main.tsx vuelve a pintar todo con createRoot, así que el
-// HTML estático solo tiene que ser correcto, no idéntico al del navegador.
+// En el navegador main.tsx hidrata este HTML (hydrateRoot): el primer render del cliente tiene que
+// coincidir con él. Lo que depende del navegador (cookies, WebGL) espera a hidratar (useIsClient).
 
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises'
 import { dirname } from 'node:path'
@@ -33,8 +33,8 @@ if (baseTemplate === template)
 // contenido: se separan por el contenedor raíz de SiteLayout
 const SHELL = '<div class="site-shell">'
 
-function renderPage(url) {
-  const output = render(url)
+async function renderPage(url) {
+  const output = await render(url)
   const shellStart = output.indexOf(SHELL)
   if (shellStart < 0) throw new Error(`${url}: no se ha encontrado ${SHELL} en el HTML`)
   // data-fallback: main.tsx las retira al arrancar y React pone las suyas, sin duplicados
@@ -57,10 +57,10 @@ async function write(file, html) {
 }
 
 for (const route of routes) {
-  await write(outputFile(route), renderPage(route))
+  await write(outputFile(route), await renderPage(route))
 }
 // Cualquier ruta que no existe pinta la página 404
-await write(`${dist}/404.html`, renderPage('/404'))
+await write(`${dist}/404.html`, await renderPage('/404'))
 
 await rm(ssrDist, { recursive: true, force: true })
 console.log(`Prerender: ${routes.length} rutas + 404.html`)
