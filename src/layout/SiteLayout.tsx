@@ -63,10 +63,11 @@ export function SiteLayout() {
   // Las páginas se cargan bajo demanda (ver App.tsx). El Suspense va fuera del ErrorBoundary para
   // no remontarse al navegar: así la transición mantiene la página anterior en lugar de dejar el
   // hueco vacío mientras llega el chunk. key: al navegar a otra página se sale de la pantalla de
-  // error
+  // error. El fallback solo se ve sin HTML prerenderizado (npm run dev): ocupa la pantalla para que
+  // el footer no suba mientras carga la página
   const page = useMemo(
     () => (
-      <Suspense fallback={null}>
+      <Suspense fallback={<div className="page-loading" aria-busy="true" />}>
         <ErrorBoundary key={location.pathname} fallback={<ErrorPage />}>
           <Outlet />
         </ErrorBoundary>

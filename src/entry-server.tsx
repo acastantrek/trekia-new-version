@@ -16,7 +16,10 @@ export const routes = [
 ]
 
 // prerender (y no renderToString) espera a las páginas cargadas con lazy() antes de devolver el
-// HTML; renderToString pintaría el fallback vacío de Suspense
+// HTML; renderToString pintaría el fallback vacío de Suspense.
+// progressiveChunkSize: Infinity para que el contenido de cada Suspense quede en su sitio. Si no,
+// React deja el fallback en <main> y mueve la página a un <div hidden> al final con un script que
+// la coloca al cargar: sin JS (buscadores, previews) el contenido quedaría oculto
 export async function render(url: string) {
   const { prelude } = await prerenderToNodeStream(
     <StrictMode>
@@ -24,6 +27,7 @@ export async function render(url: string) {
         <App />
       </StaticRouter>
     </StrictMode>,
+    { progressiveChunkSize: Infinity },
   )
   const chunks: Buffer[] = []
   for await (const chunk of prelude) chunks.push(Buffer.from(chunk))

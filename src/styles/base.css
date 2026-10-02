@@ -159,6 +159,10 @@ li {
   padding-top: 82px;
   overflow: hidden;
 }
+/* Hueco de la página mientras se descarga su chunk (ver SiteLayout) */
+.page-loading {
+  min-height: 100vh;
+}
 .container {
   width: min(calc(100% - 48px), var(--container));
   margin-inline: auto;

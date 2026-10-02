@@ -133,6 +133,9 @@ la web publicada (tareas 10 y 11).
     asíncronas) cambia antes de que la página se hidrate, React descarta su HTML y la repinta
     entera sin avisar. Por eso el estado de cookies vive en `CookieConsent`, la página está
     memorizada en `SiteLayout` y `domAnimation` se carga de forma síncrona.
+  - `prerenderToNodeStream` va con `progressiveChunkSize: Infinity`: sin eso React deja el fallback
+    en `<main>` y mueve la página a un `<div hidden>` con un script que la coloca al cargar (sin JS
+    el contenido quedaba oculto). Comprobado: ningún HTML de `dist` lleva `$RC(` ni `div hidden`.
 
 - [x] **12. La página 404 devuelve HTTP 200**
   - `vercel.json` reescribe todo a `index.html`, así que una URL inexistente responde 200 aunque se vea la
