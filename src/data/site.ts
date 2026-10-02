@@ -11,6 +11,8 @@ export const OG_IMAGE = { path: '/og-image.png', width: 1200, height: 630 }
 export const company = {
   legalName: 'Kenned Group SL',
   taxId: 'B66788605',
+  // Inscripción en el Registro Mercantil (obligatoria en el aviso legal, art. 10.1.b LSSI)
+  registry: { city: 'Barcelona', volume: '45412', folio: '44', sheet: '486890', entry: '1' },
   email: 'hello@trek-ia.com',
   phone: '+34930157006',
   address: {

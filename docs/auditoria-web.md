@@ -9,8 +9,8 @@ casilla (`[x]`) y apunta el commit o una nota breve debajo.
 
 Prioridad: 🔴 crítico · 🟠 alta · 🟡 media · 🟢 baja
 
-**Estado (02/10/2026, `develop` = `main`):** hechas 1–12, 14, 15 y 19 · parcial 16 · pendientes 13,
-17, 18 y 20–37. Verificado en un móvil real (tareas 2, 4 y 5) y previews de LinkedIn y WhatsApp con
+**Estado (02/10/2026, `develop` = `main`):** hechas 1–15 y 19 · parcial 16 · pendientes 17, 18 y
+20–37. Verificado en un móvil real (tareas 2, 4 y 5) y previews de LinkedIn y WhatsApp con
 la web publicada (tareas 10 y 11).
 
 ---
@@ -138,11 +138,12 @@ la web publicada (tareas 10 y 11).
 
 ## 🟠 Legal y contenido
 
-- [ ] **13. Aviso legal incompleto**
+- [x] **13. Aviso legal incompleto**
   - `src/pages/LegalPage.tsx`: la LSSI (art. 10.1.b) exige los datos de inscripción en el Registro
     Mercantil (tomo, folio, hoja, inscripción) de Kenned Group SL. Añadirlos.
-  - Pendiente de la empresa: tomo, folio, hoja e inscripción de Kenned Group SL en el Registro
-    Mercantil de Barcelona (aparecen en la nota simple).
+  - ✅ Hecho (02/10/2026): Registro Mercantil de Barcelona, tomo 45412, folio 44, hoja 486890,
+    inscripción 1.ª. Los datos están en `company.registry` (`src/data/site.ts`) y `LegalPage` los
+    muestra tras el CIF.
 
 - [x] **14. Política de privacidad: incoherencias**
   - `PrivacyPage.tsx:42`: dice que, "si lo autorizas", se envían comunicaciones comerciales, pero el

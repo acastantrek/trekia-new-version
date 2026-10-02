@@ -1,6 +1,9 @@
 import { PageHero } from '../components/PageHero'
 import { Reveal } from '../components/Reveal'
 import { Seo } from '../components/Seo'
+import { company } from '../data/site'
+
+const { registry } = company
 
 export function LegalPage() {
   return (
@@ -19,9 +22,9 @@ export function LegalPage() {
           <Reveal>
             <h2>1. Datos identificativos</h2>
             <p>
-              En cumplimiento del deber de información recogido en el artículo 10 de la Ley
-              34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y Comercio
-              Electrónico, se informa de los siguientes datos:
+              En cumplimiento del deber de información recogido en el artículo 10 de la Ley 34/2002,
+              de 11 de julio, de Servicios de la Sociedad de la Información y Comercio Electrónico,
+              se informa de los siguientes datos:
             </p>
             <ul>
               <li>
@@ -32,6 +35,11 @@ export function LegalPage() {
               </li>
               <li>
                 <strong>CIF:</strong> B66788605
+              </li>
+              <li>
+                <strong>Datos registrales:</strong> inscrita en el Registro Mercantil de{' '}
+                {registry.city}, tomo {registry.volume}, folio {registry.folio}, hoja{' '}
+                {registry.sheet}, inscripción {registry.entry}.ª
               </li>
               <li>
                 <strong>Domicilio:</strong> Gran Via de Carles III, 53, entlo 5ª, Les Corts, 08028
@@ -72,10 +80,10 @@ export function LegalPage() {
             <p>
               Todos los contenidos del sitio web, incluyendo a título enunciativo textos,
               fotografías, gráficos, imágenes, iconos, tecnología, software, marcas y demás
-              elementos, son propiedad de Kenned Group SL o de terceros que han autorizado su uso,
-              y están protegidos por la normativa de propiedad intelectual e industrial. Queda
-              prohibida su reproducción, distribución, comunicación pública o transformación total
-              o parcial sin autorización expresa del titular.
+              elementos, son propiedad de Kenned Group SL o de terceros que han autorizado su uso, y
+              están protegidos por la normativa de propiedad intelectual e industrial. Queda
+              prohibida su reproducción, distribución, comunicación pública o transformación total o
+              parcial sin autorización expresa del titular.
             </p>
           </Reveal>
 
@@ -94,11 +102,11 @@ export function LegalPage() {
             <h2>6. Protección de datos</h2>
             <p>
               Los datos personales facilitados a través de los formularios de este sitio web serán
-              tratados por Kenned Group SL con la finalidad de atender las solicitudes de contacto
-              e información recibidas, conforme al Reglamento (UE) 2016/679 (RGPD) y a la Ley
-              Orgánica 3/2018 de Protección de Datos Personales y garantía de los derechos
-              digitales. El usuario puede ejercer sus derechos de acceso, rectificación, supresión,
-              oposición, limitación y portabilidad dirigiéndose a hello@trek-ia.com.
+              tratados por Kenned Group SL con la finalidad de atender las solicitudes de contacto e
+              información recibidas, conforme al Reglamento (UE) 2016/679 (RGPD) y a la Ley Orgánica
+              3/2018 de Protección de Datos Personales y garantía de los derechos digitales. El
+              usuario puede ejercer sus derechos de acceso, rectificación, supresión, oposición,
+              limitación y portabilidad dirigiéndose a hello@trek-ia.com.
             </p>
           </Reveal>
 
