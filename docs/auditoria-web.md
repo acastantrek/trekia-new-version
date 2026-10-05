@@ -9,8 +9,8 @@ casilla (`[x]`) y apunta el commit o una nota breve debajo.
 
 Prioridad: 🔴 crítico · 🟠 alta · 🟡 media · 🟢 baja
 
-**Estado (05/10/2026):** hechas 1–15, 17–19 y 21–23 · parciales 16, 20 y 33 ·
-pendientes 24–32 y 34–37. Verificado en un móvil real (tareas 2, 4 y 5) y previews de LinkedIn y WhatsApp con
+**Estado (05/10/2026):** hechas 1–15, 17–19 y 21–24 · parciales 16, 20 y 33 ·
+pendientes 25–32 y 34–37. Verificado en un móvil real (tareas 2, 4 y 5) y previews de LinkedIn y WhatsApp con
 la web publicada (tareas 10 y 11).
 
 ---
@@ -273,13 +273,19 @@ la web publicada (tareas 10 y 11).
     Contorno `:focus-visible` global en `base.css` y halo del formulario más visible. Verificado en
     Chrome con teclado real (menú en un iframe de 400 px).
 
-- [ ] **24. Formulario de contacto**
+- [x] **24. Formulario de contacto**
   - `src/components/ContactForm.tsx`: vincular cada error con su campo (`aria-describedby` + `id` en el
     `<small>`), marcar los obligatorios (`aria-required` y un asterisco visible) y mover el foco al primer
     campo con error al enviar.
   - Añadir `name` y `autoComplete` (`name`, `organization`, `email`, `tel`) para que el navegador
     autorrellene.
   - Añadir `maxLength` razonables (p. ej. 2000 en el mensaje).
+  - ✅ Hecho (05/10/2026): cada campo tiene `id`, `name`, `autoComplete` (`name`, `organization`,
+    `email`, `tel`) y `maxLength` (100, 120, 254, 20 y 2000 en el mensaje). Los obligatorios llevan
+    `aria-required` y un asterisco, con la nota "Los campos con * son obligatorios". El error va fuera
+    de la etiqueta y se enlaza con `aria-describedby` (también el de la política de privacidad). Al
+    enviar con errores el foco va al primer campo inválido; los errores se pintan antes (`flushSync`)
+    para que el scroll anchoring no deje el campo fuera de pantalla. Verificado en Chrome.
 
 - [ ] **25. Detalles menores**
   - `DataFlowCore`/`OperationsCore`: `aria-label` en un `div` sin `role` no se anuncia; usar

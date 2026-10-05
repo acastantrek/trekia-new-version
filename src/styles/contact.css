@@ -120,7 +120,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 18px;
 }
-.contact-form label {
+.form-field {
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -128,11 +128,13 @@
   font-size: 13px;
   font-weight: 600;
 }
-.contact-form label em {
-  float: right;
+.form-required {
+  color: var(--negative);
+}
+.form-required-note {
+  margin: 0 0 -8px;
   color: var(--faint);
-  font-style: normal;
-  font-weight: 400;
+  font-size: 12px;
 }
 .contact-form input,
 .contact-form textarea {
@@ -166,7 +168,7 @@
 .contact-form [aria-invalid='true'] {
   border-color: var(--negative);
 }
-.contact-form label small {
+.form-field small {
   color: var(--negative);
   font-weight: 400;
 }
@@ -181,6 +183,7 @@
   max-width: 320px;
 }
 .contact-form .form-consent label {
+  display: flex;
   flex-direction: row;
   align-items: flex-start;
   gap: 10px;

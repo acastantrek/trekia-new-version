@@ -1,5 +1,6 @@
 import { ArrowRight, CheckCircle2 } from 'lucide-react'
-import { useState, type FormEvent } from 'react'
+import { useState, type ChangeEvent, type FormEvent, type ReactNode } from 'react'
+import { flushSync } from 'react-dom'
 import { Link } from 'react-router-dom'
 
 interface FormData {
@@ -12,6 +13,48 @@ interface FormData {
 type FormErrors = Partial<Record<keyof FormData, string>>
 
 const initialForm: FormData = { name: '', company: '', email: '', phone: '', process: '' }
+
+// Atributos de cada campo: obligatorio, autorrelleno del navegador y longitud máxima
+const fieldConfig: Record<
+  keyof FormData,
+  { required: boolean; autoComplete?: string; maxLength: number }
+> = {
+  name: { required: true, autoComplete: 'name', maxLength: 100 },
+  company: { required: true, autoComplete: 'organization', maxLength: 120 },
+  email: { required: true, autoComplete: 'email', maxLength: 254 },
+  phone: { required: false, autoComplete: 'tel', maxLength: 20 },
+  process: { required: true, maxLength: 2000 },
+}
+
+const fieldId = (field: keyof FormData | 'privacy') => `contact-${field}`
+const errorId = (field: keyof FormData | 'privacy') => `contact-${field}-error`
+
+interface FieldProps {
+  field: keyof FormData
+  label: string
+  error?: string
+  children: ReactNode
+}
+
+// Etiqueta, control y error de un campo. El error va fuera de la etiqueta y se enlaza con
+// `aria-describedby`: el lector de pantalla lo lee después del nombre del campo
+function Field({ field, label, error, children }: FieldProps) {
+  return (
+    <div className="form-field">
+      <label htmlFor={fieldId(field)}>
+        {label}
+        {fieldConfig[field].required && (
+          <span className="form-required" aria-hidden="true">
+            {' '}
+            *
+          </span>
+        )}
+      </label>
+      {children}
+      {error && <small id={errorId(field)}>{error}</small>}
+    </div>
+  )
+}
 
 // La access key de Web3Forms es pública por diseño: solo permite enviar al correo asociado
 const WEB3FORMS_ACCESS_KEY = '5f80f6d1-7df1-4d24-8344-0ff0297350fe'
@@ -36,12 +79,22 @@ export function ContactForm() {
       next.process = 'Cuéntanos un poco más (mínimo 15 caracteres).'
     setErrors(next)
     setPrivacyError(!privacyAccepted)
-    return Object.keys(next).length === 0 && privacyAccepted
+    // Primer campo con error, en el orden del formulario (los errores se añaden en ese orden)
+    const [firstInvalid] = Object.keys(next) as (keyof FormData)[]
+    return firstInvalid ?? (privacyAccepted ? null : 'privacy')
   }
 
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    if (sending || !validate()) return
+    if (sending) return
+    // Los errores se pintan antes de mover el foco: si no, al aparecer los mensajes el navegador
+    // ajusta el scroll (scroll anchoring) y deja el campo enfocado fuera de pantalla
+    const firstInvalid = flushSync(validate)
+    if (firstInvalid) {
+      // El foco va al primer campo con error, que anuncia su mensaje por `aria-describedby`
+      document.getElementById(fieldId(firstInvalid))?.focus()
+      return
+    }
     // Campo trampa: si un bot lo rellena, se descarta el envío sin avisar
     const botcheck = event.currentTarget.elements.namedItem('botcheck') as HTMLInputElement
     setSending(true)
@@ -80,6 +133,20 @@ export function ContactForm() {
     setErrors((current) => ({ ...current, [field]: undefined }))
   }
 
+  // Atributos comunes de los inputs y del textarea
+  const control = (field: keyof FormData) => ({
+    id: fieldId(field),
+    name: field,
+    value: form[field],
+    onChange: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+      update(field, event.target.value),
+    autoComplete: fieldConfig[field].autoComplete,
+    maxLength: fieldConfig[field].maxLength,
+    'aria-required': fieldConfig[field].required,
+    'aria-invalid': Boolean(errors[field]),
+    'aria-describedby': errors[field] ? errorId(field) : undefined,
+  })
+
   if (success) {
     return (
       <div className="form-success" role="status">
@@ -104,63 +171,32 @@ export function ContactForm() {
         autoComplete="off"
         aria-hidden="true"
       />
+      <p className="form-required-note">
+        Los campos con <span aria-hidden="true">*</span> son obligatorios.
+      </p>
       <div className="form-row">
-        <label>
-          Nombre
-          <input
-            value={form.name}
-            onChange={(e) => update('name', e.target.value)}
-            placeholder="Tu nombre"
-            aria-invalid={Boolean(errors.name)}
-          />
-          {errors.name && <small>{errors.name}</small>}
-        </label>
-        <label>
-          Empresa
-          <input
-            value={form.company}
-            onChange={(e) => update('company', e.target.value)}
-            placeholder="Nombre de la empresa"
-            aria-invalid={Boolean(errors.company)}
-          />
-          {errors.company && <small>{errors.company}</small>}
-        </label>
+        <Field field="name" label="Nombre" error={errors.name}>
+          <input {...control('name')} placeholder="Tu nombre" />
+        </Field>
+        <Field field="company" label="Empresa" error={errors.company}>
+          <input {...control('company')} placeholder="Nombre de la empresa" />
+        </Field>
       </div>
       <div className="form-row">
-        <label>
-          Email
-          <input
-            type="email"
-            value={form.email}
-            onChange={(e) => update('email', e.target.value)}
-            placeholder="nombre@empresa.com"
-            aria-invalid={Boolean(errors.email)}
-          />
-          {errors.email && <small>{errors.email}</small>}
-        </label>
-        <label>
-          Teléfono
-          <input
-            type="tel"
-            value={form.phone}
-            onChange={(e) => update('phone', e.target.value)}
-            placeholder="+34 600 000 000"
-            aria-invalid={Boolean(errors.phone)}
-          />
-          {errors.phone && <small>{errors.phone}</small>}
-        </label>
+        <Field field="email" label="Email" error={errors.email}>
+          <input {...control('email')} type="email" placeholder="nombre@empresa.com" />
+        </Field>
+        <Field field="phone" label="Teléfono" error={errors.phone}>
+          <input {...control('phone')} type="tel" placeholder="+34 600 000 000" />
+        </Field>
       </div>
-      <label>
-        ¿Qué proceso quieres optimizar?
+      <Field field="process" label="¿Qué proceso quieres optimizar?" error={errors.process}>
         <textarea
+          {...control('process')}
           rows={5}
-          value={form.process}
-          onChange={(e) => update('process', e.target.value)}
           placeholder="Describe brevemente el proceso, las herramientas actuales y dónde detectas más fricción..."
-          aria-invalid={Boolean(errors.process)}
         />
-        {errors.process && <small>{errors.process}</small>}
-      </label>
+      </Field>
       {sendError && (
         <p className="form-error" role="alert">
           No se ha podido enviar la solicitud. Inténtalo de nuevo en unos minutos.
@@ -171,12 +207,15 @@ export function ContactForm() {
           <label>
             <input
               type="checkbox"
+              id={fieldId('privacy')}
               checked={privacyAccepted}
               onChange={(e) => {
                 setPrivacyAccepted(e.target.checked)
                 setPrivacyError(false)
               }}
+              aria-required
               aria-invalid={privacyError}
+              aria-describedby={privacyError ? errorId('privacy') : undefined}
             />
             <span>
               He leído y acepto la{' '}
@@ -186,7 +225,9 @@ export function ContactForm() {
               .
             </span>
           </label>
-          {privacyError && <small>Debes aceptar la política de privacidad.</small>}
+          {privacyError && (
+            <small id={errorId('privacy')}>Debes aceptar la política de privacidad.</small>
+          )}
         </div>
         <button className="submit-button" type="submit" disabled={sending}>
           {sending ? 'Enviando…' : 'Enviar solicitud'} <ArrowRight size={18} />
