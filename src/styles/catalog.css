@@ -31,3 +31,18 @@
     height: calc(min(100cqw - 32px, 794px) * 1.414 + 140px);
   }
 }
+/* Por debajo de 600px el catálogo monta páginas del tamaño de la pantalla (sin escalar, para leer
+   sin zoom): el iframe ocupa justo una pantalla. svh y no dvh para que no cambie de alto (y el
+   libro se rehaga) al esconderse la barra del navegador */
+@container (max-width: 599px) {
+  .catalog-frame {
+    height: 100svh;
+    min-height: 0;
+  }
+}
+/* En móvil el botón flotante de cookies taparía los controles del libro, que van abajo */
+@media (max-width: 599px) {
+  .site-shell:has(.catalog-stage) .cookie-settings-button {
+    display: none;
+  }
+}

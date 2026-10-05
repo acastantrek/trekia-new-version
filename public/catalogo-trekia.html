@@ -64,23 +64,41 @@ body { margin: 0; background: var(--stage); color: var(--stage-ink); font-family
 .hint { margin: 0; font-size: 12.5px; color: var(--stage-muted); text-align: center; }
 .book.simple { position: relative; aspect-ratio: 794 / 1123; width: min(100%, calc((100dvh - 140px) * 0.707)); box-shadow: 0 10px 30px rgba(10, 16, 40, 0.25); }
 .book.simple .leaf { position: absolute; inset: 0; }
-/* Móvil: sin pasapáginas, las páginas se leen una debajo de otra a tamaño real (ver script) */
-.reflow .stage { padding: 12px; display: block; }
-.reflow .book-wrap { width: 100%; }
-.reflow .controls, .reflow .hint { display: none; }
-.reflow .leaf { margin-bottom: 12px; border-radius: 12px; box-shadow: 0 6px 18px rgba(10, 16, 40, 0.18); }
-.reflow .sheet.page { position: static !important; transform: none !important; width: auto; height: auto; padding: 32px 20px 20px !important; }
-.reflow .sheet.page[style*="justify-content: center"] { padding: 48px 20px !important; }
-.reflow .foot { position: static; margin-top: 28px; gap: 12px; }
-.reflow h1 { font-size: 30px !important; }
-.reflow h2 { font-size: 26px; }
-.reflow .head { margin-bottom: 24px; }
-.reflow .grid2, .reflow .grid3, .reflow [style*="grid-template-columns: 150px"] { grid-template-columns: minmax(0, 1fr) !important; }
-.reflow [style*="grid-auto-rows"] { grid-auto-rows: auto !important; }
-.reflow img { max-width: 100%; }
-.reflow .banner { margin-top: 24px; }
-.reflow .sheet.page[style*="space-between"] { gap: 28px; }
-.reflow [style*="grid-template-columns: 130px"] { grid-template-columns: 96px minmax(0, 1fr) !important; }
+/* Móvil: también en libro, pero con páginas del tamaño de la pantalla (sin escalar) y el contenido
+   de cada A4 repartido entre varias, con letra grande (ver script) */
+.mobile .stage { padding: 12px; gap: 12px; }
+.mobile .hint { display: none; }
+.mobile .book:not(.ready) { visibility: hidden; }
+.m-measure { position: absolute; left: -10000px; top: 0; visibility: hidden; }
+.sheet.page.m { padding: 22px 20px 48px; gap: 14px; }
+.sheet.page.m > * { flex-shrink: 0; margin-bottom: 0 !important; }
+.m [style*="padding: 18px 22px"] { padding: 14px 16px !important; gap: 12px !important; }
+.m .foot { left: 20px; right: 20px; bottom: 14px; padding-top: 10px; }
+.m .head { margin-bottom: 0; }
+.m .eyebrow { font-size: 12.5px; margin-bottom: 10px; }
+.m .eyebrow.m-cont { margin-bottom: 0; }
+/* Un banner que empieza página nueva va arriba, no empujado al pie */
+.m .m-cont + .banner { margin-top: 0; }
+.m h2 { font-size: 26px; line-height: 1.18; }
+.m .lead { font-size: 16.5px !important; line-height: 1.5; margin-top: 12px !important; }
+.m .card { padding: 18px; gap: 8px; border-radius: 12px; }
+.m .card p { font-size: 16px; }
+.m .card h3 { font-size: 18px; }
+.m .tag { font-size: 12.5px; }
+.m .fix { font-size: 15.5px; padding-top: 10px; }
+.m .banner { padding: 20px !important; border-radius: 14px; flex-wrap: wrap; row-gap: 6px !important; }
+.m [style*="justify-content: space-between"] { flex-wrap: wrap; row-gap: 6px; }
+.m img { max-width: 78%; height: auto !important; }
+.m svg { flex-shrink: 0; }
+.m > img { align-self: center; }
+.m-list { grid-template-columns: minmax(0, 1fr) !important; grid-auto-rows: auto !important; flex: none !important; gap: 12px !important; margin-bottom: 0 !important; justify-content: flex-start !important; }
+.m-list > .card[style*="grid-template-columns"] { grid-template-columns: minmax(0, 1fr) !important; }
+.m-list > .card > div:first-child[style*="padding"] { padding: 14px 16px 12px !important; }
+.m-list > .card > div[style*="border-left"] { border-left: 0 !important; border-top: 1px solid var(--line); }
+.m-list > .card > div:not(:first-child)[style*="padding"] { padding: 14px 16px !important; }
+.m-list > * > [style*="bottom:-60px"] { bottom: -12px !important; }
+.m-list > :last-child > [style*="bottom:-60px"] { display: none; }
+.m [style*="grid-template-columns: 130px"] { grid-template-columns: 96px minmax(0, 1fr) !important; row-gap: 10px !important; }
 </style>
 <script>
 // Incrustado en /catalogo: el fondo sigue el tema de la web (claro, mixto u oscuro) y no el del sistema
@@ -234,17 +252,165 @@ body { margin: 0; background: var(--stage); color: var(--stage-ink); font-family
     return 'Páginas ' + a + '–' + (a + 1);
   }
   function setState(i, portrait) { counter.textContent = label(i, portrait); prevBtn.disabled = i <= 0; nextBtn.disabled = i >= TOTAL - 1; }
-  // En pantallas estrechas el libro escalado no se lee: las páginas van seguidas a tamaño real
+  // En pantallas estrechas el A4 escalado no se lee: el libro pasa a páginas del tamaño de la
+  // pantalla, sin escalar, y el contenido de cada A4 se reparte entre las que haga falta
   var NARROW = 600;
   var narrow = window.innerWidth < NARROW;
-  window.addEventListener('resize', function () { if ((window.innerWidth < NARROW) !== narrow) location.reload(); });
-  if (narrow) {
-    document.documentElement.classList.add('reflow');
-    // Incrustado en /catalogo: el iframe crece con el contenido y se hace scroll en la página
-    var grow = function () { try { if (window.frameElement) window.frameElement.style.height = document.documentElement.scrollHeight + 'px'; } catch (e) {} };
-    grow(); window.addEventListener('load', grow); window.addEventListener('resize', grow);
-  } else if (window.St && window.St.PageFlip) {
-    var flip = new St.PageFlip(bookEl, { width: W, height: H, size: 'stretch', minWidth: Math.max(260, Math.min(420, window.innerWidth - 32)), maxWidth: W, minHeight: 368, maxHeight: H, showCover: true, usePortrait: true, mobileScrollSupport: false, maxShadowOpacity: 0.35, flippingTime: 800 });
+  var startWidth = window.innerWidth;
+  // Al cruzar el umbral o girar el móvil hay que volver a montar el libro
+  window.addEventListener('resize', function () {
+    var w = window.innerWidth;
+    if ((w < NARROW) !== narrow || (narrow && Math.abs(w - startWidth) > 40)) location.reload();
+  });
+
+  // Tamaños de letra de los estilos en línea, pensados para el A4: títulos más pequeños y texto
+  // corrido a 16px como mínimo
+  function tune(root) {
+    [root].concat(Array.prototype.slice.call(root.querySelectorAll('[style]'))).forEach(function (el) {
+      var fs = parseFloat(el.style && el.style.fontSize);
+      if (!fs) return;
+      el.style.fontSize = (fs >= 40 ? 26 : fs >= 20 ? 20 : fs >= 13 ? Math.max(fs, 16) : Math.max(fs, 12.5)) + 'px';
+    });
+  }
+  // Rejillas de tarjetas y lista de pasos: sus elementos se pueden repartir entre páginas
+  function isList(el) {
+    if (el.children.length < 2 || el.classList.contains('head') || el.classList.contains('banner')) return false;
+    return Array.prototype.every.call(el.children, function (k) { return k.classList.contains('card') || !!k.querySelector(':scope > .num'); });
+  }
+
+  function buildMobile() {
+    var MW = Math.min(window.innerWidth - 24, 480);
+    var MH = Math.max(480, window.innerHeight - 24 - 44 - 12);
+    var measure = document.createElement('div');
+    measure.className = 'm-measure';
+    document.body.appendChild(measure);
+    var pages = [];
+
+    function newPage(src, hard) {
+      var leaf = document.createElement('div');
+      leaf.className = 'leaf';
+      if (hard) leaf.setAttribute('data-density', 'hard');
+      var sec = document.createElement('section');
+      sec.className = src.className + ' m';
+      sec.style.width = MW + 'px';
+      sec.style.height = MH + 'px';
+      ['background', 'color', 'justifyContent', 'alignItems'].forEach(function (k) { if (src.style[k]) sec.style[k] = src.style[k]; });
+      leaf.appendChild(sec);
+      measure.appendChild(leaf);
+      pages.push({ leaf: leaf, sec: sec, foot: src.querySelector(':scope > .foot') });
+      return sec;
+    }
+    function overflows(sec) {
+      var limit = sec.getBoundingClientRect().top + MH - parseFloat(getComputedStyle(sec).paddingBottom) + 0.5;
+      return Array.prototype.some.call(sec.children, function (c) { return c.getBoundingClientRect().bottom > limit; });
+    }
+
+    // En pantallas bajas (p. ej. un iPhone SE con las barras del navegador) puede faltar sitio aun
+    // así: se reduce todo un poco, sin bajar del 82 %
+    function fitZoom(sec) {
+      var zoom = 1;
+      while (overflows(sec) && zoom > 0.83) {
+        zoom -= 0.02;
+        Array.prototype.forEach.call(sec.children, function (c) { c.style.zoom = zoom; });
+      }
+    }
+
+    leaves.forEach(function (srcLeaf) {
+      var src = srcLeaf.querySelector('.sheet');
+      var hard = srcLeaf.getAttribute('data-density') === 'hard';
+      var eyebrow = src.querySelector('.head .eyebrow');
+      var blocks = [];
+      Array.prototype.forEach.call(src.children, function (c) {
+        if (c.classList.contains('foot')) return;
+        if (isList(c)) Array.prototype.forEach.call(c.children, function (item) { blocks.push({ list: c, el: item }); });
+        else blocks.push({ el: c });
+      });
+      // En la contraportada el logo pasa al final: si no cabe en una página, la última (contactos y
+      // logo) cierra el libro en vez de quedarse con los contactos solos
+      var last = srcLeaf === leaves[leaves.length - 1];
+      if (last && blocks.length > 1 && blocks[0].el.tagName === 'IMG') blocks.push(blocks.shift());
+      var sec = newPage(src, hard), listSrc = null, listClone = null, count = 0;
+      function place(b) {
+        var node = b.el.cloneNode(true);
+        tune(node);
+        if (b.list) {
+          if (listSrc !== b.list) {
+            listClone = b.list.cloneNode(false);
+            listClone.classList.add('m-list');
+            sec.appendChild(listClone);
+            listSrc = b.list;
+          }
+          listClone.appendChild(node);
+        } else {
+          listSrc = null;
+          sec.appendChild(node);
+        }
+        return node;
+      }
+      // Páginas sin tarjetas ni pasos (la de presentación): todo en una sola página, con el título
+      // algo más pequeño si hace falta, antes que dejar un bloque suelto. La contraportada no: ahí
+      // queda mejor repartida, con el logo solo al final
+      if (!last && !blocks.some(function (b) { return b.list; })) {
+        blocks.forEach(place);
+        var headings = sec.querySelectorAll('h1, h2');
+        var shrink = function () {
+          var done = true;
+          Array.prototype.forEach.call(headings, function (h) {
+            var fs = parseFloat(getComputedStyle(h).fontSize);
+            if (fs > 20) { h.style.fontSize = (fs - 1) + 'px'; done = false; }
+          });
+          return !done;
+        };
+        while (overflows(sec) && shrink()) {}
+        fitZoom(sec);
+        if (!overflows(sec)) return;
+        // Ni así cabe: se reparte entre páginas como el resto
+        while (sec.firstChild) sec.removeChild(sec.firstChild);
+        headings = [];
+      }
+      blocks.forEach(function (b) {
+        var node = place(b);
+        if (count > 0 && overflows(sec)) {
+          // No cabe: a una página nueva de la misma sección, con su antetítulo para dar contexto
+          var parent = node.parentNode;
+          parent.removeChild(node);
+          if (parent !== sec && !parent.children.length) sec.removeChild(parent);
+          sec = newPage(src, hard);
+          listSrc = null;
+          count = 0;
+          if (eyebrow) {
+            var e = eyebrow.cloneNode(true);
+            e.classList.add('m-cont');
+            sec.appendChild(e);
+          }
+          place(b);
+        }
+        count++;
+      });
+    });
+
+    // Pie con la numeración nueva. La portada no lleva, ni la contraportada si se ha quedado solo
+    // con el logo, que va centrado como en la portada
+    pages.forEach(function (p, i) {
+      // Un bloque que no cabe ni solo en su página (pasa en pantallas muy bajas)
+      if (overflows(p.sec)) fitZoom(p.sec);
+      var logoOnly = p.sec.children.length === 1 && p.sec.firstElementChild.tagName === 'IMG';
+      if (logoOnly) { p.sec.style.justifyContent = 'center'; p.sec.style.alignItems = 'center'; }
+      if (i === 0 || logoOnly || !p.foot) return;
+      var foot = p.foot.cloneNode(true);
+      foot.lastElementChild.textContent = String(i + 1);
+      p.sec.appendChild(foot);
+    });
+
+    leaves.forEach(function (l) { l.parentNode.removeChild(l); });
+    leaves = pages.map(function (p) { bookEl.appendChild(p.leaf); return p.leaf; });
+    measure.parentNode.removeChild(measure);
+    W = MW; H = MH; TOTAL = leaves.length;
+    bookEl.parentNode.style.width = MW + 'px';
+  }
+
+  function startFlip(options) {
+    var flip = new St.PageFlip(bookEl, options);
     flip.loadFromHTML(leaves);
     var portrait = function () { return flip.getOrientation() === 'portrait'; };
     var refit = function () { try { fit(flip.getBoundsRect().pageWidth); } catch (e) { fit(); } };
@@ -255,6 +421,18 @@ body { margin: 0; background: var(--stage); color: var(--stage-ink); font-family
     document.addEventListener('keydown', function (e) { if (e.key === 'ArrowLeft') flip.flipPrev(); if (e.key === 'ArrowRight') flip.flipNext(); });
     window.addEventListener('resize', function () { setTimeout(update, 60); });
     update(); setTimeout(update, 300);
+    bookEl.classList.add('ready');
+  }
+
+  if (window.St && window.St.PageFlip && narrow) {
+    document.documentElement.classList.add('mobile');
+    // Las medidas para repartir el contenido necesitan las fuentes ya cargadas
+    (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(function () {
+      buildMobile();
+      startFlip({ width: W, height: H, size: 'fixed', showCover: true, usePortrait: true, mobileScrollSupport: false, maxShadowOpacity: 0.35, flippingTime: 700 });
+    });
+  } else if (window.St && window.St.PageFlip) {
+    startFlip({ width: W, height: H, size: 'stretch', minWidth: Math.max(260, Math.min(420, window.innerWidth - 32)), maxWidth: W, minHeight: 368, maxHeight: H, showCover: true, usePortrait: true, mobileScrollSupport: false, maxShadowOpacity: 0.35, flippingTime: 800 });
   } else {
     bookEl.classList.add('simple');
     var cur = 0;
