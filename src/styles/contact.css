@@ -160,7 +160,8 @@
 .contact-form input:focus,
 .contact-form textarea:focus {
   border-color: var(--blue);
-  box-shadow: 0 0 0 3px rgba(79, 140, 255, 0.1);
+  /* Sin outline (ver arriba): el foco se marca con el borde y este halo, que tiene que verse */
+  box-shadow: 0 0 0 3px rgba(79, 140, 255, 0.4);
 }
 .contact-form [aria-invalid='true'] {
   border-color: var(--negative);

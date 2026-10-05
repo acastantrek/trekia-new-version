@@ -9,8 +9,8 @@ casilla (`[x]`) y apunta el commit o una nota breve debajo.
 
 Prioridad: 🔴 crítico · 🟠 alta · 🟡 media · 🟢 baja
 
-**Estado (02/10/2026, `develop` = `main`):** hechas 1–15, 17–19, 21 y 22 · parciales 16, 20 y 33 ·
-pendientes 23–32 y 34–37. Verificado en un móvil real (tareas 2, 4 y 5) y previews de LinkedIn y WhatsApp con
+**Estado (05/10/2026):** hechas 1–15, 17–19 y 21–23 · parciales 16, 20 y 33 ·
+pendientes 24–32 y 34–37. Verificado en un móvil real (tareas 2, 4 y 5) y previews de LinkedIn y WhatsApp con
 la web publicada (tareas 10 y 11).
 
 ---
@@ -255,7 +255,7 @@ la web publicada (tareas 10 y 11).
   - Pendiente menor: los `scrollIntoView`/`scrollTo` con `behavior: 'smooth'` en JS y el giro
     automático de la figura 3D siguen activos con la preferencia.
 
-- [ ] **23. Navegación con teclado en menú y modales**
+- [x] **23. Navegación con teclado en menú y modales**
   - Menú móvil (`Header.tsx`): cerrar con Escape, mantener el foco dentro mientras está abierto y
     devolverlo al botón al cerrar.
   - `CookiePreferencesModal`: tiene `aria-modal` pero no mueve el foco al abrirse, no lo atrapa y no se
@@ -265,6 +265,13 @@ la web publicada (tareas 10 y 11).
   - Revisar `:focus-visible`: los inputs del formulario quitan el `outline` (`contact.css:142`) y el foco
     se marca solo con un `box-shadow` de opacidad 0.1, casi invisible. Hay muy pocas reglas de foco en
     el CSS (botones, enlaces del footer, tarjetas de área…).
+  - ✅ Hecho (05/10/2026): hook `useFocusTrap` (`src/hooks/useFocusTrap.ts`) para el menú móvil y el
+    modal de cookies: Tab y Mayús+Tab no salen, Escape cierra y el foco vuelve al botón que lo abrió.
+    El modal recibe el foco al abrirse; Escape lo cierra sin guardar (si no había consentimiento, el
+    banner sigue). Banner y botón de cookies se ocultan sin desmontarse mientras el modal está abierto.
+    Pestañas de `/metodo` con tabindex itinerante, flechas, Inicio y Fin; el panel es enfocable.
+    Contorno `:focus-visible` global en `base.css` y halo del formulario más visible. Verificado en
+    Chrome con teclado real (menú en un iframe de 400 px).
 
 - [ ] **24. Formulario de contacto**
   - `src/components/ContactForm.tsx`: vincular cada error con su campo (`aria-describedby` + `id` en el

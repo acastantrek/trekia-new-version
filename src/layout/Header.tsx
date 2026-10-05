@@ -5,6 +5,7 @@ import { Link, NavLink } from 'react-router-dom'
 import { businessAreas } from '../data/businessAreas'
 import { navItems, sectors, socialLinks } from '../data/siteData'
 import { Logo } from '../components/Logo'
+import { useFocusTrap } from '../hooks/useFocusTrap'
 
 interface NavDropdownItem {
   to: string
@@ -68,6 +69,10 @@ export function Header({ menuOpen: open, onMenuOpenChange: setOpen }: HeaderProp
     }
   }, [open])
 
+  // Menú móvil abierto: el foco no sale del panel y del botón de cerrar, y Escape lo cierra
+  const actionsRef = useRef<HTMLDivElement>(null)
+  useFocusTrap(actionsRef, open, () => setOpen(false))
+
   return (
     <header className={`site-header ${scrolled ? 'is-scrolled' : ''}`}>
       <div className="container header-inner">
@@ -91,7 +96,7 @@ export function Header({ menuOpen: open, onMenuOpenChange: setOpen }: HeaderProp
             ))}
           </div>
         </div>
-        <div className="header-actions">
+        <div className="header-actions" ref={actionsRef}>
           <nav className={`main-nav ${open ? 'is-open' : ''}`} aria-label="Navegación principal">
             <div className="nav-links">
               {navItems.map((item) => {

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useIsClient } from '../hooks/useIsClient'
 import {
   allAcceptedPreferences,
@@ -27,6 +27,13 @@ export function CookieConsent({ menuOpen }: CookieConsentProps) {
   )
   const [bannerOpen, setBannerOpen] = useState(() => !getStoredConsent())
   const [modalOpen, setModalOpen] = useState(false)
+  // Se guarda al pulsar, antes de que el botón se oculte y pierda el foco
+  const modalOpenerRef = useRef<HTMLElement | null>(null)
+  const openModal = () => {
+    modalOpenerRef.current =
+      document.activeElement instanceof HTMLElement ? document.activeElement : null
+    setModalOpen(true)
+  }
 
   const finalize = (value: CookiePreferences) => {
     saveConsent(value)
@@ -39,22 +46,29 @@ export function CookieConsent({ menuOpen }: CookieConsentProps) {
 
   return (
     <>
+      {/* El banner y el botón de preferencias se ocultan, sin desmontarse, mientras el modal está
+          abierto: así el foco puede volver al botón que lo abrió al cerrarlo */}
       {bannerOpen && (
-        <div style={{ display: menuOpen ? 'none' : undefined }}>
+        <div style={{ display: menuOpen || modalOpen ? 'none' : undefined }}>
           <CookieBanner
             onAcceptAll={() => finalize(allAcceptedPreferences)}
             onRejectAll={() => finalize(defaultPreferences)}
-            onCustomize={() => {
-              setBannerOpen(false)
-              setModalOpen(true)
-            }}
+            onCustomize={openModal}
           />
         </div>
       )}
-      {modalOpen && <CookiePreferencesModal initialPreferences={preferences} onClose={finalize} />}
-      {!bannerOpen && !modalOpen && (
-        <div style={{ display: menuOpen ? 'none' : undefined }}>
-          <CookieSettingsButton onClick={() => setModalOpen(true)} />
+      {modalOpen && (
+        <CookiePreferencesModal
+          initialPreferences={preferences}
+          onClose={finalize}
+          // Sin elegir nada: si aún no había consentimiento, el banner sigue ahí
+          onDismiss={() => setModalOpen(false)}
+          openerRef={modalOpenerRef}
+        />
+      )}
+      {!bannerOpen && (
+        <div style={{ display: menuOpen || modalOpen ? 'none' : undefined }}>
+          <CookieSettingsButton onClick={openModal} />
         </div>
       )}
     </>

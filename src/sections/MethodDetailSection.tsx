@@ -2,7 +2,7 @@ import construirImage from '../assets/method/construir.jpg'
 import definirImage from '../assets/method/definir.jpg'
 import entenderImage from '../assets/method/entender.jpg'
 import mejorarImage from '../assets/method/mejorar.jpg'
-import { useState } from 'react'
+import { useRef, useState, type KeyboardEvent } from 'react'
 import { Reveal } from '../components/Reveal'
 import { ResponsiveImage } from '../components/ResponsiveImage'
 
@@ -66,6 +66,23 @@ const methodDetails = [
 export function MethodDetailSection() {
   const [active, setActive] = useState(0)
   const current = methodDetails[active]
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
+
+  // Patrón ARIA de pestañas: solo la activa entra en el orden de Tab y las flechas (o Inicio y Fin)
+  // cambian de fase y le llevan el foco
+  const onTabKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
+    const last = methodDetails.length - 1
+    const next = {
+      ArrowRight: active === last ? 0 : active + 1,
+      ArrowLeft: active === 0 ? last : active - 1,
+      Home: 0,
+      End: last,
+    }[event.key]
+    if (next === undefined) return
+    event.preventDefault()
+    setActive(next)
+    tabRefs.current[next]?.focus()
+  }
 
   return (
     <section className="section method-detail">
@@ -88,11 +105,16 @@ export function MethodDetailSection() {
                 role="tab"
                 id={`method-tab-${step.number}`}
                 aria-selected={index === active}
-                aria-controls="tab-panel"
+                aria-controls="method-tab-panel"
+                tabIndex={index === active ? 0 : -1}
+                ref={(element) => {
+                  tabRefs.current[index] = element
+                }}
                 className={`tab ${index === active ? 'is-active' : ''} ${
                   index < active ? 'is-done' : ''
                 }`}
                 onClick={() => setActive(index)}
+                onKeyDown={onTabKeyDown}
               >
                 <span className="tab-badge">{step.number}</span>
                 <span className="tab-text">
@@ -104,8 +126,10 @@ export function MethodDetailSection() {
           </div>
           <div
             className="tab-panel"
-            id="tab-panel"
+            id="method-tab-panel"
             role="tabpanel"
+            // El panel no tiene nada enfocable: con Tab se llega a él desde la pestaña
+            tabIndex={0}
             aria-labelledby={`method-tab-${current.number}`}
             key={active}
           >

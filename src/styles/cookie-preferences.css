@@ -21,6 +21,10 @@
   box-shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
   overflow: hidden;
 }
+/* Recibe el foco al abrirse solo para que el lector de pantalla lea el título: sin contorno */
+.cookie-modal:focus-visible {
+  outline: none;
+}
 .cookie-modal-body {
   padding: 32px 32px 8px;
   overflow-y: auto;

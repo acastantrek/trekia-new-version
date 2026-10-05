@@ -149,6 +149,12 @@ textarea {
 button {
   color: inherit;
 }
+/* Foco visible con teclado en todo lo enfocable: el contorno por defecto del navegador apenas se ve
+   sobre los fondos oscuros. Los componentes con su propio estilo de foco lo ajustan donde toca */
+:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
 h1,
 h2,
 h3,

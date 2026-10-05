@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useRef, useState, type RefObject } from 'react'
+import { useFocusTrap } from '../hooks/useFocusTrap'
 import {
   allAcceptedPreferences,
   defaultPreferences,
@@ -55,11 +56,24 @@ const categories: CategoryDef[] = [
 interface CookiePreferencesModalProps {
   initialPreferences: CookiePreferences
   onClose: (preferences: CookiePreferences) => void
+  /** Escape: cierra sin guardar nada */
+  onDismiss: () => void
+  /** El botón que abrió el modal: recibe el foco al cerrarlo */
+  openerRef: RefObject<HTMLElement | null>
 }
 
-export function CookiePreferencesModal({ initialPreferences, onClose }: CookiePreferencesModalProps) {
+export function CookiePreferencesModal({
+  initialPreferences,
+  onClose,
+  onDismiss,
+  openerRef,
+}: CookiePreferencesModalProps) {
   const [preferences, setPreferences] = useState(initialPreferences)
   const [showMore, setShowMore] = useState(false)
+  // Al abrirse el foco pasa al diálogo (el lector de pantalla lee su título), no sale de él y al
+  // cerrarse vuelve al botón que lo abrió
+  const dialogRef = useRef<HTMLDivElement>(null)
+  useFocusTrap(dialogRef, true, onDismiss, { focusContainer: true, returnFocusRef: openerRef })
 
   const toggle = (key: keyof CookiePreferences) => {
     setPreferences((current) => ({ ...current, [key]: !current[key] }))
@@ -67,7 +81,14 @@ export function CookiePreferencesModal({ initialPreferences, onClose }: CookiePr
 
   return (
     <div className="cookie-modal-overlay" role="presentation">
-      <div className="cookie-modal" role="dialog" aria-modal="true" aria-label="Personalizar las preferencias de consentimiento">
+      <div
+        className="cookie-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Personalizar las preferencias de consentimiento"
+        tabIndex={-1}
+        ref={dialogRef}
+      >
         <div className="cookie-modal-body">
           <h2>Personalizar las preferencias de consentimiento</h2>
           <p>
