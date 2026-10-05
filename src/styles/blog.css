@@ -4,6 +4,12 @@
 .blog-section {
   padding-top: 0;
 }
+/* En desktop la primera fila de tarjetas no va pegada al borde del hero */
+@media (min-width: 821px) {
+  .blog-section {
+    padding-top: 48px;
+  }
+}
 .blog-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
