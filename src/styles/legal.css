@@ -1,7 +1,8 @@
 .page-hero:has(+ .legal-section) {
   padding-bottom: 30px;
 }
-.legal-section {
+/* .section.legal-section para que el padding de .section en responsive.css no lo pise en móvil */
+.section.legal-section {
   padding-top: 0;
   background: var(--bg-alt-2);
 }
@@ -57,24 +58,15 @@
   align-items: center;
   gap: 8px;
   margin: 36px 0 32px;
-  padding: 11px 20px;
-  border-radius: 999px;
-  background: var(--blue);
-  box-shadow: 0 8px 22px rgba(79, 140, 255, 0.3);
-  color: #fff;
-  font-size: 15px;
-  font-weight: 600;
-  transition: 0.2s;
+  color: var(--blue);
+  font-size: 14px;
+  font-weight: 700;
 }
-.blog-back-link:hover {
-  background: var(--violet);
-  box-shadow: 0 10px 26px rgba(124, 92, 255, 0.35);
+.blog-back-link svg {
+  transition: transform 0.25s;
 }
 .blog-back-link:hover svg {
   transform: translateX(-3px);
-}
-.blog-back-link svg {
-  transition: transform 0.2s;
 }
 .article-p + .article-p {
   margin-top: 20px;

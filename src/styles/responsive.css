@@ -391,6 +391,10 @@
   }
   .service-detail-media {
     height: 200px;
+    margin-bottom: 28px;
+  }
+  .blog-back-link {
+    margin: 22px 0 20px;
   }
   .comparison-grid {
     grid-template-columns: 1fr;
