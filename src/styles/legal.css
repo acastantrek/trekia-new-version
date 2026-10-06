@@ -55,14 +55,26 @@
 .blog-back-link {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  margin-bottom: 32px;
-  color: var(--muted);
-  font-size: 14px;
+  gap: 8px;
+  margin: 36px 0 32px;
+  padding: 11px 20px;
+  border-radius: 999px;
+  background: var(--blue);
+  box-shadow: 0 8px 22px rgba(79, 140, 255, 0.3);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
   transition: 0.2s;
 }
 .blog-back-link:hover {
-  color: var(--text);
+  background: var(--violet);
+  box-shadow: 0 10px 26px rgba(124, 92, 255, 0.35);
+}
+.blog-back-link:hover svg {
+  transform: translateX(-3px);
+}
+.blog-back-link svg {
+  transition: transform 0.2s;
 }
 .article-p + .article-p {
   margin-top: 20px;
