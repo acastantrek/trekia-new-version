@@ -1,4 +1,4 @@
-// Genera public/og-image.png (preview de redes, 1200x630) y public/favicon.ico a partir del logo.
+// Genera public/og-image.png (preview de redes, 1200x630), los favicons PNG, apple-touch-icon y public/favicon.ico a partir del logo.
 // Se ejecuta a mano cuando cambie el logo o el texto: node scripts/generate-static-images.mjs
 import { readFile, writeFile } from 'node:fs/promises'
 import sharp from 'sharp'
@@ -45,6 +45,31 @@ await sharp(Buffer.from(background))
   .png({ compressionLevel: 9 })
   .toFile('public/og-image.png')
 
+// Favicons: la T del logo sobre fondo blanco. Se dibujan a 256 px y se reducen al resto de tamaños.
+const ICON_SIZE = 256
+const logoTrimmed = await sharp('src/assets/logo-mark-t.png').trim().toBuffer()
+
+async function renderIcon({ inset, radius, markWidth }) {
+  const square = `
+<svg xmlns="http://www.w3.org/2000/svg" width="${ICON_SIZE}" height="${ICON_SIZE}">
+  <rect x="${inset}" y="${inset}" width="${ICON_SIZE - inset * 2}" height="${ICON_SIZE - inset * 2}" rx="${radius}" fill="#ffffff" />
+</svg>`
+  const mark = await sharp(logoTrimmed).resize({ width: markWidth }).toBuffer()
+  const { width, height } = await sharp(mark).metadata()
+  return sharp(Buffer.from(square))
+    .composite([{ input: mark, left: Math.round((ICON_SIZE - width) / 2), top: Math.round((ICON_SIZE - height) / 2) }])
+    .png()
+    .toBuffer()
+}
+
+const favicon = await renderIcon({ inset: 0, radius: 52, markWidth: 196 })
+for (const size of [32, 48, 256]) {
+  await sharp(favicon).resize(size, size).png({ compressionLevel: 9 }).toFile(`public/favicon-${size}.png`)
+}
+// iOS redondea las esquinas por su cuenta: cuadrado blanco completo
+const appleIcon = await renderIcon({ inset: 0, radius: 0, markWidth: 150 })
+await sharp(appleIcon).resize(180, 180).flatten({ background: '#ffffff' }).png({ compressionLevel: 9 }).toFile('public/apple-touch-icon.png')
+
 // ICO con los PNG de 32 y 48 px dentro (formato admitido por todos los navegadores actuales)
 const pngs = await Promise.all(['public/favicon-32.png', 'public/favicon-48.png'].map((f) => readFile(f)))
 const header = Buffer.alloc(6 + 16 * pngs.length)
@@ -65,4 +90,4 @@ pngs.forEach((png, index) => {
 })
 await writeFile('public/favicon.ico', Buffer.concat([header, ...pngs]))
 
-console.log('Generados public/og-image.png y public/favicon.ico')
+console.log('Generados public/og-image.png, los favicons y public/favicon.ico')
