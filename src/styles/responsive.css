@@ -618,6 +618,24 @@
   .cookie-modal-footer .cookie-btn {
     width: 100%;
   }
+  /* Títulos centrados: los h1 de cabecera, los h2 de sección y sus antetítulos. No toca los
+     apartados de los textos legales */
+  main h1,
+  main section:not(.legal-section) h2 {
+    margin-inline: auto;
+    text-align: center;
+  }
+  main .eyebrow:has(+ h1),
+  main section:not(.legal-section) .eyebrow:has(+ h2),
+  .hero-content .eyebrow {
+    display: flex;
+    width: fit-content;
+    margin-inline: auto;
+  }
+  .contact-aside > span {
+    display: block;
+    text-align: center;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
