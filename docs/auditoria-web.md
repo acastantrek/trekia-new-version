@@ -9,8 +9,8 @@ casilla (`[x]`) y apunta el commit o una nota breve debajo.
 
 Prioridad: 🔴 crítico · 🟠 alta · 🟡 media · 🟢 baja
 
-**Estado (05/10/2026):** hechas 1–15, 17–19 y 21–24 · parciales 16, 20 y 33 ·
-pendientes 25–32 y 34–37. Verificado en un móvil real (tareas 2, 4 y 5) y previews de LinkedIn y WhatsApp con
+**Estado (15/10/2026):** hechas 1–19 y 21–24 · parciales 20, 33 y 36 ·
+pendientes 25–32, 34, 35 y 37. Verificado en un móvil real (tareas 2, 4 y 5) y previews de LinkedIn y WhatsApp con
 la web publicada (tareas 10 y 11).
 
 ---
@@ -175,7 +175,7 @@ la web publicada (tareas 10 y 11).
   - ✅ Revisado (02/10/2026, `3cb586a`): las métricas y los chips del hero son datos reales, se mantienen.
     Formato español con espacio no separable: `-65 %`, `+40 %`, `92,4 %`, `↗ 18,6 %` y el `20 %` del artículo de costes.
 
-- [ ] **16. Erratas y textos**
+- [x] **16. Erratas y textos**
   - `siteData.ts:58`: "Qué hacemos?" → "¿Qué hacemos?" (menú y footer).
   - `blogPosts.ts:63`: "si el modelo mejora el proceso o simplemente lo distinto" → "o simplemente lo
     cambia".
@@ -185,9 +185,8 @@ la web publicada (tareas 10 y 11).
     empresa (`/company/…`), usar esa.
   - Parcial (02/10/2026, `e217348`): corregidos "¿Qué hacemos?" y "o simplemente lo cambia".
   - Horario de atención: decidido no ponerlo; se mantiene "Respuesta en 1–2 días laborables".
-  - Pendiente: LinkedIn. El enlace sí lleva a la cuenta de Trek.IA, pero es un perfil personal
-    (`/in/`); cuando se cree la página de empresa (`/company/…`), cambiar `siteData.ts` (también
-    alimenta `sameAs` del JSON-LD).
+  - ✅ Hecho (15/10/2026): LinkedIn apunta a la página de empresa
+    (`https://www.linkedin.com/company/146712991/`) en `siteData.ts`, que también alimenta `sameAs` del JSON-LD.
 
 - [x] **17. Testimonios ficticios con fotos de terceros**
   - `siteData.ts:203-247`: los testimonios son de ejemplo y usan avatares de `i.pravatar.cc` (fotos de

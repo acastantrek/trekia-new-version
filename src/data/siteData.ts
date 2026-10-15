@@ -40,7 +40,7 @@ export interface BenefitItem {
 export const socialLinks = [
   {
     label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/trek-ia-79968b43b/',
+    href: 'https://www.linkedin.com/company/146712991/',
     Icon: Linkedin,
     color: '#0A66C2',
   },
