@@ -18,6 +18,10 @@
   position: relative;
   z-index: 1;
 }
+/* Título con una versión corta para móvil (/contacto y /blog): por defecto solo se ve la larga */
+.page-hero-title-short {
+  display: none;
+}
 .page-hero h1 {
   max-width: 900px;
   margin: 24px 0 20px;

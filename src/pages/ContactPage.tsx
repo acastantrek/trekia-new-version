@@ -19,7 +19,16 @@ export function ContactPage() {
       />
       <PageHero
         eyebrow="Diagnóstico gratuito"
-        title="Nosotros encontramos dónde la tecnología puede ayudarte"
+        title={
+          <>
+            <span className="page-hero-title-long">
+              Nosotros encontramos dónde la tecnología puede ayudarte
+            </span>
+            <span className="page-hero-title-short">
+              Encontramos dónde la tecnología puede ayudarte
+            </span>
+          </>
+        }
         description="Analizamos cómo trabajáis, detectamos oportunidades de automatización y os proponemos soluciones concretas para ahorrar tiempo, simplificar procesos y mejorar el día a día."
       >
         <ul className="contact-hero-points">

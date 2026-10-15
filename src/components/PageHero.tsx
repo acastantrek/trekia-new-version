@@ -3,7 +3,7 @@ import { Reveal } from './Reveal'
 
 interface PageHeroProps {
   eyebrow: string
-  title: string
+  title: ReactNode
   description: string
   /** Contenido extra bajo la descripción, como los puntos clave del hero de /contacto */
   children?: ReactNode

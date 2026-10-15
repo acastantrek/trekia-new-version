@@ -652,6 +652,12 @@
   .hero-content .eyebrow::after {
     width: 12px;
   }
+  .page-hero-title-long {
+    display: none;
+  }
+  .page-hero-title-short {
+    display: inline;
+  }
   /* Fecha y autor bajo el título de un artículo del blog */
   .page-hero-article p {
     text-align: center;
