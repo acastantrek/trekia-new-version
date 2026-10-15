@@ -22,7 +22,7 @@ export function ChallengesSection() {
         <Reveal>
           <SectionHeading
             eyebrow="El punto de inflexión"
-            title="Menos fricción. Más capacidad operativa."
+            title="Menos fricción. Más capacidad operativa"
             description="No se trata de añadir otra herramienta. Se trata de rediseñar cómo fluye el trabajo para que cada sistema, dato y persona sume."
           />
         </Reveal>

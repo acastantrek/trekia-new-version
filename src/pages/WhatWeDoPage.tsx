@@ -35,7 +35,7 @@ export function WhatWeDoPage() {
               <i />
               Criterios de diseño
             </span>
-            <h2>Tecnología sostenible, no parches rápidos.</h2>
+            <h2>Tecnología sostenible, no parches rápidos</h2>
           </Reveal>
           <div>
             {principles.map(([title, description], index) => (

@@ -19,7 +19,7 @@ export function ContactPage() {
       />
       <PageHero
         eyebrow="Diagnóstico gratuito"
-        title="Nosotros encontramos dónde la tecnología puede ayudarte."
+        title="Nosotros encontramos dónde la tecnología puede ayudarte"
         description="Analizamos cómo trabajáis, detectamos oportunidades de automatización y os proponemos soluciones concretas para ahorrar tiempo, simplificar procesos y mejorar el día a día."
       >
         <ul className="contact-hero-points">
@@ -35,7 +35,7 @@ export function ContactPage() {
         <div className="container contact-layout">
           <Reveal className="contact-aside">
             <span>Qué puedes esperar</span>
-            <h2>Tu reto merece una conversación.</h2>
+            <h2>Tu reto merece una conversación</h2>
             <ul>
               <li>
                 <Check />

@@ -13,7 +13,7 @@ export function SectorsOverviewSection() {
             <i />
             Sectores
           </span>
-          <h1>Sectores donde los procesos importan.</h1>
+          <h1>Sectores donde los procesos importan</h1>
           <p>
             Nos adaptamos a la forma de trabajar de cada negocio para simplificar tareas, mejorar la
             trazabilidad y conectar equipos.

@@ -14,7 +14,7 @@ export function BlogPage() {
       />
       <PageHero
         eyebrow="Blog"
-        title="Ideas prácticas sobre automatización, datos e IA aplicada."
+        title="Ideas prácticas sobre automatización, datos e IA aplicada"
         description="Lo que aprendemos ayudando a empresas B2B a operar con menos fricción, escrito sin relleno."
       />
       <section className="section blog-section">

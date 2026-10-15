@@ -22,7 +22,7 @@ export function CtaSection() {
               <i />
               Diagnóstico gratuito
             </span>
-            <h2>Nosotros encontramos dónde la tecnología puede ayudarte.</h2>
+            <h2>Nosotros encontramos dónde la tecnología puede ayudarte</h2>
             <p>
               Analizamos cómo trabajáis, detectamos oportunidades de automatización y os proponemos
               soluciones concretas para ahorrar tiempo, simplificar procesos y mejorar el día a día.

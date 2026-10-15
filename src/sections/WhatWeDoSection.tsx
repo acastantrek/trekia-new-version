@@ -21,7 +21,7 @@ export function WhatWeDoSection({ isPageHeader = false }: WhatWeDoSectionProps) 
             <i />
             Qué hacemos
           </span>
-          <Title>Tecnología que resuelve trabajo real.</Title>
+          <Title>Tecnología que resuelve trabajo real</Title>
           <p>
             Automatizamos, conectamos y simplificamos procesos que hoy consumen tiempo, generan
             errores o dependen demasiado de tareas manuales.

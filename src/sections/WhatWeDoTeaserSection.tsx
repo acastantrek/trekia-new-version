@@ -16,7 +16,7 @@ export function WhatWeDoTeaserSection() {
               <i />
               Qué hacemos
             </span>
-            <h2>Tecnología que resuelve trabajo real.</h2>
+            <h2>Tecnología que resuelve trabajo real</h2>
           </div>
           <Link to="/que-hacemos" className="what-we-do-teaser-link">
             Descubre cómo te ayudamos

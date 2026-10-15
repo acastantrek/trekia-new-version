@@ -45,7 +45,7 @@ export function AboutPage() {
               <i />
               Quiénes somos
             </span>
-            <h1>Personas trabajando para personas.</h1>
+            <h1>Personas trabajando para personas</h1>
             <p className="about-hero-lead">
               Usamos la tecnología y la IA para hacer más fácil el día a día de tu empresa.
             </p>
@@ -74,7 +74,7 @@ export function AboutPage() {
             </span>
             <h2>
               La tecnología es la herramienta.{' '}
-              <span className="text-gradient">Las personas, el motivo.</span>
+              <span className="text-gradient">Las personas, el motivo</span>
             </h2>
           </Reveal>
           <div className="about-ideas-grid">
@@ -97,7 +97,7 @@ export function AboutPage() {
       <section className="section about-fit">
         <div className="container">
           <Reveal className="about-fit-heading">
-            <h2>La mejor tecnología es la que encaja en tu forma de trabajar.</h2>
+            <h2>La mejor tecnología es la que encaja en tu forma de trabajar</h2>
             <p className="about-fit-statement">
               <span>No venimos a decirte qué IA necesitas.</span>
               <span className="text-gradient">Venimos a entender qué podemos mejorar.</span>
@@ -122,7 +122,7 @@ export function AboutPage() {
         <div className="container">
           <Reveal className="about-closing-content">
             <h2>
-              Tecnología con sentido. <span className="text-gradient">Personas en el centro.</span>
+              Tecnología con sentido. <span className="text-gradient">Personas en el centro</span>
             </h2>
             <p>
               Tu empresa no necesita más herramientas. Necesita soluciones que funcionen y personas

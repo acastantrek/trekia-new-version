@@ -636,6 +636,26 @@
     display: block;
     text-align: center;
   }
+  /* Antetítulos con una raya a cada lado: la del final es la del principio en espejo */
+  .eyebrow::after {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--violet), var(--cyan));
+    box-shadow: 0 0 8px var(--blue);
+  }
+  /* En el hero, rayas y huecos más cortos para que quepa en una línea con las dos rayas */
+  .hero-content .eyebrow {
+    gap: 6px;
+  }
+  .hero-content .eyebrow i,
+  .hero-content .eyebrow::after {
+    width: 12px;
+  }
+  /* Fecha y autor bajo el título de un artículo del blog */
+  .page-hero-article p {
+    text-align: center;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

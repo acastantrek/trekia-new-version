@@ -11,7 +11,7 @@ export function EconomicModelSection() {
         <Reveal>
           <SectionHeading
             eyebrow="Cómo funciona"
-            title="Una inversión alineada con la evolución del negocio."
+            title="Una inversión alineada con la evolución del negocio"
             description="Empezamos con un alcance claro y continuamos solo donde existe impacto. Sin licencias infladas ni dependencia artificial."
           />
         </Reveal>

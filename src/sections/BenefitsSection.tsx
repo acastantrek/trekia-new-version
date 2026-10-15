@@ -10,7 +10,7 @@ export function BenefitsSection() {
         <Reveal>
           <SectionHeading
             eyebrow="Por qué Trek.IA"
-            title="Ingeniería con criterio de negocio."
+            title="Ingeniería con criterio de negocio"
           />
         </Reveal>
         <div className="benefits-grid">

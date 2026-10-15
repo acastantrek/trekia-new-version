@@ -152,7 +152,7 @@ export function ContactForm() {
       <div className="form-success" role="status">
         <CheckCircle2 />
         <span>Solicitud recibida</span>
-        <h2>Gracias por contarnos tu reto.</h2>
+        <h2>Gracias por contarnos tu reto</h2>
         <p>Revisaremos la información y te contactaremos para preparar el diagnóstico.</p>
         <button type="button" onClick={() => setSuccess(false)}>
           Enviar otra consulta

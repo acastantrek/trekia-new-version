@@ -64,7 +64,7 @@ export function SectorsSection({ carousel = false }: SectorsSectionProps) {
             title={
               <>
                 Donde los procesos importan, <br className="sectors-title-break" />
-                la automatización multiplica.
+                la automatización multiplica
               </>
             }
             description="Entendemos entornos con operaciones complejas, equipos diversos y sistemas que necesitan hablar entre sí."

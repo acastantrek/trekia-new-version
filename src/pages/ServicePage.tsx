@@ -59,7 +59,7 @@ export function ServicePage() {
               <i />
               ¿Te suena?
             </span>
-            <h2>Lo que vemos a menudo.</h2>
+            <h2>Lo que vemos a menudo</h2>
           </Reveal>
           <div className="area-cards area-cards-3">
             {area.pains.map(({ title, text, icon: Icon }, index) => (
@@ -82,7 +82,7 @@ export function ServicePage() {
               <i />
               La solución
             </span>
-            <h2>Qué automatizamos.</h2>
+            <h2>Qué automatizamos</h2>
           </Reveal>
           <div className="area-cards">
             {area.capabilities.map(({ title, text, icon: Icon }, index) => (
@@ -105,7 +105,7 @@ export function ServicePage() {
               <i />
               Resultado
             </span>
-            <h2>Lo que ganas.</h2>
+            <h2>Lo que ganas</h2>
           </Reveal>
           <div className="area-results">
             {area.results.map(({ label, icon: Icon }, index) => (

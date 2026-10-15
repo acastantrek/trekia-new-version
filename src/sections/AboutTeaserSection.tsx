@@ -14,7 +14,7 @@ export function AboutTeaserSection() {
             <i />
             Quiénes somos
           </span>
-          <h2>Tu departamento de IA.</h2>
+          <h2>Tu departamento de IA</h2>
           <p>
             Nos integramos en tu empresa para encontrar oportunidades, desarrollar soluciones y
             acompañar a tu equipo en su uso diario. Con personas a las que conoces, objetivos

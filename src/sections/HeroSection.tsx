@@ -37,7 +37,7 @@ export function HeroSection() {
           </Reveal>
           <Reveal onLoad delay={0.06}>
             <h1>
-              Automatizamos procesos. <span>Impulsamos negocios.</span>
+              Automatizamos procesos. <span>Impulsamos negocios</span>
             </h1>
           </Reveal>
           <Reveal onLoad className="hero-highlights-wrap" delay={0.09}>

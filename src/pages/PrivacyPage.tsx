@@ -12,7 +12,7 @@ export function PrivacyPage() {
       />
       <PageHero
         eyebrow="Política de privacidad"
-        title="Cómo tratamos tus datos personales."
+        title="Cómo tratamos tus datos personales"
         description="Información sobre el tratamiento de datos personales recogidos a través de este sitio web, conforme al Reglamento (UE) 2016/679 (RGPD) y la Ley Orgánica 3/2018 (LOPDGDD)."
       />
       <section className="section legal-section">

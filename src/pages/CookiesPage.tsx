@@ -11,7 +11,7 @@ export function CookiesPage() {
       />
       <PageHero
         eyebrow="Política de cookies"
-        title="Cómo usamos las cookies en este sitio."
+        title="Cómo usamos las cookies en este sitio"
         description="Información sobre las cookies que utiliza este sitio web y cómo puedes gestionarlas."
       />
       <section className="section legal-section">

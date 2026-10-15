@@ -38,6 +38,7 @@ export function BlogPostPage() {
         eyebrow={post.tag}
         title={post.title}
         description={`${post.date} · Equipo Trek.IA`}
+        className="page-hero-article"
       />
       <section className="section legal-section">
         <div className="container legal-content">

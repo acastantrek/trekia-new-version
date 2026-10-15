@@ -22,7 +22,7 @@ export function OperationsShowcaseSection() {
         <Reveal>
           <SectionHeading
             eyebrow="Tecnología en acción"
-            title="Así conectamos tu operación."
+            title="Así conectamos tu operación"
             description="Un mismo núcleo de datos alimentando procesos, dashboards y decisiones en tiempo real."
           />
         </Reveal>

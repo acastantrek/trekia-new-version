@@ -56,7 +56,7 @@ export function ProcessSection() {
               Nuestro método
             </span>
             <h2>
-              Cuatro etapas. <span className="text-gradient">Una dirección clara.</span>
+              Cuatro etapas. <span className="text-gradient">Una dirección clara</span>
             </h2>
           </div>
           <Link to="/metodo" className="process-header-link">

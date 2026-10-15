@@ -14,7 +14,7 @@ export function LegalPage() {
       />
       <PageHero
         eyebrow="Aviso legal"
-        title="Información legal sobre Trek.IA."
+        title="Información legal sobre Trek.IA"
         description="Datos identificativos y condiciones de uso de este sitio web, conforme a la Ley 34/2002, de Servicios de la Sociedad de la Información y Comercio Electrónico (LSSI-CE)."
       />
       <section className="section legal-section">
